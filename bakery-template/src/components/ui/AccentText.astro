@@ -1,0 +1,14 @@
+---
+/** Renders a title with its *accent* word set in the italic accent style. */
+import { splitAccent } from '~/lib/accent';
+
+interface Props {
+  text: string;
+}
+
+const { before, accent, after } = splitAccent(Astro.props.text);
+---
+
+{before}
+{accent && <em class="accent-word">{accent}</em>}
+{after}

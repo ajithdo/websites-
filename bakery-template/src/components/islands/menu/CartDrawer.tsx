@@ -4,6 +4,7 @@ import { fmt, formatINR, formatIndianMobile, normalizeIndianMobile } from '~/lib
 import { readJSON, storageKeys, writeJSON } from '~/lib/storage';
 import { formatDateKey, zonedParts } from '~/lib/time';
 import { cartMessage, waLink } from '~/lib/whatsapp';
+import { openExternal } from '~/lib/browser';
 import { Icon } from '../shared/Icon';
 import { ResponsivePicture } from '../shared/ResponsivePicture';
 import { useTween } from '../shared/useTween';
@@ -125,8 +126,7 @@ export function CartDrawer({
       },
     });
     const url = waLink(config.whatsapp, text);
-    const win = window.open(url, '_blank', 'noopener,noreferrer');
-    if (!win) window.location.href = url;
+    openExternal(url);
     setSent(true);
   };
 

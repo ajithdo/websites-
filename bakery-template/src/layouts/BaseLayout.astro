@@ -71,7 +71,8 @@ const robots = demo || noindex ? 'noindex, nofollow' : 'index, follow, max-image
 
 const headConfig = {
   demo,
-  telugu: site.features.telugu,
+  // The 404 page answers every missing URL; never redirect it to /te/.
+  telugu: site.features.telugu && path !== '/404/',
   themes: [...themeIds],
   intro: site.motion.intro,
   keys: storageKeys,

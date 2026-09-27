@@ -1,6 +1,17 @@
 ---
+import { getCollection } from 'astro:content';
+import CtaBand from '~/components/home/CtaBand.astro';
+import GalleryBrowser from '~/components/islands/gallery/GalleryBrowser';
+import type {
+  GalleryConfig,
+  GalleryItemView,
+  GalleryLabels,
+} from '~/components/islands/gallery/types';
+import PageHeader from '~/components/ui/PageHeader.astro';
+import { site } from '~/config/site';
+import { getDictionary, langPaths, localizePath, makeFormatter, type Lang } from '~/i18n';
 import BaseLayout from '~/layouts/BaseLayout.astro';
-import { getDictionary, langPaths, makeFormatter, type Lang } from '~/i18n';
+import { responsiveImage } from '~/lib/images';
 
 export function getStaticPaths() {
   return langPaths('gallery');
@@ -9,6 +20,40 @@ export function getStaticPaths() {
 const { lang } = Astro.props as { lang: Lang };
 const t = getDictionary(lang);
 const f = makeFormatter(lang);
+
+const groups = (await getCollection('gallery'))
+  .map((entry) => entry.data)
+  .sort((a, b) => a.order - b.order);
+
+// "All" mixes the occasions (one of each in turn) so the grid never reads as blocks.
+const longest = Math.max(...groups.map((g) => g.items.length));
+const ordered = Array.from({ length: longest }, (_, i) =>
+  groups.flatMap((g) => (g.items[i] ? [{ occasion: g.occasion, ...g.items[i] }] : [])),
+).flat();
+
+const items: GalleryItemView[] = await Promise.all(
+  ordered.map(async (item) => ({
+    id: item.image.replace(/\.\w+$/, '').replaceAll('/', '-'),
+    occasion: item.occasion,
+    alt: item.alt,
+    caption: lang === 'te' && item.captionTe ? item.captionTe : item.caption,
+    thumb: await responsiveImage(item.image, {
+      widths: [320, 480, 640, 800],
+      sizes: '(min-width: 80rem) 400px, (min-width: 48rem) 31vw, 47vw',
+    }),
+    full: await responsiveImage(item.image, {
+      widths: [640, 960, 1280, 1600],
+      sizes: '(min-width: 64rem) 70vw, 100vw',
+      quality: 76,
+    }),
+  })),
+);
+
+const labels: GalleryLabels = { gallery: t.gallery, occasions: t.occasions, cta: t.cta };
+const config: GalleryConfig = {
+  occasions: groups.map((g) => g.occasion),
+  builderPath: site.features.cakeBuilder ? localizePath('/custom-cakes/', lang) : null,
+};
 ---
 
 <BaseLayout
@@ -17,7 +62,17 @@ const f = makeFormatter(lang);
   title={f(t.gallery.meta.title)}
   description={f(t.gallery.meta.description)}
 >
-  <section class="section container-x">
-    <h1 class="text-display-lg">{f(t.gallery.meta.title)}</h1>
+  <PageHeader eyebrow={t.gallery.eyebrow} title={t.gallery.title} lede={t.gallery.intro} split />
+
+  <section class="container-x gallery-section" aria-label={t.gallery.eyebrow}>
+    <GalleryBrowser client:idle items={items} labels={labels} config={config} />
   </section>
+
+  <CtaBand lang={lang} />
 </BaseLayout>
+
+<style>
+  .gallery-section {
+    padding-bottom: clamp(3rem, 2rem + 5vw, 7rem);
+  }
+</style>

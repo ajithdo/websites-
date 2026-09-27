@@ -351,9 +351,7 @@ export const en = {
         'Design a custom celebration cake in {city}: occasion, flavour, size and finish, with a live price estimate. Send it to us on WhatsApp.',
     },
     eyebrow: 'Custom cakes',
-    titleLead: 'Design your',
-    titleAccent: 'cake',
-    titleTail: '',
+    title: 'Design your *cake*',
     noscript:
       'The cake designer needs JavaScript. You can still order: send us your occasion, flavour, size and date on WhatsApp.',
     intro:
@@ -501,11 +499,11 @@ export const en = {
         'Birthday, anniversary, wedding and kids’ theme cakes, festive hampers and corporate gifts by {brand}, {city}.',
     },
     eyebrow: 'Gallery',
-    title: 'Cakes we have loved making',
+    title: 'Cakes we have *loved* making',
     intro: 'A few recent favourites. Tap any cake to see it up close, then design your own.',
     all: 'All',
     filterLabel: 'Filter by occasion',
-    open: 'View larger: {caption}',
+    count: '{n} photos',
     close: 'Close',
     prev: 'Previous photo',
     next: 'Next photo',
@@ -520,12 +518,13 @@ export const en = {
         '{brand} is a small family patisserie in {city} blending French technique with Indian flavours. Fresh every morning, custom cakes to order.',
     },
     eyebrow: 'Our story',
-    title: 'Butter, patience and a little bloom',
+    title: 'Butter, patience and a little *bloom*',
     story: [
       '{brand} began at a family kitchen table in {city}, with a stand mixer, a notebook of French recipes and a grandmother who insisted every dessert should taste of home.',
       'We still bake that way. Croissants are laminated before sunrise. Cakes are layered by hand with real butter and cream. And the flavours are ours: rasmalai soaked in saffron milk, pistachio with a breath of rose, Banganapalli mango when the season allows, jaggery where others reach for sugar.',
       'Everything on the counter is baked fresh each morning, and every celebration cake is made to order, for one table and one moment.',
     ],
+    pullQuote: 'Every dessert should taste of home.',
     valuesTitle: 'What we hold to',
     values: [
       {
@@ -560,7 +559,7 @@ export const en = {
         'Find {brand} in {city}: address, map, opening hours and WhatsApp. Enquire about custom cakes, bulk and corporate orders.',
     },
     eyebrow: 'Visit & contact',
-    title: 'Say hello',
+    title: 'Say *hello*',
     intro: 'The quickest way to reach us is WhatsApp. We reply through the day.',
     cards: {
       call: 'Call us',
@@ -600,7 +599,7 @@ export const en = {
   notFound: {
     meta: { title: 'Page not found · {brand}', description: 'This page could not be found.' },
     eyebrow: 'Error 404',
-    title: 'This page crumbled.',
+    title: 'This page *crumbled*.',
     body: 'The link may be old, or the page has moved. The cakes, thankfully, are all still here.',
   },
 

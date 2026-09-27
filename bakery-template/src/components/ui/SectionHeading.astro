@@ -1,10 +1,11 @@
 ---
+import AccentText from './AccentText.astro';
+
 /** Eyebrow + display title + optional lede, with an optional action slot. */
 interface Props {
   eyebrow?: string;
+  /** Mark one italic accent word with asterisks: "Say *hello*". */
   title: string;
-  /** Italicised part of the title, rendered after `title`. */
-  accent?: string;
   lede?: string;
   as?: 'h1' | 'h2';
   align?: 'start' | 'center';
@@ -16,7 +17,6 @@ interface Props {
 const {
   eyebrow,
   title,
-  accent,
   lede,
   as: Tag = 'h2',
   align = 'start',
@@ -43,8 +43,7 @@ const {
       align === 'center' && 'mx-auto',
     ]}
   >
-    {title}
-    {accent && <em class="accent-word">{accent}</em>}
+    <AccentText text={title} />
   </Tag>
   {lede && <p class:list={['lede mt-5', align === 'center' && 'mx-auto']}>{lede}</p>}
   <slot />
@@ -57,9 +56,5 @@ const {
   }
   .section-heading.items-center .eyebrow::before {
     display: none;
-  }
-  .accent-word {
-    font-style: italic;
-    color: var(--bb-accent-ink);
   }
 </style>

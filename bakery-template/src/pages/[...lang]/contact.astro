@@ -1,6 +1,13 @@
 ---
+import VisitUs from '~/components/home/VisitUs.astro';
+import Icon from '~/components/ui/Icon.astro';
+import PageHeader from '~/components/ui/PageHeader.astro';
+import Picture from '~/components/ui/Picture.astro';
+import { site } from '~/config/site';
+import { getDictionary, langPaths, lt, makeFormatter, type Lang } from '~/i18n';
 import BaseLayout from '~/layouts/BaseLayout.astro';
-import { getDictionary, langPaths, makeFormatter, type Lang } from '~/i18n';
+import { mailHref, telHref, whatsappHref } from '~/lib/links';
+import { openers } from '~/lib/whatsapp';
 
 export function getStaticPaths() {
   return langPaths();
@@ -8,16 +15,445 @@ export function getStaticPaths() {
 
 const { lang } = Astro.props as { lang: Lang };
 const t = getDictionary(lang);
+const en = getDictionary('en');
 const f = makeFormatter(lang);
+const c = t.contact;
+const { instagram } = site.socials;
+const corporatePhoto = site.contactPage.corporateImage;
+const typeIds = ['general', 'bulk', 'corporate'] as const;
+const [emailLocal, emailDomain] = site.contact.email.split('@');
 ---
 
 <BaseLayout
   lang={lang}
   path="/contact/"
-  title={f(t.contact.meta.title)}
-  description={f(t.contact.meta.description)}
+  title={f(c.meta.title)}
+  description={f(c.meta.description)}
 >
-  <section class="section container-x">
-    <h1 class="text-display-lg">{f(t.contact.meta.title)}</h1>
+  <PageHeader eyebrow={c.eyebrow} title={c.title} lede={c.intro} split />
+
+  <div class="container-x">
+    <ul class="contact-cards">
+      <li data-reveal>
+        <a
+          href={whatsappHref(openers.order(site.brand.name))}
+          class="contact-card is-primary"
+          target="_blank"
+          rel="noopener"
+        >
+          <Icon name="whatsapp" size={26} />
+          <span class="contact-card-label">{c.cards.whatsapp}</span>
+          <span class="contact-card-value">{c.cards.whatsappBody}</span>
+          <Icon name="arrow-up-right" size={18} class="contact-card-arrow" />
+        </a>
+      </li>
+      <li data-reveal style="--i:1">
+        <a href={telHref} class="contact-card">
+          <Icon name="phone" size={24} />
+          <span class="contact-card-label">{c.cards.call}</span>
+          <span class="contact-card-value tabular nowrap">{site.contact.phoneDisplay}</span>
+          <Icon name="arrow-up-right" size={18} class="contact-card-arrow" />
+        </a>
+      </li>
+      <li data-reveal style="--i:2">
+        <a href={mailHref} class="contact-card">
+          <Icon name="mail" size={24} />
+          <span class="contact-card-label">{c.cards.email}</span>
+          <span class="contact-card-value">
+            {emailLocal}@<wbr />
+            {emailDomain}
+          </span>
+          <Icon name="arrow-up-right" size={18} class="contact-card-arrow" />
+        </a>
+      </li>
+      {instagram && (
+        <li data-reveal style="--i:3">
+          <a href={instagram.url} class="contact-card" target="_blank" rel="noopener">
+            <Icon name="instagram" size={24} />
+            <span class="contact-card-label">{c.cards.instagram}</span>
+            <span class="contact-card-value">@{instagram.handle}</span>
+            <Icon name="arrow-up-right" size={18} class="contact-card-arrow" />
+          </a>
+        </li>
+      )}
+    </ul>
+  </div>
+
+  <div class="contact-visit">
+    <VisitUs lang={lang} title={c.visitTitle} />
+  </div>
+
+  <section class="section" aria-labelledby="enquiry-title">
+    <div class="container-x contact-enquiry">
+      <div class="contact-enquiry-intro">
+        <h2 id="enquiry-title" class="text-display-lg" data-reveal>
+          {c.formTitle}
+        </h2>
+        <p class="lede mt-5" data-reveal style="--i:1">
+          {c.formIntro}
+        </p>
+      </div>
+
+      <form
+        class="enquiry-card"
+        data-enquiry-form
+        action={`https://wa.me/${site.contact.whatsapp}`}
+        method="get"
+        target="_blank"
+        novalidate
+        data-brand={site.brand.name}
+        data-whatsapp={site.contact.whatsapp}
+        data-email={site.contact.email}
+        data-subject={en.contact.form.emailSubject}
+        data-types={JSON.stringify(en.contact.form.types)}
+        data-reveal
+      >
+        <div>
+          <label class="field-label" for="enq-name">
+            {c.form.name}
+          </label>
+          <input
+            id="enq-name"
+            name="name"
+            class="field"
+            autocomplete="name"
+            required
+            aria-describedby="enq-name-error"
+          />
+          <p class="field-error" id="enq-name-error" data-error-for="name" hidden>
+            <Icon name="info" size={16} />
+            <span>{c.errors.name}</span>
+          </p>
+        </div>
+        <div>
+          <label class="field-label" for="enq-phone">
+            {c.form.phone}
+          </label>
+          <input
+            id="enq-phone"
+            name="phone"
+            class="field tabular"
+            type="tel"
+            inputmode="tel"
+            autocomplete="tel"
+            required
+            aria-describedby="enq-phone-error"
+          />
+          <p class="field-error" id="enq-phone-error" data-error-for="phone" hidden>
+            <Icon name="info" size={16} />
+            <span>{c.errors.phone}</span>
+          </p>
+        </div>
+        <fieldset class="enquiry-types">
+          <legend class="field-label">{c.form.type}</legend>
+          <div class="flex flex-wrap gap-2">
+            {typeIds.map((id, i) => (
+              <label class="choice-chip">
+                <input type="radio" name="type" value={id} checked={i === 0} />
+                <span>{c.form.types[id]}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+        <div>
+          <label class="field-label" for="enq-message">
+            {c.form.message}
+          </label>
+          <textarea
+            id="enq-message"
+            name="text"
+            class="field enquiry-message"
+            rows="5"
+            required
+            aria-describedby="enq-message-error"
+          ></textarea>
+          <p class="field-error" id="enq-message-error" data-error-for="message" hidden>
+            <Icon name="info" size={16} />
+            <span>{c.errors.message}</span>
+          </p>
+        </div>
+        <div class="enquiry-actions">
+          <button type="submit" name="via" value="whatsapp" class="btn">
+            <Icon name="whatsapp" size={20} />
+            {c.form.sendWhatsApp}
+          </button>
+          <button type="submit" name="via" value="email" class="btn btn-outline">
+            <Icon name="mail" size={18} />
+            {c.form.sendEmail}
+          </button>
+        </div>
+      </form>
+    </div>
   </section>
+
+  {site.features.corporateOrders && (
+    <section id="corporate" class="section band-secondary" aria-labelledby="corporate-title">
+      <div class="container-x contact-corporate">
+        <div class="contact-corporate-photo" data-reveal="clip">
+          <Picture
+            src={corporatePhoto.src}
+            alt={lt(corporatePhoto.alt, lang)}
+            widths={[480, 720, 960, 1200]}
+            sizes="(min-width: 64rem) 44vw, 94vw"
+            aspect={4 / 3}
+          />
+        </div>
+        <div class="contact-corporate-text">
+          <p class="eyebrow" data-reveal>
+            {c.corporate.eyebrow}
+          </p>
+          <h2 id="corporate-title" class="text-display-lg mt-4" data-reveal style="--i:1">
+            {c.corporate.title}
+          </h2>
+          <p class="lede mt-5" data-reveal style="--i:2">
+            {c.corporate.body}
+          </p>
+          <ul class="corporate-points" data-reveal style="--i:3">
+            {c.corporate.points.map((point) => (
+              <li>
+                <Icon name="check" size={18} strokeWidth={2} />
+                <span>{f(point)}</span>
+              </li>
+            ))}
+          </ul>
+          <a
+            href={whatsappHref(openers.corporate(site.brand.name))}
+            class="btn btn-ink mt-8"
+            target="_blank"
+            rel="noopener"
+            data-reveal
+            style="--i:4"
+          >
+            <Icon name="whatsapp" size={20} />
+            {c.corporate.cta}
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
 </BaseLayout>
+
+<script>
+  import { initEnquiryForms } from '~/scripts/enquiry-form';
+
+  initEnquiryForms();
+</script>
+
+<style>
+  .contact-cards {
+    display: grid;
+    gap: 0.75rem;
+  }
+  @media (min-width: 40rem) {
+    .contact-cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 64rem) {
+    .contact-cards {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+  }
+  /* Phones: a row per channel (icon, label and value, arrow). */
+  .contact-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      'icon label arrow'
+      'icon value arrow';
+    align-items: center;
+    column-gap: 1rem;
+    row-gap: 0.1rem;
+    height: 100%;
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--bb-line-strong);
+    border-radius: var(--bb-radius-card);
+    background: var(--bb-surface);
+    color: var(--bb-ink);
+    text-decoration: none;
+    transition:
+      border-color 0.25s ease,
+      transform 0.4s var(--ease),
+      box-shadow 0.4s var(--ease);
+  }
+  .contact-card > :global(svg:first-child) {
+    grid-area: icon;
+    color: var(--bb-accent-ink);
+  }
+  .contact-card-label {
+    grid-area: label;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--bb-ink-muted);
+  }
+  .contact-card-value {
+    grid-area: value;
+    font-weight: 600;
+    overflow-wrap: break-word;
+  }
+  .nowrap {
+    white-space: nowrap;
+  }
+  .contact-card :global(.contact-card-arrow) {
+    grid-area: arrow;
+    color: var(--bb-ink-muted);
+  }
+  /* Tablet and up: tiles, icon on top, arrow in the corner. */
+  @media (min-width: 40rem) {
+    .contact-card {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: 'icon' 'label' 'value';
+      align-content: start;
+      align-items: start;
+      row-gap: 0.35rem;
+      min-height: 9rem;
+      padding: 1.1rem 1.1rem 1.25rem;
+    }
+    .contact-card > :global(svg:first-child) {
+      margin-bottom: 1.25rem;
+    }
+    .contact-card :global(.contact-card-arrow) {
+      position: absolute;
+      top: 1.1rem;
+      right: 1.1rem;
+    }
+  }
+  .contact-card:hover {
+    border-color: var(--bb-ink);
+    transform: translateY(-2px);
+    box-shadow: 0 18px 30px -24px rgb(0 0 0 / 0.45);
+  }
+  .contact-card:focus-visible {
+    outline: 2px solid var(--bb-focus);
+    outline-offset: 3px;
+  }
+  .contact-card.is-primary {
+    border-color: var(--bb-accent);
+    background: var(--bb-accent);
+    color: var(--bb-on-accent);
+  }
+  .contact-card.is-primary > :global(svg:first-child),
+  .contact-card.is-primary .contact-card-label,
+  .contact-card.is-primary :global(.contact-card-arrow) {
+    color: var(--bb-on-accent);
+  }
+
+  .contact-visit {
+    margin-top: clamp(3rem, 2rem + 4vw, 6rem);
+  }
+
+  .contact-enquiry {
+    display: grid;
+    gap: 2.5rem;
+  }
+  @media (min-width: 64rem) {
+    .contact-enquiry {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: clamp(2rem, 4vw, 4rem);
+      align-items: start;
+    }
+    .contact-enquiry-intro {
+      grid-column: 1 / span 5;
+      position: sticky;
+      top: calc(var(--header-h) + 2rem);
+    }
+    .enquiry-card {
+      grid-column: 7 / span 6;
+    }
+  }
+  .enquiry-card {
+    display: grid;
+    gap: 1.35rem;
+    padding: clamp(1.25rem, 1rem + 1.5vw, 2.25rem);
+    border: 1px solid var(--bb-line);
+    border-radius: var(--bb-radius-card);
+    background: var(--bb-surface);
+  }
+  .enquiry-types {
+    min-inline-size: 0;
+  }
+  .enquiry-message {
+    min-height: 8rem;
+    resize: vertical;
+  }
+  .enquiry-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding-top: 0.25rem;
+  }
+  .choice-chip {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0.45rem 1rem;
+    border: 1px solid var(--bb-line-strong);
+    border-radius: var(--bb-radius-control);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .choice-chip input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: inherit;
+  }
+  .choice-chip:hover {
+    border-color: var(--bb-ink);
+  }
+  .choice-chip:has(input:checked) {
+    border-color: var(--bb-ink);
+    background: var(--bb-ink);
+    color: var(--bb-bg);
+  }
+  .choice-chip:has(input:focus-visible) {
+    outline: 2px solid var(--bb-focus);
+    outline-offset: 2px;
+  }
+
+  .contact-corporate {
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+  }
+  @media (min-width: 64rem) {
+    .contact-corporate {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: clamp(2rem, 4vw, 4rem);
+    }
+    .contact-corporate-photo {
+      grid-column: 1 / span 6;
+    }
+    .contact-corporate-text {
+      grid-column: 8 / span 5;
+    }
+  }
+  .contact-corporate-photo {
+    overflow: hidden;
+    border-radius: var(--bb-radius-card);
+  }
+  .corporate-points {
+    display: grid;
+    gap: 0.6rem;
+    margin-top: 1.75rem;
+    font-weight: 600;
+  }
+  .corporate-points li {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+  }
+  .corporate-points :global(svg) {
+    margin-top: 0.2rem;
+    color: var(--bb-accent-ink);
+  }
+</style>

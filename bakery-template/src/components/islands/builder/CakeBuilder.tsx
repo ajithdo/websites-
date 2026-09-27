@@ -13,6 +13,7 @@ import {
 import { fmt, formatINR, formatINRRange } from '~/lib/format';
 import { isSlotAllowed } from '~/lib/leadtime';
 import { cakeMessage, waLink } from '~/lib/whatsapp';
+import { openExternal } from '~/lib/browser';
 import { Icon } from '../shared/Icon';
 import './builder.css';
 import {
@@ -31,7 +32,7 @@ import type { BuilderProps } from './types';
 import { useBuilderStore } from './useBuilderStore';
 import { WhatsAppPreview } from './WhatsAppPreview';
 
-const loadFeatures = () => import('./motion-features').then((mod) => mod.default);
+const loadFeatures = () => import('../shared/motion-features').then((mod) => mod.default);
 const autoAdvance: StepId[] = ['occasion', 'flavour', 'size', 'design', 'fulfilment'];
 
 export default function CakeBuilder({ labels, messageLabels, flavours, config }: BuilderProps) {
@@ -144,8 +145,7 @@ export default function CakeBuilder({ labels, messageLabels, flavours, config }:
     const input = cakeMessageInput(draft, ctx, messageLabels, brand);
     if (!input) return;
     const url = waLink(config.whatsapp, cakeMessage(input));
-    const win = window.open(url, '_blank', 'noopener,noreferrer');
-    if (!win) window.location.assign(url);
+    openExternal(url);
     setSent(true);
   };
 

@@ -150,6 +150,46 @@ test.describe('cake builder', () => {
     }
   });
 
+  test('sending opens WhatsApp in a new tab and keeps the site open', async ({ page, context }) => {
+    await context.route('https://wa.me/**', (route) =>
+      route.fulfill({ status: 200, contentType: 'text/html', body: '<p>WhatsApp</p>' }),
+    );
+    // A finished design saved from an earlier visit.
+    await page.addInitScript(() =>
+      localStorage.setItem(
+        'bb:builder:v1',
+        JSON.stringify({
+          step: 8,
+          maxStep: 8,
+          occasion: 'anniversary',
+          flavour: 'red-velvet',
+          sizeKg: 1,
+          style: 'simple',
+          eggless: false,
+          shape: 'round',
+          message: '',
+          date: '2031-12-24',
+          time: '12:00',
+          fulfilment: 'pickup',
+          area: '',
+          name: 'Ravi',
+          phone: '9876543210',
+        }),
+      ),
+    );
+    await page.goto('/custom-cakes/');
+    await expect(heading(page)).toContainText('Your cake');
+    const popup = context.waitForEvent('page');
+    await page.getByRole('button', { name: 'Send on WhatsApp' }).click();
+    const wa = await popup;
+    expect(wa.url()).toMatch(/^https:\/\/wa\.me\/919000000000\?text=/);
+    expect(decodeURIComponent(wa.url())).toContain('*Occasion:* Anniversary');
+    await expect(page).toHaveURL(/\/custom-cakes\/$/);
+    await expect(
+      page.getByRole('status').filter({ hasText: 'WhatsApp should now be open' }),
+    ).toBeVisible();
+  });
+
   test('taps advance, drafts survive a reload, and bigger designs need more notice', async ({
     page,
   }) => {

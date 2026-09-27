@@ -1,20 +1,97 @@
 ---
+import AccentText from '~/components/ui/AccentText.astro';
+import Icon from '~/components/ui/Icon.astro';
+import Picture from '~/components/ui/Picture.astro';
+import { site } from '~/config/site';
+import { getDictionary, lt, makeFormatter } from '~/i18n';
 import BaseLayout from '~/layouts/BaseLayout.astro';
-import { getDictionary, makeFormatter } from '~/i18n';
 
 const lang = 'en' as const;
 const t = getDictionary(lang);
 const f = makeFormatter(lang);
+const n = t.notFound;
+const photo = site.notFoundImage;
 ---
 
 <BaseLayout
   lang={lang}
   path="/404/"
-  title={f(t.notFound.meta.title)}
-  description={t.notFound.meta.description}
+  title={f(n.meta.title)}
+  description={n.meta.description}
   noindex
 >
-  <section class="section container-x">
-    <h1 class="text-display-lg">{t.notFound.title}</h1>
+  <section class="container-x not-found">
+    <div class="not-found-photo arch">
+      <Picture
+        src={photo.src}
+        alt={lt(photo.alt, lang)}
+        widths={[360, 540, 720]}
+        sizes="(min-width: 64rem) 28vw, 64vw"
+        aspect={4 / 5}
+        priority
+      />
+    </div>
+    <div class="not-found-text">
+      <p class="eyebrow">{n.eyebrow}</p>
+      <h1 class="text-display-xl not-found-title">
+        <AccentText text={n.title} />
+      </h1>
+      <p class="lede mt-5">{n.body}</p>
+      <div class="not-found-actions">
+        <a href="/" class="btn">
+          <Icon name="arrow-left" size={18} />
+          {t.cta.backHome}
+        </a>
+        <a href="/menu/" class="btn btn-outline">
+          {t.cta.exploreMenu}
+        </a>
+        {site.features.cakeBuilder && (
+          <a href="/custom-cakes/" class="link-arrow">
+            {t.cta.designCake}
+            <Icon name="arrow-right" size={16} />
+          </a>
+        )}
+      </div>
+    </div>
   </section>
 </BaseLayout>
+
+<style>
+  .not-found {
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+    padding-top: clamp(2rem, 1.5rem + 3vw, 5rem);
+    padding-bottom: clamp(4rem, 3rem + 5vw, 8rem);
+  }
+  @media (min-width: 64rem) {
+    .not-found {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: clamp(2rem, 4vw, 4rem);
+      min-height: min(46rem, 80vh);
+    }
+    .not-found-photo {
+      grid-column: 2 / span 4;
+    }
+    .not-found-text {
+      grid-column: 7 / span 6;
+    }
+  }
+  .not-found-photo {
+    width: min(100%, 22rem);
+    transform: rotate(-2.5deg);
+    box-shadow: 0 30px 60px -40px rgb(0 0 0 / 0.55);
+  }
+  .not-found-title {
+    margin-top: 1rem;
+    max-width: 14ch;
+    text-wrap: balance;
+  }
+  .not-found-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+    margin-top: 2rem;
+  }
+</style>

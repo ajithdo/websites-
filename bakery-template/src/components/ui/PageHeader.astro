@@ -1,0 +1,72 @@
+---
+/**
+ * Page opening: eyebrow, display title (with its *accent* word) and lede.
+ * `split` sets the lede beside the title on desktop, on the same 7 + 4
+ * column rhythm as the content below.
+ */
+import AccentText from './AccentText.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  lede?: string | undefined;
+  split?: boolean;
+  class?: string;
+}
+
+const { eyebrow, title, lede, split = false, class: className } = Astro.props;
+---
+
+<header class:list={['container-x page-header', split && 'is-split', className]}>
+  <div class="page-header-title">
+    <p class="eyebrow" data-reveal>
+      {eyebrow}
+    </p>
+    <h1 class="text-display-xl page-header-h1" data-reveal style="--i:1">
+      <AccentText text={title} />
+    </h1>
+  </div>
+  {lede && (
+    <p class="lede page-header-lede" data-reveal style="--i:2">
+      {lede}
+    </p>
+  )}
+  <slot />
+</header>
+
+<style>
+  .page-header {
+    display: grid;
+    gap: 1rem;
+    padding-top: clamp(1.75rem, 1.25rem + 3vw, 4.5rem);
+    padding-bottom: clamp(1.5rem, 1.25rem + 2vw, 3rem);
+  }
+  .page-header-h1 {
+    margin-top: 1rem;
+    max-width: 20ch;
+    text-wrap: balance;
+  }
+  /* Phones: a size that keeps short titles on one line and the content close. */
+  @media (max-width: 63.99rem) {
+    .page-header-h1 {
+      font-size: calc(clamp(2.25rem, 1.6rem + 3.2vw, 3.5rem) * var(--bb-heading-scale));
+    }
+    .page-header-lede {
+      font-size: 1rem;
+    }
+  }
+  @media (min-width: 64rem) {
+    .page-header.is-split {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: clamp(2rem, 4vw, 4rem);
+      align-items: end;
+    }
+    .is-split .page-header-title {
+      grid-column: 1 / span 7;
+    }
+    .is-split .page-header-lede {
+      grid-column: 9 / span 4;
+      font-size: 1.0625rem;
+    }
+  }
+</style>

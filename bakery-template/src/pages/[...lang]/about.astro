@@ -1,6 +1,11 @@
 ---
+import CtaBand from '~/components/home/CtaBand.astro';
+import Icon from '~/components/ui/Icon.astro';
+import PageHeader from '~/components/ui/PageHeader.astro';
+import Picture from '~/components/ui/Picture.astro';
+import { site } from '~/config/site';
+import { getDictionary, langPaths, localizePath, lt, makeFormatter, type Lang } from '~/i18n';
 import BaseLayout from '~/layouts/BaseLayout.astro';
-import { getDictionary, langPaths, makeFormatter, type Lang } from '~/i18n';
 
 export function getStaticPaths() {
   return langPaths();
@@ -9,15 +14,298 @@ export function getStaticPaths() {
 const { lang } = Astro.props as { lang: Lang };
 const t = getDictionary(lang);
 const f = makeFormatter(lang);
+const a = t.about;
+const { hero, strip, hands } = site.about;
+const href = (path: string) => localizePath(path, lang);
 ---
 
-<BaseLayout
-  lang={lang}
-  path="/about/"
-  title={f(t.about.meta.title)}
-  description={f(t.about.meta.description)}
->
-  <section class="section container-x">
-    <h1 class="text-display-lg">{f(t.about.meta.title)}</h1>
+<BaseLayout lang={lang} path="/about/" title={f(a.meta.title)} description={f(a.meta.description)}>
+  <PageHeader eyebrow={a.eyebrow} title={a.title} />
+
+  <div class="container-x">
+    <div class="about-hero" data-reveal="clip">
+      <Picture
+        src={hero.src}
+        alt={lt(hero.alt, lang)}
+        widths={[640, 960, 1280, 1600, 2000]}
+        sizes="(min-width: 82rem) 1216px, 94vw"
+        aspect={16 / 9}
+        priority
+      />
+    </div>
+  </div>
+
+  <section class="section container-x about-story" aria-label={a.eyebrow}>
+    <figure class="about-quote" data-reveal>
+      <svg viewBox="0 0 40 28" width="40" height="28" aria-hidden="true" class="about-quote-mark">
+        <path
+          d="M0 28V16Q0 3 13 0l2 4Q7 7 7 14h7v14zm22 0V16q0-13 13-16l2 4q-8 3-8 10h7v14z"
+          fill="currentColor"
+        ></path>
+      </svg>
+      <blockquote>
+        <p>{a.pullQuote}</p>
+      </blockquote>
+    </figure>
+    <div class="about-copy">
+      {a.story.map((paragraph, i) => (
+        <p
+          class:list={['about-paragraph', i === 0 && 'has-dropcap']}
+          data-reveal
+          style={`--i:${i}`}
+        >
+          {f(paragraph)}
+        </p>
+      ))}
+    </div>
   </section>
+
+  <section class="section bg-bg-alt" aria-labelledby="values-title">
+    <div class="container-x">
+      <h2 id="values-title" class="text-display-lg" data-reveal>
+        {a.valuesTitle}
+      </h2>
+      <ol class="about-values">
+        {a.values.map((value, i) => (
+          <li class="about-value" data-reveal style={`--i:${i}`}>
+            <span class="about-value-num tabular" aria-hidden="true">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <h3 class="text-display-sm">{value.title}</h3>
+            <p>{value.body}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="strip-title">
+    <div class="container-x">
+      <h2 id="strip-title" class="text-display-lg" data-reveal>
+        {a.stripTitle}
+      </h2>
+    </div>
+    <ul class="track about-strip" data-reveal>
+      {strip.map((photo, i) => (
+        <li class:list={['about-strip-item', i % 2 === 1 && 'is-low']}>
+          <Picture
+            src={photo.src}
+            alt={lt(photo.alt, lang)}
+            widths={[320, 480, 640, 800]}
+            sizes="(min-width: 64rem) 22vw, 70vw"
+            aspect={4 / 5}
+            class="about-strip-photo"
+          />
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="section band-inverse" aria-labelledby="founder-title">
+    <div class="container-x about-founder">
+      <div class="about-founder-photo arch" data-reveal="clip">
+        <Picture
+          src={hands.src}
+          alt={lt(hands.alt, lang)}
+          widths={[400, 600, 800, 1000]}
+          sizes="(min-width: 64rem) 36vw, 88vw"
+          aspect={4 / 5}
+        />
+      </div>
+      <div class="about-founder-text">
+        <p class="eyebrow" data-reveal>
+          {a.founderEyebrow}
+        </p>
+        <h2 id="founder-title" class="text-display-lg mt-4" data-reveal style="--i:1">
+          {a.founderTitle}
+        </h2>
+        <p class="lede mt-5" data-reveal style="--i:2">
+          {f(a.founderBody)}
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3" data-reveal style="--i:3">
+          <a href={href('/menu/')} class="btn">
+            {t.cta.exploreMenu}
+            <Icon name="arrow-right" size={18} />
+          </a>
+          {site.features.cakeBuilder && (
+            <a href={href('/custom-cakes/')} class="btn btn-light">
+              {t.cta.designCake}
+            </a>
+          )}
+        </div>
+        {site.features.demoMode && (
+          <p class="sample-pill mt-8" data-demo-only>
+            <Icon name="camera" size={14} />
+            {a.founderNote}
+          </p>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand lang={lang} />
 </BaseLayout>
+
+<style>
+  .about-hero {
+    overflow: hidden;
+    border-radius: var(--bb-radius-card);
+    aspect-ratio: 4 / 3;
+  }
+  @media (min-width: 48rem) {
+    .about-hero {
+      aspect-ratio: 16 / 9;
+    }
+  }
+
+  .about-story {
+    display: grid;
+    gap: 2.5rem;
+  }
+  @media (min-width: 64rem) {
+    .about-story {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: clamp(2rem, 4vw, 4rem);
+    }
+    .about-quote {
+      grid-column: 1 / span 4;
+      align-self: start;
+      position: sticky;
+      top: calc(var(--header-h) + 3rem);
+    }
+    .about-copy {
+      grid-column: 6 / span 7;
+    }
+  }
+  .about-quote {
+    margin: 0;
+  }
+  .about-quote-mark {
+    color: var(--bb-accent);
+  }
+  .about-quote blockquote {
+    margin-top: 1.25rem;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: var(--bb-heading-weight);
+    font-size: calc(clamp(1.6rem, 1.2rem + 1.6vw, 2.5rem) * var(--bb-heading-scale));
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+  :lang(te) .about-quote blockquote {
+    font-style: normal;
+    line-height: 1.5;
+  }
+  .about-copy {
+    display: grid;
+    gap: 1.4rem;
+    max-width: 40rem;
+  }
+  .about-paragraph {
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    color: var(--bb-ink);
+  }
+  @media (min-width: 64rem) {
+    .about-paragraph {
+      font-size: 1.1875rem;
+    }
+  }
+  .has-dropcap::first-letter {
+    float: left;
+    margin: 0.08em 0.12em 0 0;
+    font-family: var(--font-display);
+    font-weight: var(--bb-heading-weight);
+    font-size: 3.6em;
+    line-height: 0.82;
+    color: var(--bb-accent-ink);
+  }
+  :lang(te) .has-dropcap::first-letter {
+    float: none;
+    margin: 0;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+  }
+
+  .about-values {
+    display: grid;
+    gap: 2rem 2.5rem;
+    margin-top: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+  }
+  @media (min-width: 40rem) {
+    .about-values {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 80rem) {
+    .about-values {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  .about-value {
+    display: grid;
+    align-content: start;
+    gap: 0.75rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--bb-line-strong);
+  }
+  .about-value-num {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--bb-accent-ink);
+  }
+  .about-value p {
+    color: var(--bb-ink-muted);
+    line-height: 1.65;
+  }
+
+  .about-strip {
+    margin-top: clamp(1.75rem, 1.25rem + 2vw, 3rem);
+    grid-auto-columns: min(70vw, 20rem);
+  }
+  @media (min-width: 64rem) {
+    .about-strip {
+      grid-auto-flow: row;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(1rem, 2vw, 2rem);
+      max-width: 82rem;
+      margin-inline: auto;
+      overflow: visible;
+    }
+    .about-strip-item.is-low {
+      margin-top: 4rem;
+    }
+  }
+  .about-strip-photo {
+    overflow: hidden;
+    border-radius: var(--bb-radius-card);
+  }
+
+  .about-founder {
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+  }
+  @media (min-width: 64rem) {
+    .about-founder {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: clamp(2rem, 4vw, 4rem);
+    }
+    .about-founder-photo {
+      grid-column: 1 / span 5;
+    }
+    .about-founder-text {
+      grid-column: 7 / span 6;
+    }
+  }
+  .about-founder-photo {
+    max-width: 28rem;
+  }
+  .about-founder .sample-pill {
+    gap: 0.35rem;
+    border-color: color-mix(in srgb, var(--bb-on-inverse) 30%, transparent);
+    color: var(--bb-on-inverse-muted);
+  }
+</style>

@@ -2,6 +2,7 @@
 import CakeBuilder from '~/components/islands/builder/CakeBuilder';
 import type { BuilderConfig, BuilderLabels, FlavourView } from '~/components/islands/builder/types';
 import Icon from '~/components/ui/Icon.astro';
+import PageHeader from '~/components/ui/PageHeader.astro';
 import { designStyleIds, shapeIds } from '~/config/schema';
 import { site } from '~/config/site';
 import { getDictionary, langPaths, lt, makeFormatter, type Lang } from '~/i18n';
@@ -91,20 +92,7 @@ const config: BuilderConfig = {
   description={f(t.builder.meta.description)}
   actionBar={false}
 >
-  <header class="container-x builder-hero">
-    <div class="builder-hero-title">
-      <p class="eyebrow" data-reveal>
-        {t.builder.eyebrow}
-      </p>
-      <h1 class="text-display-xl mt-4" data-reveal style="--i:1">
-        {t.builder.titleLead} <em>{t.builder.titleAccent}</em>
-        {t.builder.titleTail && <> {t.builder.titleTail}</>}
-      </h1>
-    </div>
-    <p class="lede builder-hero-lede" data-reveal style="--i:2">
-      {f(t.builder.intro)}
-    </p>
-  </header>
+  <PageHeader eyebrow={t.builder.eyebrow} title={t.builder.title} lede={f(t.builder.intro)} split />
 
   <div class="container-x builder-shell">
     <CakeBuilder
@@ -127,45 +115,6 @@ const config: BuilderConfig = {
 </BaseLayout>
 
 <style>
-  .builder-hero {
-    display: grid;
-    gap: 1rem;
-    padding-top: clamp(1.75rem, 1.25rem + 3vw, 4.5rem);
-    padding-bottom: clamp(1.5rem, 1.25rem + 2vw, 3rem);
-  }
-  .builder-hero h1 {
-    text-wrap: balance;
-  }
-  /* A task page: on phones the title stays on one line so the first choices show sooner. */
-  @media (max-width: 63.99rem) {
-    .builder-hero h1 {
-      font-size: calc(clamp(2.25rem, 1.6rem + 3.2vw, 3.5rem) * var(--bb-heading-scale));
-    }
-    .builder-hero-lede {
-      font-size: 1rem;
-    }
-  }
-  .builder-hero em {
-    font-style: italic;
-    color: var(--bb-accent-ink);
-  }
-  :lang(te) .builder-hero em {
-    font-style: normal;
-  }
-  @media (min-width: 64rem) {
-    .builder-hero {
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      column-gap: clamp(2rem, 4vw, 4rem);
-      align-items: end;
-    }
-    .builder-hero-title {
-      grid-column: 1 / span 7;
-    }
-    .builder-hero-lede {
-      grid-column: 9 / span 4;
-      font-size: 1.0625rem;
-    }
-  }
   .builder-shell {
     padding-bottom: clamp(3rem, 2rem + 4vw, 6rem);
   }
