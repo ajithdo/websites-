@@ -108,8 +108,8 @@ export const site: SiteConfig = {
     mobileImage: 'hero/hero-mobile.jpg',
     video: null,
     alt: {
-      en: 'A tall celebration cake with cream swirls and fresh berries on a cake stand',
-      te: 'క్రీమ్ అలంకరణ, తాజా బెర్రీలతో కేక్ స్టాండ్‌పై ఉన్న ఎత్తైన వేడుక కేక్',
+      en: 'A tall tiered celebration cake decorated with roses, on a candlelit table',
+      te: 'కొవ్వొత్తుల వెలుగులో టేబుల్‌పై గులాబీలతో అలంకరించిన ఎత్తైన అంతస్తుల వేడుక కేక్',
     },
     position: '50% 50%',
     mobilePosition: '50% 50%',
@@ -129,8 +129,8 @@ export const site: SiteConfig = {
       {
         src: 'story/story-1.jpg',
         alt: {
-          en: 'A baker’s floured hands shaping dough on a wooden counter',
-          te: 'చెక్క బల్లపై పిండిని మలుస్తున్న బేకర్ చేతులు',
+          en: 'A baker’s floured hands shaping a round of dough',
+          te: 'పిండి అంటిన చేతులతో పిండి ముద్దను గుండ్రంగా మలుస్తున్న బేకర్',
         },
       },
       {
@@ -144,8 +144,8 @@ export const site: SiteConfig = {
     builderTeaserImage: {
       src: 'misc/builder-teaser.jpg',
       alt: {
-        en: 'Piping cream onto a layered cake',
-        te: 'పొరల కేక్‌పై క్రీమ్ పైప్ చేస్తున్న దృశ్యం',
+        en: 'Piping cream onto a layered sponge cake',
+        te: 'పొరల స్పాంజ్ కేక్‌పై క్రీమ్ పైప్ చేస్తున్న దృశ్యం',
       },
     },
   },
@@ -154,8 +154,8 @@ export const site: SiteConfig = {
     hero: {
       src: 'about/about-hero.jpg',
       alt: {
-        en: 'Pastries and cakes arranged on a bakery counter',
-        te: 'బేకరీ కౌంటర్‌పై అమర్చిన పేస్ట్రీలు, కేకులు',
+        en: 'Trays of freshly baked chocolate croissants and pastries',
+        te: 'ట్రేలలో తాజాగా బేక్ చేసిన చాక్లెట్ క్రొయిసాంట్లు, పేస్ట్రీలు',
       },
     },
     strip: [
@@ -165,33 +165,48 @@ export const site: SiteConfig = {
       },
       {
         src: 'about/strip-2.jpg',
-        alt: { en: 'Piping cream rosettes', te: 'క్రీమ్ పువ్వులు పైప్ చేస్తున్న దృశ్యం' },
+        alt: {
+          en: 'Piping a chocolate border onto a cream cake',
+          te: 'క్రీమ్ కేక్‌పై చాక్లెట్ అంచు పైప్ చేస్తున్న దృశ్యం',
+        },
       },
       {
         src: 'about/strip-3.jpg',
-        alt: { en: 'Loaves of bread coming out of the oven', te: 'ఓవెన్ నుంచి వస్తున్న బ్రెడ్లు' },
+        alt: {
+          en: 'Racks of fresh bread loaves in the bakery',
+          te: 'బేకరీలో అరల నిండా తాజా బ్రెడ్లు',
+        },
       },
       {
         src: 'about/strip-4.jpg',
-        alt: { en: 'Flour dusted over a work table', te: 'పని బల్లపై చల్లిన పిండి' },
+        alt: {
+          en: 'Hands working flour into dough on a wooden table',
+          te: 'చెక్క బల్లపై పిండిని కలుపుతున్న చేతులు',
+        },
       },
     ],
     hands: {
       src: 'about/hands.jpg',
-      alt: { en: 'A baker’s hands dusted with flour', te: 'పిండి అంటిన బేకర్ చేతులు' },
+      alt: {
+        en: 'A baker’s hands holding a ball of dough',
+        te: 'పిండి ముద్దను పట్టుకున్న బేకర్ చేతులు',
+      },
     },
   },
 
   contactPage: {
     corporateImage: {
       src: 'misc/corporate.jpg',
-      alt: { en: 'Gift boxes tied with ribbon', te: 'రిబ్బన్‌తో కట్టిన బహుమతి పెట్టెలు' },
+      alt: {
+        en: 'A kraft-paper gift box tied with a pink ribbon',
+        te: 'గులాబీ రిబ్బన్‌తో కట్టిన కాగితపు బహుమతి పెట్టె',
+      },
     },
   },
 
   notFoundImage: {
     src: 'misc/not-found.jpg',
-    alt: { en: 'A croissant with a bite taken out of it', te: 'ఒక ముక్క కొరికిన క్రొయిసాంట్' },
+    alt: { en: 'A single croissant on a white plate', te: 'తెల్లని ప్లేట్‌లో ఒక క్రొయిసాంట్' },
   },
 
   occasions: [
@@ -199,7 +214,10 @@ export const site: SiteConfig = {
       id: 'birthday',
       image: {
         src: 'occasions/birthday.jpg',
-        alt: { en: 'A birthday cake with candles', te: 'కొవ్వొత్తులతో పుట్టినరోజు కేక్' },
+        alt: {
+          en: 'Candles being lit on a piped birthday cake',
+          te: 'పుట్టినరోజు కేక్‌పై కొవ్వొత్తులు వెలిగిస్తున్న దృశ్యం',
+        },
       },
       tile: true,
     },
@@ -207,7 +225,10 @@ export const site: SiteConfig = {
       id: 'anniversary',
       image: {
         src: 'occasions/anniversary.jpg',
-        alt: { en: 'An elegant cake decorated with flowers', te: 'పూలతో అలంకరించిన సొగసైన కేక్' },
+        alt: {
+          en: 'A cream cake decorated with pink carnations',
+          te: 'గులాబీ రంగు కార్నేషన్ పూలతో అలంకరించిన క్రీమ్ కేక్',
+        },
       },
       tile: true,
     },
@@ -215,7 +236,10 @@ export const site: SiteConfig = {
       id: 'wedding',
       image: {
         src: 'occasions/wedding.jpg',
-        alt: { en: 'A tall tiered wedding cake', te: 'ఎత్తైన అంతస్తుల పెళ్లి కేక్' },
+        alt: {
+          en: 'A white three-tier wedding cake with deep red roses',
+          te: 'ముదురు ఎరుపు గులాబీలతో తెల్లని మూడు అంతస్తుల పెళ్లి కేక్',
+        },
       },
       tile: true,
     },
@@ -224,8 +248,8 @@ export const site: SiteConfig = {
       image: {
         src: 'occasions/kids.jpg',
         alt: {
-          en: 'A colourful cake for a child’s party',
-          te: 'పిల్లల పార్టీ కోసం రంగురంగుల కేక్',
+          en: 'A pink drip cake topped with an ice-cream cone and sprinkles',
+          te: 'ఐస్‌క్రీమ్ కోన్, రంగు స్ప్రింకిల్స్‌తో గులాబీ రంగు డ్రిప్ కేక్',
         },
       },
       tile: true,
@@ -235,8 +259,8 @@ export const site: SiteConfig = {
       image: {
         src: 'occasions/festive.jpg',
         alt: {
-          en: 'A festive gift hamper of sweets and treats',
-          te: 'తీపి వంటకాలతో పండుగ బహుమతి హ్యాంపర్',
+          en: 'Boondi laddoos on a tray beside a lit diya',
+          te: 'వెలిగించిన దీపం పక్కన ట్రేలో బూందీ లడ్డూలు',
         },
       },
       tile: true,
@@ -246,8 +270,8 @@ export const site: SiteConfig = {
       image: {
         src: 'occasions/corporate.jpg',
         alt: {
-          en: 'Branded gift boxes tied with ribbon',
-          te: 'రిబ్బన్‌తో కట్టిన బ్రాండెడ్ బహుమతి పెట్టెలు',
+          en: 'Black gift boxes tied with gold satin ribbons',
+          te: 'బంగారు రంగు శాటిన్ రిబ్బన్లతో కట్టిన నల్లని బహుమతి పెట్టెలు',
         },
       },
       tile: true,

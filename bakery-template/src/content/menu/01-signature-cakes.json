@@ -13,7 +13,7 @@
       "description": "Dark chocolate sponge, silky ganache and a glossy truffle glaze.",
       "descriptionTe": "డార్క్ చాక్లెట్ స్పాంజ్, మృదువైన గనాష్, మెరిసే ట్రఫుల్ గ్లేజ్.",
       "image": "menu/belgian-chocolate-truffle.jpg",
-      "alt": "Chocolate cake with a glossy dark ganache finish",
+      "alt": "Chocolate cake with swirled ganache frosting on a glass cake stand",
       "diet": "egg",
       "egglessAvailable": true,
       "variants": [
@@ -35,7 +35,7 @@
       "description": "Cocoa-kissed red sponge layered with tangy cream-cheese frosting.",
       "descriptionTe": "కోకో రుచితో ఎర్రని స్పాంజ్, పులుపు-తీపి క్రీమ్ చీజ్ ఫ్రాస్టింగ్ పొరలు.",
       "image": "menu/red-velvet-cream-cheese.jpg",
-      "alt": "Red velvet cake with white cream cheese frosting between the layers",
+      "alt": "A slice of red velvet layer cake with cream cheese frosting",
       "diet": "egg",
       "egglessAvailable": true,
       "variants": [
@@ -57,7 +57,7 @@
       "description": "Butterscotch sponge, house-made caramel and a crunch of praline.",
       "descriptionTe": "బటర్‌స్కాచ్ స్పాంజ్, ఇంట్లో చేసిన కారమెల్, కరకరలాడే ప్రాలీన్.",
       "image": "menu/salted-caramel-butterscotch.jpg",
-      "alt": "Cake with caramel dripping down its sides",
+      "alt": "A caramel drip cake topped with meringue kisses",
       "diet": "egg",
       "egglessAvailable": true,
       "variants": [
@@ -79,7 +79,7 @@
       "description": "Saffron-milk soaked sponge, cardamom cream and pistachio slivers.",
       "descriptionTe": "కుంకుమపువ్వు పాలలో నానిన స్పాంజ్, యాలకుల క్రీమ్, పిస్తా ముక్కలు.",
       "image": "menu/rasmalai-fusion-cake.jpg",
-      "alt": "Cream cake topped with pistachio slivers and saffron",
+      "alt": "A slice of cream layer cake topped with pistachio and a rose petal",
       "diet": "egg",
       "egglessAvailable": true,
       "variants": [
@@ -101,7 +101,7 @@
       "description": "Light vanilla sponge with fresh Banganapalli mango and whipped cream.",
       "descriptionTe": "తేలికపాటి వెనిల్లా స్పాంజ్, తాజా బంగినపల్లి మామిడి, విప్డ్ క్రీమ్.",
       "image": "menu/fresh-mango-cream.jpg",
-      "alt": "Layered cream cake with fresh mango pieces",
+      "alt": "A mango cream cake with cream rosettes and fresh mango cubes",
       "diet": "egg",
       "egglessAvailable": true,
       "variants": [
@@ -123,7 +123,7 @@
       "description": "Pistachio sponge, rose-scented cream and candied petals.",
       "descriptionTe": "పిస్తా స్పాంజ్, గులాబీ సువాసన క్రీమ్, చక్కెర పూసిన రేకులు.",
       "image": "menu/pistachio-rose.jpg",
-      "alt": "Pale green cake decorated with rose petals and pistachios",
+      "alt": "A pistachio cake topped with dried rose petals and chopped pistachios",
       "diet": "egg",
       "egglessAvailable": true,
       "variants": [
@@ -145,7 +145,7 @@
       "description": "Spiced biscuit cream, Biscoff crumb and a caramel drip.",
       "descriptionTe": "మసాలా బిస్కెట్ క్రీమ్, బిస్కాఫ్ పొడి, కారమెల్ డ్రిప్.",
       "image": "menu/lotus-biscoff.jpg",
-      "alt": "Caramel-coloured cake topped with spiced biscuits",
+      "alt": "A caramel-glazed cake topped with biscuits and caramel popcorn",
       "diet": "egg",
       "egglessAvailable": true,
       "variants": [
@@ -167,7 +167,7 @@
       "description": "New York-style baked cheesecake under a bright blueberry compote.",
       "descriptionTe": "న్యూయార్క్ శైలి బేక్డ్ చీజ్‌కేక్‌పై తాజా బ్లూబెర్రీ కంపోట్.",
       "image": "menu/baked-blueberry-cheesecake.jpg",
-      "alt": "Baked cheesecake topped with blueberry compote",
+      "alt": "A slice of baked cheesecake under blueberry compote",
       "diet": "egg",
       "egglessAvailable": true,
       "variants": [

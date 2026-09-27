@@ -11,7 +11,7 @@
       "description": "Flaky puff pastry filled with spiced potato and peas.",
       "descriptionTe": "మసాలా బంగాళాదుంప, బఠానీలతో పొరల పఫ్ పేస్ట్రీ.",
       "image": "menu/classic-veg-puff.jpg",
-      "alt": "Golden puff pastries",
+      "alt": "Golden square puff pastries on a plate",
       "diet": "veg",
       "price": 35,
       "badges": []
@@ -23,7 +23,7 @@
       "description": "Tandoori-spiced paneer and peppers in golden puff pastry.",
       "descriptionTe": "తందూరీ మసాలా పనీర్, క్యాప్సికమ్‌తో బంగారు రంగు పఫ్.",
       "image": "menu/paneer-tikka-puff.jpg",
-      "alt": "Savoury puff pastry with a spiced filling",
+      "alt": "Square puff pastry cases with a golden filling",
       "diet": "veg",
       "price": 50,
       "badges": []
@@ -35,7 +35,7 @@
       "description": "The bakery favourite: a boiled egg in onion masala, wrapped in puff.",
       "descriptionTe": "బేకరీ ఫేవరెట్: ఉల్లిపాయ మసాలాలో ఉడికించిన గుడ్డు, పఫ్‌లో చుట్టి.",
       "image": "menu/egg-puff.jpg",
-      "alt": "Flaky puff pastry parcel",
+      "alt": "Golden puff pastries on a baking tray",
       "diet": "egg",
       "price": 40,
       "badges": []
@@ -47,7 +47,7 @@
       "description": "Minced chicken cooked with green chilli and garam masala.",
       "descriptionTe": "పచ్చిమిర్చి, గరం మసాలాతో వండిన చికెన్ కీమా.",
       "image": "menu/chicken-keema-puff.jpg",
-      "alt": "Baked puff pastry with a savoury filling",
+      "alt": "Flaky puff pastry rolls with a spiced filling",
       "diet": "nonveg",
       "price": 60,
       "badges": []
@@ -59,7 +59,7 @@
       "description": "Grilled paneer tikka, mint chutney and crunchy onions on milk bread.",
       "descriptionTe": "మిల్క్ బ్రెడ్‌పై గ్రిల్డ్ పనీర్ టిక్కా, పుదీనా చట్నీ, కరకర ఉల్లిపాయలు.",
       "image": "menu/paneer-tikka-sandwich.jpg",
-      "alt": "Grilled sandwich cut in half",
+      "alt": "A grilled sandwich with dips on the side",
       "diet": "veg",
       "price": 140,
       "badges": []
@@ -71,7 +71,7 @@
       "description": "Our butter croissant with herbed chicken, basil pesto and greens.",
       "descriptionTe": "మా బటర్ క్రొయిసాంట్‌లో హెర్బ్ చికెన్, బేసిల్ పెస్టో, ఆకుకూరలు.",
       "image": "menu/chicken-pesto-croissant-sandwich.jpg",
-      "alt": "Croissant sandwich filled with greens",
+      "alt": "A croissant sandwich with greens, tomato and cheese",
       "diet": "nonveg",
       "price": 190,
       "badges": []

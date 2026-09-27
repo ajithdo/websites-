@@ -1,0 +1,964 @@
+[
+  {
+    "slot": "hero/hero.jpg",
+    "source": "unsplash",
+    "id": "gXgwsCshtnc",
+    "url": "https://images.unsplash.com/photo-1631998878375-236a6826ce7f",
+    "page": "https://unsplash.com/photos/a-wedding-cake-with-flowers-on-a-table-gXgwsCshtnc",
+    "photographer": "David Holifield",
+    "username": "davidholifield",
+    "size": {
+      "width": 2400,
+      "height": 1600
+    }
+  },
+  {
+    "slot": "hero/hero-mobile.jpg",
+    "source": "unsplash",
+    "id": "K64N6WkhL4g",
+    "url": "https://images.unsplash.com/photo-1565987164841-7132b384293b",
+    "page": "https://unsplash.com/photos/baked-cake-K64N6WkhL4g",
+    "photographer": "Christina Victoria Craft",
+    "username": "victoriabcphotographer",
+    "size": {
+      "width": 1200,
+      "height": 1800
+    }
+  },
+  {
+    "slot": "story/story-1.jpg",
+    "source": "unsplash",
+    "id": "Y-FYCzaV5zk",
+    "url": "https://images.unsplash.com/photo-1652283318977-bc722abd88ca",
+    "page": "https://unsplash.com/photos/a-pair-of-hands-holding-a-rock-Y-FYCzaV5zk",
+    "photographer": "Skyler Ewing",
+    "username": "skylerewing",
+    "size": {
+      "width": 1200,
+      "height": 1600
+    }
+  },
+  {
+    "slot": "story/story-2.jpg",
+    "source": "unsplash",
+    "id": "P3uyZxdjhX8",
+    "url": "https://images.unsplash.com/photo-1747459707229-7b1b7c8367e0",
+    "page": "https://unsplash.com/photos/freshly-baked-croissants-on-a-baking-sheet-P3uyZxdjhX8",
+    "photographer": "arh Lee",
+    "username": "arhlee_00",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "occasions/birthday.jpg",
+    "source": "unsplash",
+    "id": "d8s13D29QiE",
+    "url": "https://images.unsplash.com/photo-1545696563-af8f6ec2295a",
+    "page": "https://unsplash.com/photos/birthday-cake-with-lit-candles-d8s13D29QiE",
+    "photographer": "Aneta Pawlik",
+    "username": "anetakpawlik",
+    "size": {
+      "width": 1200,
+      "height": 1500
+    }
+  },
+  {
+    "slot": "occasions/anniversary.jpg",
+    "source": "unsplash",
+    "id": "CWburPtXtHM",
+    "url": "https://images.unsplash.com/photo-1629389861081-43cc4f172b0c",
+    "page": "https://unsplash.com/photos/a-white-cake-with-pink-flowers-on-top-of-it-CWburPtXtHM",
+    "photographer": "leyli sadeqian",
+    "username": "leilyian",
+    "size": {
+      "width": 1200,
+      "height": 1500
+    }
+  },
+  {
+    "slot": "occasions/wedding.jpg",
+    "source": "unsplash",
+    "id": "U7N6XFvTBjU",
+    "url": "https://images.unsplash.com/photo-1525257831700-183b9b8bf5c4",
+    "page": "https://unsplash.com/photos/round-white-floral-4-tiered-fondant-cake-U7N6XFvTBjU",
+    "photographer": "Thomas William",
+    "username": "thomasw",
+    "size": {
+      "width": 1200,
+      "height": 1500
+    }
+  },
+  {
+    "slot": "occasions/kids.jpg",
+    "source": "unsplash",
+    "id": "QNyRp21hb5I",
+    "url": "https://images.unsplash.com/photo-1621303837174-89787a7d4729",
+    "page": "https://unsplash.com/photos/pink-and-white-cake-on-white-ceramic-plate-QNyRp21hb5I",
+    "photographer": "Katie Rosario",
+    "username": "xokatierosario",
+    "size": {
+      "width": 1200,
+      "height": 1500
+    }
+  },
+  {
+    "slot": "occasions/festive.jpg",
+    "source": "unsplash",
+    "id": "da36Ez54mf4",
+    "url": "https://images.unsplash.com/photo-1695568180842-1fcf31187dd6",
+    "page": "https://unsplash.com/photos/a-close-up-of-a-plate-of-food-on-a-table-da36Ez54mf4",
+    "photographer": "Gaurav Kumar",
+    "username": "countingframez",
+    "size": {
+      "width": 1200,
+      "height": 1500
+    }
+  },
+  {
+    "slot": "occasions/corporate.jpg",
+    "source": "unsplash",
+    "id": "M-dLdqCVfAY",
+    "url": "https://images.unsplash.com/photo-1607344645866-009c320b63e0",
+    "page": "https://unsplash.com/photos/blue-and-white-star-print-textile-M-dLdqCVfAY",
+    "photographer": "Shamblen Studios",
+    "username": "shamblenstudios",
+    "size": {
+      "width": 1200,
+      "height": 1500
+    }
+  },
+  {
+    "slot": "misc/builder-teaser.jpg",
+    "source": "unsplash",
+    "id": "JSXiZYErA88",
+    "url": "https://images.unsplash.com/photo-1731318194186-a7ba75a397f5",
+    "page": "https://unsplash.com/photos/a-cake-with-white-frosting-on-a-plate-JSXiZYErA88",
+    "photographer": "A L",
+    "username": "li_ao",
+    "size": {
+      "width": 1600,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "about/about-hero.jpg",
+    "source": "unsplash",
+    "id": "qZ5lPCPvdXE",
+    "url": "https://images.unsplash.com/photo-1483695028939-5bb13f8648b0",
+    "page": "https://unsplash.com/photos/close-up-photography-of-baked-treats-on-tray-qZ5lPCPvdXE",
+    "photographer": "Mink Mingle",
+    "username": "minkmingle",
+    "size": {
+      "width": 2000,
+      "height": 1300
+    }
+  },
+  {
+    "slot": "about/strip-1.jpg",
+    "source": "unsplash",
+    "id": "1pwAz-shzjw",
+    "url": "https://images.unsplash.com/photo-1616898650098-0c9f737f8c04",
+    "page": "https://unsplash.com/photos/person-holding-white-powder-on-brown-wooden-table-1pwAz-shzjw",
+    "photographer": "\u2600\ufe0fShine_ Photos",
+    "username": "lara_corviello",
+    "size": {
+      "width": 1200,
+      "height": 1500
+    }
+  },
+  {
+    "slot": "about/strip-2.jpg",
+    "source": "unsplash",
+    "id": "xVKG3q60tAQ",
+    "url": "https://images.unsplash.com/photo-1687561822667-c308ab7b97a7",
+    "page": "https://unsplash.com/photos/a-person-cutting-a-cake-with-a-knife-xVKG3q60tAQ",
+    "photographer": "Federico Faccipieri",
+    "username": "efecubo",
+    "size": {
+      "width": 1200,
+      "height": 1500
+    }
+  },
+  {
+    "slot": "about/strip-3.jpg",
+    "source": "unsplash",
+    "id": "UVNguozJOPE",
+    "url": "https://images.unsplash.com/photo-1732565729552-994c6af761e3",
+    "page": "https://unsplash.com/photos/a-bunch-of-breads-that-are-on-a-rack-UVNguozJOPE",
+    "photographer": "Maite Paternain",
+    "username": "maite_paternain",
+    "size": {
+      "width": 1200,
+      "height": 1500
+    }
+  },
+  {
+    "slot": "about/strip-4.jpg",
+    "source": "unsplash",
+    "id": "GHdWRQwrDNY",
+    "url": "https://images.unsplash.com/photo-1606854428857-5121b55a2661",
+    "page": "https://unsplash.com/photos/person-making-white-powder-on-brown-wooden-table-GHdWRQwrDNY",
+    "photographer": "Simona Sergi",
+    "username": "i_am_simoesse",
+    "size": {
+      "width": 1200,
+      "height": 1500
+    }
+  },
+  {
+    "slot": "about/hands.jpg",
+    "source": "unsplash",
+    "id": "4yzEtTQLdL4",
+    "url": "https://images.unsplash.com/photo-1537734796389-e1fc293cf856",
+    "page": "https://unsplash.com/photos/person-holding-dough-4yzEtTQLdL4",
+    "photographer": "Arturrro",
+    "username": "artek123",
+    "size": {
+      "width": 1200,
+      "height": 1500
+    }
+  },
+  {
+    "slot": "misc/corporate.jpg",
+    "source": "unsplash",
+    "id": "f94JPVrDbnY",
+    "url": "https://images.unsplash.com/photo-1513201099705-a9746e1e201f",
+    "page": "https://unsplash.com/photos/brown-gift-box-with-pink-ribbon-f94JPVrDbnY",
+    "photographer": "Jess Bailey",
+    "username": "jessbaileydesigns",
+    "size": {
+      "width": 1600,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "misc/not-found.jpg",
+    "source": "unsplash",
+    "id": "E5Yb_0jua2U",
+    "url": "https://images.unsplash.com/photo-1501721358449-1505ca840822",
+    "page": "https://unsplash.com/photos/baked-pastry-on-white-ceramic-saucer-E5Yb_0jua2U",
+    "photographer": "Kaley  Dykstra",
+    "username": "kaleyloved",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/belgian-chocolate-truffle.jpg",
+    "source": "unsplash",
+    "id": "Id8BO472TbY",
+    "url": "https://images.unsplash.com/photo-1586985289906-406988974504",
+    "page": "https://unsplash.com/photos/brown-cake-on-clear-glass-cake-stand-Id8BO472TbY",
+    "photographer": "American Heritage Chocolate",
+    "username": "americanheritagechocolate",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/red-velvet-cream-cheese.jpg",
+    "source": "unsplash",
+    "id": "EfkMkUXs0fU",
+    "url": "https://images.unsplash.com/photo-1586788680434-30d324b2d46f",
+    "page": "https://unsplash.com/photos/sliced-cake-on-white-ceramic-plate-EfkMkUXs0fU",
+    "photographer": "amirali mirhashemian",
+    "username": "amir_v_ali",
+    "size": {
+      "width": 1200,
+      "height": 1200,
+      "focus": "0.55,0.5"
+    }
+  },
+  {
+    "slot": "menu/salted-caramel-butterscotch.jpg",
+    "source": "unsplash",
+    "id": "H2t7or5XgPs",
+    "url": "https://images.unsplash.com/photo-1702744382319-20efefc9dc19",
+    "page": "https://unsplash.com/photos/a-chocolate-cake-with-chocolate-icing-and-chocolate-swirls-H2t7or5XgPs",
+    "photographer": "Serghey Savchuk",
+    "username": "savchuks",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/rasmalai-fusion-cake.jpg",
+    "source": "unsplash",
+    "id": "snIGbFjsjP8",
+    "url": "https://images.unsplash.com/photo-1559329373-78f77851b979",
+    "page": "https://unsplash.com/photos/selective-focus-photo-of-white-icing-covered-cake-slice-snIGbFjsjP8",
+    "photographer": "K8",
+    "username": "_k8_",
+    "size": {
+      "width": 1200,
+      "height": 1200,
+      "focus": "0.42,0.5"
+    }
+  },
+  {
+    "slot": "menu/fresh-mango-cream.jpg",
+    "source": "unsplash",
+    "id": "IUiPtTKqWb0",
+    "url": "https://images.unsplash.com/photo-1688458297155-228a3b1e5b49",
+    "page": "https://unsplash.com/photos/a-cheesecake-topped-with-whipped-cream-and-mango-slices-IUiPtTKqWb0",
+    "photographer": "RJ Trazona",
+    "username": "muzkafilms",
+    "size": {
+      "width": 1200,
+      "height": 1200,
+      "focus": "0.6,0.5"
+    }
+  },
+  {
+    "slot": "menu/pistachio-rose.jpg",
+    "source": "unsplash",
+    "id": "bkveqX4Nsvk",
+    "url": "https://images.unsplash.com/photo-1716579862099-acd0967de37b",
+    "page": "https://unsplash.com/photos/a-cake-sitting-on-top-of-a-table-next-to-a-glass-bkveqX4Nsvk",
+    "photographer": "Aleksandra Gencheva",
+    "username": "inmykitchen_bg",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/lotus-biscoff.jpg",
+    "source": "unsplash",
+    "id": "VLbeOIhgSXo",
+    "url": "https://images.unsplash.com/photo-1616150679962-5eaf88e189d2",
+    "page": "https://unsplash.com/photos/brown-and-white-doughnut-on-white-textile-VLbeOIhgSXo",
+    "photographer": "Mateusz D",
+    "username": "mat7451",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/baked-blueberry-cheesecake.jpg",
+    "source": "unsplash",
+    "id": "LGNxQzYmeUk",
+    "url": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad",
+    "page": "https://unsplash.com/photos/slice-blueberry-cheesecake-pie-on-white-ceramic-plate-LGNxQzYmeUk",
+    "photographer": "Mink Mingle",
+    "username": "minkmingle",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/chocolate-truffle-pastry.jpg",
+    "source": "unsplash",
+    "id": "_K-yx6wIgt8",
+    "url": "https://images.unsplash.com/photo-1700448293876-07dca826c161",
+    "page": "https://unsplash.com/photos/a-slice-of-chocolate-cake-on-a-white-plate-_K-yx6wIgt8",
+    "photographer": "yiseul han",
+    "username": "hanyiseul",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/red-velvet-pastry.jpg",
+    "source": "unsplash",
+    "id": "cwggT0-5iF4",
+    "url": "https://images.unsplash.com/photo-1714949134591-d6f2c581b20d",
+    "page": "https://unsplash.com/photos/a-slice-of-red-velvet-cake-with-strawberries-on-top-cwggT0-5iF4",
+    "photographer": "monserrat nunez",
+    "username": "monsenue",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/pineapple-fresh-cream-pastry.jpg",
+    "source": "unsplash",
+    "id": "fENvSZUzbzU",
+    "url": "https://images.unsplash.com/photo-1602663491496-73f07481dbea",
+    "page": "https://unsplash.com/photos/white-and-red-strawberry-cake-fENvSZUzbzU",
+    "photographer": "Takuya Nagaoka",
+    "username": "takuya_n",
+    "size": {
+      "width": 1200,
+      "height": 1200,
+      "focus": "0.45,0.5"
+    }
+  },
+  {
+    "slot": "menu/biscoff-cheesecake-slice.jpg",
+    "source": "unsplash",
+    "id": "GAauSStia3s",
+    "url": "https://images.unsplash.com/photo-1547414368-ac947d00b91d",
+    "page": "https://unsplash.com/photos/slice-of-caramel-cake-on-black-plate-beside-fork-GAauSStia3s",
+    "photographer": "Aliona Gumeniuk",
+    "username": "agumeniuk",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/tiramisu-cup.jpg",
+    "source": "unsplash",
+    "id": "DEQofwQEHlc",
+    "url": "https://images.unsplash.com/photo-1586040140378-b5634cb4c8fc",
+    "page": "https://unsplash.com/photos/ice-cream-in-clear-glass-cup-DEQofwQEHlc",
+    "photographer": "Julie MARTINS",
+    "username": "staycem",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/rasmalai-tres-leches.jpg",
+    "source": "unsplash",
+    "id": "u7CHQEARG1s",
+    "url": "https://images.unsplash.com/photo-1633436375372-393c549b5c64",
+    "page": "https://unsplash.com/photos/a-wooden-cutting-board-topped-with-a-loaf-of-cake-u7CHQEARG1s",
+    "photographer": "Parnis Azimi",
+    "username": "parnissazimi",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/fudge-brownie.jpg",
+    "source": "unsplash",
+    "id": "LjtviHokbr4",
+    "url": "https://images.unsplash.com/photo-1636743715220-d8f8dd900b87",
+    "page": "https://unsplash.com/photos/a-pile-of-brownies-sitting-on-top-of-a-white-plate-LjtviHokbr4",
+    "photographer": "Anna Przepiorka",
+    "username": "myphotoland",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/nutella-brownie.jpg",
+    "source": "unsplash",
+    "id": "2UeBOL7UD34",
+    "url": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c",
+    "page": "https://unsplash.com/photos/chocolate-brownies-with-pouring-sauce-2UeBOL7UD34",
+    "photographer": "Pushpak Dsilva",
+    "username": "pushpak88",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/double-chocolate-cookies.jpg",
+    "source": "unsplash",
+    "id": "TOF9BBEgTnU",
+    "url": "https://images.unsplash.com/photo-1664854678365-ad59da72356c",
+    "page": "https://unsplash.com/photos/a-group-of-chocolate-chip-cookies-TOF9BBEgTnU",
+    "photographer": "Luna Wang",
+    "username": "lunawangjl",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/millet-jaggery-cookies.jpg",
+    "source": "unsplash",
+    "id": "-09BJOxi9CM",
+    "url": "https://images.unsplash.com/photo-1588345274200-42aa29063b78",
+    "page": "https://unsplash.com/photos/cookies-in-clear-glass-bowl--09BJOxi9CM",
+    "photographer": "Delaney Van",
+    "username": "delaneyvan",
+    "size": {
+      "width": 1200,
+      "height": 1200,
+      "focus": "0.64,0.5"
+    }
+  },
+  {
+    "slot": "menu/banana-walnut-tea-cake.jpg",
+    "source": "unsplash",
+    "id": "a0fBbS8RZAo",
+    "url": "https://images.unsplash.com/photo-1632931057819-4eefffa8e007",
+    "page": "https://unsplash.com/photos/a-loaf-of-banana-nut-bread-sitting-on-top-of-a-wooden-cutting-board-a0fBbS8RZAo",
+    "photographer": "Cody  Chan",
+    "username": "cceee",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/butter-tea-biscuits.jpg",
+    "source": "unsplash",
+    "id": "j2Z4H2FHK58",
+    "url": "https://images.unsplash.com/photo-1766226763094-2a78cc546d76",
+    "page": "https://unsplash.com/photos/a-pile-of-golden-brown-butter-cookies-j2Z4H2FHK58",
+    "photographer": "Stacy",
+    "username": "stacysuxx",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/butter-croissant.jpg",
+    "source": "unsplash",
+    "id": "sqkXyyj4WdE",
+    "url": "https://images.unsplash.com/photo-1623334044303-241021148842",
+    "page": "https://unsplash.com/photos/a-bunch-of-croissants-that-are-on-a-table-sqkXyyj4WdE",
+    "photographer": "Conor Brown",
+    "username": "commonboxturtle",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/almond-croissant.jpg",
+    "source": "unsplash",
+    "id": "123wTsGP4LU",
+    "url": "https://images.unsplash.com/photo-1586657263857-346c4b712ff5",
+    "page": "https://unsplash.com/photos/brown-bread-on-blue-and-white-checkered-paper-123wTsGP4LU",
+    "photographer": "mahyar motebassem",
+    "username": "mahyarmotebassem",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/multigrain-sourdough-loaf.jpg",
+    "source": "unsplash",
+    "id": "-ee84xVMlOA",
+    "url": "https://images.unsplash.com/photo-1675725291010-cb1020860cb2",
+    "page": "https://unsplash.com/photos/a-loaf-of-bread-sitting-on-top-of-a-wooden-cutting-board--ee84xVMlOA",
+    "photographer": "Vicky Ng",
+    "username": "vickyng",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/soft-milk-bread.jpg",
+    "source": "unsplash",
+    "id": "e83dQJ-BMog",
+    "url": "https://images.unsplash.com/photo-1598373182308-3270495d2f58",
+    "page": "https://unsplash.com/photos/brown-bread-on-white-ceramic-plate-e83dQJ-BMog",
+    "photographer": "Charles Chen",
+    "username": "color0911",
+    "size": {
+      "width": 1200,
+      "height": 1200,
+      "focus": "0.6,0.5"
+    }
+  },
+  {
+    "slot": "menu/garlic-cheese-pull-apart.jpg",
+    "source": "unsplash",
+    "id": "jB6ca6p6yVA",
+    "url": "https://images.unsplash.com/photo-1772223460178-409a9ae69c99",
+    "page": "https://unsplash.com/photos/a-golden-brown-calzone-with-melted-cheese-and-herbs-jB6ca6p6yVA",
+    "photographer": "Mohammad Fahim",
+    "username": "dischef",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/classic-veg-puff.jpg",
+    "source": "unsplash",
+    "id": "5C0ev9m9lbo",
+    "url": "https://images.unsplash.com/photo-1682263167429-0dbcf2c1e127",
+    "page": "https://unsplash.com/photos/a-black-plate-topped-with-pastries-on-top-of-a-table-5C0ev9m9lbo",
+    "photographer": "Mia Truong",
+    "username": "miatruong",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/paneer-tikka-puff.jpg",
+    "source": "unsplash",
+    "id": "sH_alscXC6U",
+    "url": "https://images.unsplash.com/photo-1658740879058-80f783c6b033",
+    "page": "https://unsplash.com/photos/a-group-of-bread-sH_alscXC6U",
+    "photographer": "kimia kazemi",
+    "username": "kimick",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/egg-puff.jpg",
+    "source": "unsplash",
+    "id": "ejVg2SNffGU",
+    "url": "https://images.unsplash.com/photo-1790029410371-c5ca0fb96c68",
+    "page": "https://unsplash.com/photos/baked-pastries-on-baking-sheet-ejVg2SNffGU",
+    "photographer": "Peter Muniz",
+    "username": "petepxl",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/chicken-keema-puff.jpg",
+    "source": "unsplash",
+    "id": "fXdoHjQ2Pyg",
+    "url": "https://images.unsplash.com/photo-1608582037152-adefa9decb70",
+    "page": "https://unsplash.com/photos/brown-bread-on-white-paper-fXdoHjQ2Pyg",
+    "photographer": "Geri Chapple",
+    "username": "gmchapple",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/paneer-tikka-sandwich.jpg",
+    "source": "unsplash",
+    "id": "ZB8NK8cB4EE",
+    "url": "https://images.unsplash.com/photo-1528736235302-52922df5c122",
+    "page": "https://unsplash.com/photos/bread-with-cheese-fillings-on-white-ceramic-plate-ZB8NK8cB4EE",
+    "photographer": "Pixzolo Photography",
+    "username": "pixzolo",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/chicken-pesto-croissant-sandwich.jpg",
+    "source": "unsplash",
+    "id": "ESXMLLiZcWU",
+    "url": "https://images.unsplash.com/photo-1639667852145-466e29aa49fd",
+    "page": "https://unsplash.com/photos/a-croissant-sandwich-with-tomatoes-cheese-and-lettuce-ESXMLLiZcWU",
+    "photographer": "Luis Covarrubias",
+    "username": "eledeluis",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/classic-cold-coffee.jpg",
+    "source": "unsplash",
+    "id": "vZOZJH_xkUk",
+    "url": "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5",
+    "page": "https://unsplash.com/photos/clear-glass-filled-ice-coffee-vZOZJH_xkUk",
+    "photographer": "Nathan Dumlao",
+    "username": "nate_dumlao",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/belgian-hot-chocolate.jpg",
+    "source": "unsplash",
+    "id": "RtHw0PWCLhw",
+    "url": "https://images.unsplash.com/photo-1517578239113-b03992dcdd25",
+    "page": "https://unsplash.com/photos/photo-of-mug-with-hot-choco-RtHw0PWCLhw",
+    "photographer": "Giancarlo Duarte",
+    "username": "giancarloduarte",
+    "size": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "slot": "menu/masala-chai.jpg",
+    "source": "unsplash",
+    "id": "Aug2nVY2x4o",
+    "url": "https://images.unsplash.com/photo-1683533698971-dcc5e19cb0f1",
+    "page": "https://unsplash.com/photos/a-plate-of-food-that-includes-bread-and-drinks-Aug2nVY2x4o",
+    "photographer": "Ananthan Chithiraikani",
+    "username": "ananthan8110",
+    "size": {
+      "width": 1200,
+      "height": 1200,
+      "focus": "0.5,0.62"
+    }
+  },
+  {
+    "slot": "menu/lime-mint-cooler.jpg",
+    "source": "unsplash",
+    "id": "gtDYwUIr9Vg",
+    "url": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd",
+    "page": "https://unsplash.com/photos/clear-glass-cup-filled-with-water-and-lemon-gtDYwUIr9Vg",
+    "photographer": "Melissa Walker Horn",
+    "username": "sugercoatit",
+    "size": {
+      "width": 1200,
+      "height": 1200,
+      "focus": "0.45,0.5"
+    }
+  },
+  {
+    "slot": "gallery/birthday-01.jpg",
+    "source": "unsplash",
+    "id": "qSPxjNn7Uy8",
+    "url": "https://images.unsplash.com/photo-1610670444950-0b29430891b4",
+    "page": "https://unsplash.com/photos/chocolate-birthday-cake-with-lit-candles-qSPxjNn7Uy8",
+    "photographer": "Duncan Kidd",
+    "username": "we_the_royal",
+    "size": {
+      "longEdge": 1600
+    }
+  },
+  {
+    "slot": "gallery/birthday-02.jpg",
+    "source": "unsplash",
+    "id": "LRIQuZyxKRM",
+    "url": "https://images.unsplash.com/photo-1606983340126-99ab4feaa64a",
+    "page": "https://unsplash.com/photos/chocolate-birthday-cake-with-icing-roses-LRIQuZyxKRM",
+    "photographer": "Stephen Wheeler",
+    "username": "stephen2002",
+    "size": {
+      "longEdge": 1600
+    }
+  },
+  {
+    "slot": "gallery/birthday-03.jpg",
+    "source": "unsplash",
+    "id": "2O4va26lBEI",
+    "url": "https://images.unsplash.com/photo-1694043325785-d841a964257f",
+    "page": "https://unsplash.com/photos/a-three-tiered-cake-with-candles-sticking-out-of-it-2O4va26lBEI",
+    "photographer": "Shaylyn",
+    "username": "mpadb",
+    "size": {
+      "longEdge": 1600
+    }
+  },
+  {
+    "slot": "gallery/birthday-04.jpg",
+    "source": "unsplash",
+    "id": "UEeiZeKFlks",
+    "url": "https://images.unsplash.com/photo-1631857455684-a54a2f03665f",
+    "page": "https://unsplash.com/photos/a-table-topped-with-lots-of-cakes-and-cupcakes-UEeiZeKFlks",
+    "photographer": "Arjun MJ",
+    "username": "arjun_mj",
+    "size": {
+      "longEdge": 1600
+    }
+  },
+  {
+    "slot": "gallery/anniversary-01.jpg",
+    "source": "unsplash",
+    "id": "RLJpYsEMTWM",
+    "url": "https://images.unsplash.com/photo-1557776959-f066eb37857f",
+    "page": "https://unsplash.com/photos/one-layer-cake-with-flowers-on-top-RLJpYsEMTWM",
+    "photographer": "Deva Williamson",
+    "username": "biglaughkitchen",
+    "size": {
+      "longEdge": 1600
+    }
+  },
+  {
+    "slot": "gallery/anniversary-02.jpg",
+    "source": "unsplash",
+    "id": "m4uypz8-zHU",
+    "url": "https://images.unsplash.com/photo-1721312097763-912b7ea1100a",
+    "page": "https://unsplash.com/photos/a-heart-shaped-cake-sitting-on-top-of-a-laptop-computer-m4uypz8-zHU",
+    "photographer": "Kurt Harvey",
+    "username": "khd_film",
+    "size": {
+      "longEdge": 1600
+    }
+  },
+  {
+    "slot": "gallery/anniversary-03.jpg",
+    "source": "unsplash",
+    "id": "s9S4dzwHXEs",
+    "url": "https://images.unsplash.com/photo-1567517757338-47d461bb1dd1",
+    "page": "https://unsplash.com/photos/white-and-pink-icing-covered-cake-s9S4dzwHXEs",
+    "photographer": "Deva Williamson",
+    "username": "biglaughkitchen",
+    "size": {
+      "longEdge": 1600
+    }
+  },
+  {
+    "slot": "gallery/wedding-01.jpg",
+    "source": "unsplash",
+    "id": "QjoXfAdqg8Q",
+    "url": "https://images.unsplash.com/photo-1659401083689-240a4f511a76",
+    "page": "https://unsplash.com/photos/a-white-vase-with-flowers-QjoXfAdqg8Q",
+    "photographer": "Stephen Wheeler",
+    "username": "stephen2002",
+    "size": {
+      "longEdge": 1600
+    }
+  },
+  {
+    "slot": "gallery/wedding-02.jpg",
+    "source": "unsplash",
+    "id": "pQSs6HXrr3Y",
+    "url": "https://images.unsplash.com/photo-1628601911129-1cd358c28112",
+    "page": "https://unsplash.com/photos/pink-and-white-roses-in-white-ceramic-vase-pQSs6HXrr3Y",
+    "photographer": "Hermes Rivera",
+    "username": "hermez777",
+    "size": {
+      "longEdge": 1600
+    }
+  },
+  {
+    "slot": "gallery/wedding-03.jpg",
+    "source": "unsplash",
+    "id": "22JxStzTxwo",
+    "url": "https://images.unsplash.com/photo-1519654793190-2e8a4806f1f2",
+    "page": "https://unsplash.com/photos/3-layer-cake-with-flowers-accent-22JxStzTxwo",
+    "photographer": "Photos by Lanty",
+    "username": "photos_by_lanty",
+    "size": {
+      "longEdge": 1600
+    }
+  },
+  {
+    "slot": "gallery/wedding-04.jpg",
+    "source": "unsplash",
+    "id": "HGl1Q2Y-mbw",
+    "url": "https://images.unsplash.com/photo-1561940329-7382e6704231",
+    "page": "https://unsplash.com/photos/assorted-pastries-on-ceramic-trays-HGl1Q2Y-mbw",
+    "photographer": "Samia Liamani",
+    "username": "mialiamani",
+    "size": {
+      "longEdge": 1600
+    }
+  },
+  {
+    "slot": "gallery/kids-01.jpg",
+    "source": "unsplash",
+    "id": "ntfGWVbBiO0",
+    "url": "https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec",
+    "page": "https://unsplash.com/photos/fondant-cake-with-stand-ntfGWVbBiO0",
+    "photographer": "Deva Williamson",
+    "username": "biglaughkitchen",
+    "size": {
+      "longEdge": 1600
+    }
+  },
+  {
+    "slot": "gallery/kids-02.jpg",
+    "source": "unsplash",
+    "id": "6SHd7Q-l1UQ",
+    "url": "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3",
+    "page": "https://unsplash.com/photos/sliced-cake-top-with-star-raisins-on-cake-stand-6SHd7Q-l1UQ",
+    "photographer": "Annie Spratt",
+    "username": "anniespratt",
+    "size": {
+      "longEdge": 1600
+    }
+  },
+  {
+    "slot": "gallery/kids-03.jpg",
+    "source": "unsplash",
+    "id": "nXKWLn8y9qE",
+    "url": "https://images.unsplash.com/photo-1607478900766-efe13248b125",
+    "page": "https://unsplash.com/photos/cupcakes-with-white-icing-on-top-nXKWLn8y9qE",
+    "photographer": "Bryam Blanco",
+    "username": "bryamb",
+    "size": {
+      "longEdge": 1600
+    }
+  },
+  {
+    "slot": "gallery/festive-01.jpg",
+    "source": "unsplash",
+    "id": "Bn4vWSX0d1Y",
+    "url": "https://images.unsplash.com/photo-1610508500445-a4592435e27e",
+    "page": "https://unsplash.com/photos/brown-cookies-on-brown-wooden-tray-Bn4vWSX0d1Y",
+    "photographer": "Prchi Palwe",
+    "username": "prachipalwe",
+    "size": {
+      "longEdge": 1600
+    }
+  },
+  {
+    "slot": "gallery/festive-02.jpg",
+    "source": "unsplash",
+    "id": "eBA6us2QOsw",
+    "url": "https://images.unsplash.com/photo-1692624015733-dc7de1df64a5",
+    "page": "https://unsplash.com/photos/a-box-filled-with-cookies-and-cookies-on-top-of-a-table-eBA6us2QOsw",
+    "photographer": "Paulina Kaminska",
+    "username": "paulinaka",
+    "size": {
+      "longEdge": 1600
+    }
+  },
+  {
+    "slot": "gallery/festive-03.jpg",
+    "source": "unsplash",
+    "id": "vrQI3demp3w",
+    "url": "https://images.unsplash.com/photo-1695568181310-41f4133d1279",
+    "page": "https://unsplash.com/photos/a-plate-of-food-on-a-table-with-a-candle-vrQI3demp3w",
+    "photographer": "Gaurav Kumar",
+    "username": "countingframez",
+    "size": {
+      "longEdge": 1600
+    }
+  },
+  {
+    "slot": "gallery/festive-04.jpg",
+    "source": "unsplash",
+    "id": "cZaUWl1Lse4",
+    "url": "https://images.unsplash.com/photo-1544202272-d1b1feb21070",
+    "page": "https://unsplash.com/photos/cookies-in-bowl-near-christmas-tree-cZaUWl1Lse4",
+    "photographer": "Diliara Garifullina",
+    "username": "dilja96",
+    "size": {
+      "longEdge": 1600
+    }
+  },
+  {
+    "slot": "gallery/corporate-01.jpg",
+    "source": "unsplash",
+    "id": "rR59irzeUl0",
+    "url": "https://images.unsplash.com/photo-1545844568-98bb15133ec0",
+    "page": "https://unsplash.com/photos/white-box-with-red-ribbon-rR59irzeUl0",
+    "photographer": "Annie Spratt",
+    "username": "anniespratt",
+    "size": {
+      "longEdge": 1600
+    }
+  },
+  {
+    "slot": "gallery/corporate-02.jpg",
+    "source": "unsplash",
+    "id": "2jJ7M-kD9XY",
+    "url": "https://images.unsplash.com/photo-1757179891224-38edeeb8cef8",
+    "page": "https://unsplash.com/photos/colorful-macarons-arranged-in-a-white-box-2jJ7M-kD9XY",
+    "photographer": "Dan Dennis",
+    "username": "cameramandan83",
+    "size": {
+      "longEdge": 1600
+    }
+  },
+  {
+    "slot": "gallery/corporate-03.jpg",
+    "source": "unsplash",
+    "id": "lOW7w5-DMHk",
+    "url": "https://images.unsplash.com/photo-1508349307373-ab2edc239589",
+    "page": "https://unsplash.com/photos/assorted-pastry-on-clear-glass-cupcake-rack-lOW7w5-DMHk",
+    "photographer": "zeno Aras",
+    "username": "araspower",
+    "size": {
+      "longEdge": 1600
+    }
+  }
+]

@@ -11,7 +11,7 @@
       "description": "Dense, fudgy and crackle-topped, with dark chocolate chunks.",
       "descriptionTe": "దట్టమైన, మెత్తని బ్రౌనీ, పైన పగుళ్ల పొర, డార్క్ చాక్లెట్ ముక్కలతో.",
       "image": "menu/fudge-brownie.jpg",
-      "alt": "Stack of fudgy chocolate brownies with crackled tops",
+      "alt": "A stack of fudgy chocolate brownies",
       "diet": "egg",
       "price": 90,
       "badges": ["bestseller"]
@@ -23,7 +23,7 @@
       "description": "Our fudge brownie swirled with Nutella and toasted hazelnuts.",
       "descriptionTe": "న్యూటెల్లా, వేయించిన హేజల్‌నట్‌లతో మా ఫడ్జ్ బ్రౌనీ.",
       "image": "menu/nutella-brownie.jpg",
-      "alt": "Chocolate brownie with a hazelnut spread swirl",
+      "alt": "Chocolate sauce drizzled over stacked brownies",
       "diet": "egg",
       "price": 120,
       "badges": []
@@ -35,7 +35,7 @@
       "description": "Chewy cocoa cookies packed with milk and dark chocolate chips.",
       "descriptionTe": "మిల్క్, డార్క్ చాక్లెట్ చిప్స్‌తో నిండిన మెత్తని కోకో కుకీలు.",
       "image": "menu/double-chocolate-cookies.jpg",
-      "alt": "Chocolate cookies studded with chocolate chips",
+      "alt": "Double chocolate cookies with chocolate chunks",
       "diet": "egg",
       "price": 240,
       "badges": []
@@ -47,7 +47,7 @@
       "description": "Crisp ragi and jowar cookies sweetened with jaggery and a hint of ginger.",
       "descriptionTe": "బెల్లం, కొద్దిగా అల్లంతో రాగి, జొన్న కరకర కుకీలు.",
       "image": "menu/millet-jaggery-cookies.jpg",
-      "alt": "Rustic golden-brown cookies on a board",
+      "alt": "A stack of rustic oat cookies",
       "diet": "veg",
       "price": 220,
       "badges": ["new"]
@@ -59,7 +59,7 @@
       "description": "Moist banana loaf studded with toasted walnuts. Made for chai.",
       "descriptionTe": "వేయించిన వాల్‌నట్‌లతో మెత్తని అరటిపండు కేక్. చాయ్‌తో తినడానికే.",
       "image": "menu/banana-walnut-tea-cake.jpg",
-      "alt": "Sliced banana loaf with walnuts",
+      "alt": "Sliced banana bread topped with banana, with walnuts on the side",
       "diet": "egg",
       "price": 280,
       "badges": []
@@ -71,7 +71,7 @@
       "description": "Short, crumbly and properly buttery. A tin never lasts long.",
       "descriptionTe": "పొడిపొడిగా, నిండుగా వెన్న రుచి. డబ్బా ఎక్కువ రోజులు నిలవదు.",
       "image": "menu/butter-tea-biscuits.jpg",
-      "alt": "Round golden butter biscuits",
+      "alt": "A pile of piped butter biscuits",
       "diet": "veg",
       "price": 160,
       "badges": []

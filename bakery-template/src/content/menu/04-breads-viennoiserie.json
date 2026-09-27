@@ -11,7 +11,7 @@
       "description": "Laminated with real butter: shattering crust, honeycomb crumb.",
       "descriptionTe": "నిజమైన వెన్నతో పొరలుగా: కరకరలాడే పైపొర, తేనెపట్టు లాంటి లోపలి భాగం.",
       "image": "menu/butter-croissant.jpg",
-      "alt": "Golden, flaky butter croissants",
+      "alt": "Rows of golden butter croissants",
       "diet": "egg",
       "price": 110,
       "badges": []
@@ -23,7 +23,7 @@
       "description": "Twice-baked with frangipane and flaked almonds, dusted with sugar.",
       "descriptionTe": "ఫ్రాంజిపేన్, బాదం ముక్కలతో రెండుసార్లు బేక్ చేసి, పైన చక్కెర పొడి.",
       "image": "menu/almond-croissant.jpg",
-      "alt": "Almond croissant topped with flaked almonds and powdered sugar",
+      "alt": "Almond croissants on a cooling rack",
       "diet": "egg",
       "price": 150,
       "badges": []
@@ -35,7 +35,7 @@
       "description": "Slow-fermented for 24 hours, with oats, flax and sunflower seeds.",
       "descriptionTe": "ఓట్స్, అవిసె, పొద్దుతిరుగుడు గింజలతో 24 గంటలు నెమ్మదిగా పులియబెట్టిన బ్రెడ్.",
       "image": "menu/multigrain-sourdough-loaf.jpg",
-      "alt": "Seeded sourdough loaf with a dark, crackled crust",
+      "alt": "A crusty round sourdough loaf on a board",
       "diet": "veg",
       "price": 220,
       "badges": []
@@ -47,7 +47,7 @@
       "description": "Pillowy, lightly sweet sandwich loaf. The one for your morning toast.",
       "descriptionTe": "దూదిలా మెత్తని, కొద్దిగా తీపి బ్రెడ్. ఉదయం టోస్ట్‌కు సరైనది.",
       "image": "menu/soft-milk-bread.jpg",
-      "alt": "Soft white loaf of bread",
+      "alt": "Sliced soft white sandwich bread",
       "diet": "veg",
       "price": 60,
       "badges": []
@@ -59,7 +59,7 @@
       "description": "Buttery garlic bread knots baked with molten mozzarella.",
       "descriptionTe": "కరిగిన మొజరెల్లాతో బేక్ చేసిన వెన్న-వెల్లుల్లి బ్రెడ్ ముడులు.",
       "image": "menu/garlic-cheese-pull-apart.jpg",
-      "alt": "Pull-apart bread with melted cheese and herbs",
+      "alt": "Cheesy garlic bread with herbs on a wooden board",
       "diet": "veg",
       "price": 180,
       "badges": ["bestseller"]
