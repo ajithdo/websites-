@@ -21,6 +21,7 @@ const stroke = [
   'ChevronLeft',
   'ChevronRight',
   'ChevronDown',
+  'ChevronUp',
   'Clock',
   'Star',
   'Check',
@@ -66,6 +67,7 @@ const stroke = [
   'Flame',
   'Candy',
   'RotateCcw',
+  'ReceiptText',
 ];
 const brands = {
   whatsapp: 'siWhatsapp',

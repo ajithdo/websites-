@@ -1,6 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import { site } from '~/config/site';
-import { formatClock, openStatus, zonedParts, zonedToEpoch, type WeekHours } from '~/lib/time';
+import {
+  dateParts,
+  formatClock,
+  formatDateKey,
+  openStatus,
+  zonedParts,
+  zonedToEpoch,
+  type WeekHours,
+} from '~/lib/time';
 
 const IST = 'Asia/Kolkata';
 /** A moment given as IST wall-clock time, independent of the machine's timezone. */
@@ -90,5 +98,19 @@ describe('formatClock', () => {
     expect(formatClock('22:00', 'te')).toBe('రాత్రి 10');
     expect(formatClock('09:00', 'te')).toBe('ఉదయం 9');
     expect(formatClock('14:30', 'te')).toBe('మధ్యాహ్నం 2:30');
+  });
+});
+
+describe('formatDateKey / dateParts (English is formatted by hand)', () => {
+  it('uses short names by default', () => {
+    expect(formatDateKey('2026-10-03')).toBe('Sat, 3 Oct 2026');
+  });
+  it('honours long weekday and month names', () => {
+    expect(
+      formatDateKey('2026-10-03', 'en', { weekday: 'long', day: 'numeric', month: 'long' }),
+    ).toBe('Saturday, 3 October');
+  });
+  it('splits a date into chip parts', () => {
+    expect(dateParts('2026-09-29')).toEqual({ weekday: 'Tue', day: '29', month: 'Sep' });
   });
 });

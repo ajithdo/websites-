@@ -1,6 +1,14 @@
 ---
+import CakeBuilder from '~/components/islands/builder/CakeBuilder';
+import type { BuilderConfig, BuilderLabels, FlavourView } from '~/components/islands/builder/types';
+import Icon from '~/components/ui/Icon.astro';
+import { designStyleIds, shapeIds } from '~/config/schema';
+import { site } from '~/config/site';
+import { getDictionary, langPaths, lt, makeFormatter, type Lang } from '~/i18n';
 import BaseLayout from '~/layouts/BaseLayout.astro';
-import { getDictionary, langPaths, makeFormatter, type Lang } from '~/i18n';
+import type { BuilderContext, MessageLabels } from '~/lib/builder';
+import { responsiveImage } from '~/lib/images';
+import { whatsappHref } from '~/lib/links';
 
 export function getStaticPaths() {
   return langPaths('cakeBuilder');
@@ -8,7 +16,72 @@ export function getStaticPaths() {
 
 const { lang } = Astro.props as { lang: Lang };
 const t = getDictionary(lang);
+const en = getDictionary('en');
 const f = makeFormatter(lang);
+const cb = site.cakeBuilder;
+const { address } = site.contact;
+
+const flavours: FlavourView[] = await Promise.all(
+  cb.flavours.map(async (fl) => ({
+    id: fl.id,
+    name: fl.name,
+    nameTe: fl.nameTe,
+    tier: fl.tier,
+    note: fl.note,
+    image: await responsiveImage(fl.image, {
+      widths: [180, 280, 360, 520, 680],
+      sizes: '(min-width: 80rem) 170px, (min-width: 64rem) 260px, (min-width: 40rem) 340px, 45vw',
+      aspect: 1,
+    }),
+  })),
+);
+
+const ctx: BuilderContext = {
+  occasions: site.occasions.map((o) => o.id),
+  flavours: cb.flavours.map(({ id, name, nameTe, tier }) => ({ id, name, nameTe, tier })),
+  sizesKg: cb.sizesKg,
+  styles: designStyleIds,
+  shapes: shapeIds,
+  messageMaxLength: cb.messageMaxLength,
+  servingsPerKg: cb.servingsPerKg,
+  pricing: cb.pricing,
+  lead: {
+    leadTimeHours: cb.leadTimeHours,
+    extendedLeadStyles: cb.extendedLeadStyles,
+    slots: cb.slots,
+  },
+  hours: site.hours,
+  timezone: site.timezone,
+};
+
+const labels: BuilderLabels = {
+  builder: t.builder,
+  occasions: t.occasions,
+  common: t.common,
+  cta: t.cta,
+};
+
+// The bakery reads orders in English, whatever language the customer uses.
+const enSteps = en.builder.steps;
+const messageLabels: MessageLabels = {
+  occasions: Object.fromEntries(Object.entries(en.occasions).map(([id, o]) => [id, o.label])),
+  styles: Object.fromEntries(
+    designStyleIds.map((id) => [id, enSteps.design.styles[id].name]),
+  ) as MessageLabels['styles'],
+  shapes: enSteps.options.shapes,
+  tiers: { classic: enSteps.flavour.classic, premium: enSteps.flavour.premium },
+};
+
+const config: BuilderConfig = {
+  lang,
+  brand: site.brand.name,
+  whatsapp: site.contact.whatsapp,
+  phone: site.contact.phone,
+  addressLine: `${address.street}, ${address.locality} ${address.postalCode}`,
+  radiusKm: site.delivery.radiusKm,
+  areas: site.delivery.areas.map((a) => lt(a, 'en')),
+  ctx,
+};
 ---
 
 <BaseLayout
@@ -16,8 +89,101 @@ const f = makeFormatter(lang);
   path="/custom-cakes/"
   title={f(t.builder.meta.title)}
   description={f(t.builder.meta.description)}
+  actionBar={false}
 >
-  <section class="section container-x">
-    <h1 class="text-display-lg">{f(t.builder.meta.title)}</h1>
-  </section>
+  <header class="container-x builder-hero">
+    <div class="builder-hero-title">
+      <p class="eyebrow" data-reveal>
+        {t.builder.eyebrow}
+      </p>
+      <h1 class="text-display-xl mt-4" data-reveal style="--i:1">
+        {t.builder.titleLead} <em>{t.builder.titleAccent}</em>
+        {t.builder.titleTail && <> {t.builder.titleTail}</>}
+      </h1>
+    </div>
+    <p class="lede builder-hero-lede" data-reveal style="--i:2">
+      {f(t.builder.intro)}
+    </p>
+  </header>
+
+  <div class="container-x builder-shell">
+    <CakeBuilder
+      client:load
+      labels={labels}
+      messageLabels={messageLabels}
+      flavours={flavours}
+      config={config}
+    />
+    <noscript>
+      <p class="builder-noscript">
+        <span>{t.builder.noscript}</span>
+        <a href={whatsappHref()} class="btn" target="_blank" rel="noopener noreferrer">
+          <Icon name="whatsapp" size={20} />
+          {t.cta.whatsapp}
+        </a>
+      </p>
+    </noscript>
+  </div>
 </BaseLayout>
+
+<style>
+  .builder-hero {
+    display: grid;
+    gap: 1rem;
+    padding-top: clamp(1.75rem, 1.25rem + 3vw, 4.5rem);
+    padding-bottom: clamp(1.5rem, 1.25rem + 2vw, 3rem);
+  }
+  .builder-hero h1 {
+    text-wrap: balance;
+  }
+  /* A task page: on phones the title stays on one line so the first choices show sooner. */
+  @media (max-width: 63.99rem) {
+    .builder-hero h1 {
+      font-size: calc(clamp(2.25rem, 1.6rem + 3.2vw, 3.5rem) * var(--bb-heading-scale));
+    }
+    .builder-hero-lede {
+      font-size: 1rem;
+    }
+  }
+  .builder-hero em {
+    font-style: italic;
+    color: var(--bb-accent-ink);
+  }
+  :lang(te) .builder-hero em {
+    font-style: normal;
+  }
+  @media (min-width: 64rem) {
+    .builder-hero {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: clamp(2rem, 4vw, 4rem);
+      align-items: end;
+    }
+    .builder-hero-title {
+      grid-column: 1 / span 7;
+    }
+    .builder-hero-lede {
+      grid-column: 9 / span 4;
+      font-size: 1.0625rem;
+    }
+  }
+  .builder-shell {
+    padding-bottom: clamp(3rem, 2rem + 4vw, 6rem);
+  }
+  /* Without JavaScript the builder cannot work: show the WhatsApp fallback instead. */
+  :global(:root:not(.js)) .builder-shell :global(.builder) {
+    display: none;
+  }
+  .builder-noscript {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid var(--bb-line-strong);
+    border-radius: var(--bb-radius-card);
+    background: var(--bb-surface);
+  }
+  .builder-noscript span {
+    flex: 1 1 18rem;
+  }
+</style>

@@ -153,8 +153,23 @@ export function formatClock(hhmm: string, lang: 'en' | 'te' = 'en'): string {
   return `${h12}${mm} ${hh < 12 ? 'AM' : 'PM'}`;
 }
 
-const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const WEEKDAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const MONTHS = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+const name = (full: string, style: string | undefined) =>
+  style === 'long' ? full : full.slice(0, 3);
 
 /**
  * "Sat, 3 Oct 2026" for a YYYY-MM-DD key. English is formatted by hand so
@@ -175,12 +190,36 @@ export function formatDateKey(
   const date = new Date(Date.UTC(y, m - 1, d));
   if (lang === 'en') {
     const parts = [
-      options.weekday ? `${WEEKDAYS[date.getUTCDay()]},` : '',
+      options.weekday ? `${name(WEEKDAYS[date.getUTCDay()]!, options.weekday)},` : '',
       options.day ? String(d) : '',
-      options.month ? MONTHS[m - 1] : '',
+      options.month ? name(MONTHS[m - 1]!, options.month) : '',
       options.year ? String(y) : '',
     ];
     return parts.filter(Boolean).join(' ');
   }
   return new Intl.DateTimeFormat('te-IN', { ...options, timeZone: 'UTC' }).format(date);
+}
+
+/** Weekday, day and month of a YYYY-MM-DD key, for date chips. */
+export function dateParts(
+  dateKey: string,
+  lang: 'en' | 'te' = 'en',
+): { weekday: string; day: string; month: string } {
+  const [y = 1970, m = 1, d = 1] = dateKey.split('-').map(Number);
+  const date = new Date(Date.UTC(y, m - 1, d));
+  if (lang === 'en')
+    return {
+      weekday: name(WEEKDAYS[date.getUTCDay()]!, 'short'),
+      day: String(d),
+      month: name(MONTHS[m - 1]!, 'short'),
+    };
+  const parts = new Intl.DateTimeFormat('te-IN', {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+    timeZone: 'UTC',
+  })
+    .formatToParts(date)
+    .reduce<Record<string, string>>((acc, p) => ({ ...acc, [p.type]: p.value }), {});
+  return { weekday: parts.weekday ?? '', day: parts.day ?? String(d), month: parts.month ?? '' };
 }

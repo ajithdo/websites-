@@ -48,6 +48,10 @@ export const icons = {
     kind: 'stroke',
     body: '<path d="m6 9 6 6 6-6"/>',
   },
+  'chevron-up': {
+    kind: 'stroke',
+    body: '<path d="m18 15-6-6-6 6"/>',
+  },
   clock: {
     kind: 'stroke',
     body: '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
@@ -227,6 +231,10 @@ export const icons = {
   'rotate-ccw': {
     kind: 'stroke',
     body: '<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>',
+  },
+  'receipt-text': {
+    kind: 'stroke',
+    body: '<path d="M13 16H8"/><path d="M14 8H8"/><path d="M16 12H8"/><path d="M4 3a1 1 0 0 1 1-1 1.3 1.3 0 0 1 .7.2l.933.6a1.3 1.3 0 0 0 1.4 0l.934-.6a1.3 1.3 0 0 1 1.4 0l.933.6a1.3 1.3 0 0 0 1.4 0l.933-.6a1.3 1.3 0 0 1 1.4 0l.934.6a1.3 1.3 0 0 0 1.4 0l.933-.6A1.3 1.3 0 0 1 19 2a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1 1.3 1.3 0 0 1-.7-.2l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.934.6a1.3 1.3 0 0 1-1.4 0l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-1.4 0l-.934-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-.7.2 1 1 0 0 1-1-1z"/>',
   },
   whatsapp: {
     kind: 'fill',

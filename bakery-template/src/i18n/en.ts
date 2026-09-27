@@ -351,7 +351,11 @@ export const en = {
         'Design a custom celebration cake in {city}: occasion, flavour, size and finish, with a live price estimate. Send it to us on WhatsApp.',
     },
     eyebrow: 'Custom cakes',
-    title: 'Design your cake',
+    titleLead: 'Design your',
+    titleAccent: 'cake',
+    titleTail: '',
+    noscript:
+      'The cake designer needs JavaScript. You can still order: send us your occasion, flavour, size and date on WhatsApp.',
     intro:
       'Nine quick steps. The estimate updates as you go, and nothing is final until we confirm it with you on WhatsApp.',
     progress: 'Step {n} of {total}',
@@ -362,6 +366,9 @@ export const en = {
     startOver: 'Start over',
     startOverConfirm: 'Clear your cake design and start again?',
     draftRestored: 'We saved your design from last time.',
+    perKg: '{price}/kg',
+    questions: 'Questions? We are one message away.',
+    tooSoonShort: 'Too soon',
     steps: {
       occasion: {
         label: 'Occasion',
@@ -403,6 +410,7 @@ export const en = {
           'two-tier': { name: 'Two-tier', body: 'Two stacked cakes for a grand moment.' },
         },
         leadNote: 'Needs {hours} hours',
+        base: 'Base price',
       },
       options: {
         label: 'Options',
@@ -414,6 +422,7 @@ export const en = {
         message: 'Message on the cake (optional)',
         messageHint: 'Up to {max} characters.',
         messageCount: '{count} of {max}',
+        noExtra: 'No extra charge',
       },
       date: {
         label: 'Date',
@@ -425,6 +434,7 @@ export const en = {
           '{style} cakes need {hours} hours. The earliest we can do is {earliest}. Need it sooner? Message us and we will try.',
         earliest: 'Earliest available: {earliest}',
         otherDate: 'Pick another date',
+        daysLabel: 'Choose a date',
       },
       fulfilment: {
         label: 'Pickup or delivery',
@@ -452,6 +462,8 @@ export const en = {
         send: 'Send on WhatsApp',
         attach: 'Tip: attach a reference photo in the chat once WhatsApp opens.',
         sent: 'WhatsApp should now be open with your cake details. Send the message there and we will reply soon.',
+        preview: 'Your WhatsApp message',
+        newDesign: 'Start a new design',
       },
     },
     summaryCard: {
@@ -459,6 +471,8 @@ export const en = {
       empty: 'Your choices will appear here.',
       estimate: 'Estimate',
       estimatePending: 'Choose a flavour and size to see an estimate',
+      estimatePendingShort: 'Pick a flavour and size',
+      ticket: 'Order ticket',
       open: 'Show your order ticket',
       close: 'Hide your order ticket',
       eggless: 'Eggless',

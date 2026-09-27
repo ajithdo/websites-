@@ -32,5 +32,5 @@ export const sampleCakeMessage: CakeMessageInput = {
   message: 'Happy 30th, Priya',
   when: 'Sat, 10 Oct 2026 · 6 PM',
   customer: { name: 'Ananya', phone: '98765 43210', fulfilment: 'pickup' },
-  estimate: { low: 2600, high: 3000 },
+  estimate: { low: 2650, high: 3050 },
 };

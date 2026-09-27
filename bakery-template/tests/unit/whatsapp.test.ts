@@ -39,7 +39,7 @@ describe('cake message', () => {
       '*Eggless:* Yes',
       '*Message on cake:* "Happy 30th, Priya"',
       '*When:* Sat, 10 Oct 2026 · 6 PM',
-      '*Estimate:* ₹2,600 – ₹3,000',
+      '*Estimate:* ₹2,650 – ₹3,050',
     ]) {
       expect(text).toContain(line);
     }
