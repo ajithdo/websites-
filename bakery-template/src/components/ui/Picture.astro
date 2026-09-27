@@ -56,7 +56,7 @@ const placeholder = blur && !priority ? await lqip(src) : undefined;
   formats={['avif', 'webp']}
   fallbackFormat="jpg"
   fit="cover"
-  {...position ? { position } : {}}
+  {...(position ? { position } : {})}
   quality={quality}
   priority={priority}
   class:list={['bb-img', imgClass]}

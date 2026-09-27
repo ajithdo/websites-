@@ -1,0 +1,16 @@
+import { chromium, devices } from '@playwright/test';
+const [, , out, theme = 'classic'] = process.argv;
+const browser = await chromium.launch();
+const ctx = await browser.newContext({ ...devices['Pixel 7'] });
+const page = await ctx.newPage();
+await page.emulateMedia({ reducedMotion: 'reduce' });
+await page.goto(`http://localhost:4321/menu/?theme=${theme}`, { waitUntil: 'networkidle' });
+await page.locator('#belgian-chocolate-truffle').getByRole('radio', { name: '1 kg' }).check();
+await page.locator('#belgian-chocolate-truffle').getByRole('button', { name: /Add/ }).click();
+await page.locator('#butter-croissant').getByRole('button', { name: /Add/ }).click();
+await page.locator('#masala-chai').getByRole('button', { name: /Add/ }).click();
+await page.screenshot({ path: out.replace('.png', '-pill.png') });
+await page.getByRole('button', { name: /View order/ }).click();
+await page.waitForTimeout(700);
+await page.screenshot({ path: out });
+await browser.close();

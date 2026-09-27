@@ -153,7 +153,14 @@ export function formatClock(hhmm: string, lang: 'en' | 'te' = 'en'): string {
   return `${h12}${mm} ${hh < 12 ? 'AM' : 'PM'}`;
 }
 
-/** "Sat, 3 Oct 2026" for a YYYY-MM-DD key. */
+const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+/**
+ * "Sat, 3 Oct 2026" for a YYYY-MM-DD key. English is formatted by hand so
+ * order messages read identically in every browser (ICU versions differ);
+ * Telugu uses the browser's te-IN calendar names.
+ */
 export function formatDateKey(
   dateKey: string,
   lang: 'en' | 'te' = 'en',
@@ -165,8 +172,15 @@ export function formatDateKey(
   },
 ): string {
   const [y = 1970, m = 1, d = 1] = dateKey.split('-').map(Number);
-  return new Intl.DateTimeFormat(lang === 'te' ? 'te-IN' : 'en-IN', {
-    ...options,
-    timeZone: 'UTC',
-  }).format(new Date(Date.UTC(y, m - 1, d)));
+  const date = new Date(Date.UTC(y, m - 1, d));
+  if (lang === 'en') {
+    const parts = [
+      options.weekday ? `${WEEKDAYS[date.getUTCDay()]},` : '',
+      options.day ? String(d) : '',
+      options.month ? MONTHS[m - 1] : '',
+      options.year ? String(y) : '',
+    ];
+    return parts.filter(Boolean).join(' ');
+  }
+  return new Intl.DateTimeFormat('te-IN', { ...options, timeZone: 'UTC' }).format(date);
 }

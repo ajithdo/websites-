@@ -1,6 +1,12 @@
 ---
+import MenuBrowser from '~/components/islands/menu/MenuBrowser';
+import type { CategoryView, MenuConfig, MenuLabels } from '~/components/islands/menu/types';
+import DietMark from '~/components/ui/DietMark.astro';
+import { site } from '~/config/site';
+import { getDictionary, langPaths, lt, makeFormatter, type Lang } from '~/i18n';
 import BaseLayout from '~/layouts/BaseLayout.astro';
-import { getDictionary, langPaths, makeFormatter, type Lang } from '~/i18n';
+import { responsiveImage } from '~/lib/images';
+import { getMenu } from '~/lib/menu';
 
 export function getStaticPaths() {
   return langPaths();
@@ -9,6 +15,53 @@ export function getStaticPaths() {
 const { lang } = Astro.props as { lang: Lang };
 const t = getDictionary(lang);
 const f = makeFormatter(lang);
+const { categories } = await getMenu();
+
+const views: CategoryView[] = await Promise.all(
+  categories.map(async (c) => ({
+    slug: c.slug,
+    name: c.name,
+    nameTe: c.nameTe,
+    note: c.note,
+    items: await Promise.all(
+      c.items.map(async (item) => ({
+        id: item.id,
+        name: item.name,
+        nameTe: item.nameTe,
+        description: item.description,
+        alt: item.alt,
+        diet: item.diet,
+        egglessAvailable: item.egglessAvailable,
+        price: item.price,
+        variants: item.variants,
+        badges: item.badges,
+        category: item.category,
+        image: await responsiveImage(item.image, {
+          widths: [120, 184, 256, 320],
+          sizes: '(min-width: 64rem) 128px, 92px',
+          aspect: 1,
+        }),
+      })),
+    ),
+  })),
+);
+
+const labels: MenuLabels = {
+  menu: t.menu,
+  cart: t.cart,
+  diet: t.diet,
+  badges: t.badges,
+  common: t.common,
+};
+const config: MenuConfig = {
+  lang,
+  brand: site.brand.name,
+  whatsapp: site.contact.whatsapp,
+  egglessSurcharge: site.menu.egglessSurcharge,
+  timezone: site.timezone,
+  areas: site.delivery.areas.map((a) => lt(a, 'en')),
+  cartEnabled: site.features.enquiryCart,
+};
 ---
 
 <BaseLayout
@@ -17,7 +70,45 @@ const f = makeFormatter(lang);
   title={f(t.menu.meta.title)}
   description={f(t.menu.meta.description)}
 >
-  <section class="section container-x">
-    <h1 class="text-display-lg">{f(t.menu.meta.title)}</h1>
-  </section>
+  <header class="container-x menu-hero">
+    <p class="eyebrow" data-reveal>
+      {t.menu.eyebrow}
+    </p>
+    <h1 class="text-display-xl mt-4" data-reveal style="--i:1">
+      {t.menu.title}
+    </h1>
+    <p class="lede mt-5" data-reveal style="--i:2">
+      {site.features.enquiryCart ? t.menu.intro : f(t.menu.meta.description)}
+    </p>
+    <div class="menu-key" data-reveal style="--i:3">
+      <span class="text-sm font-semibold text-ink-muted">{t.menu.dietKey}</span>
+      <DietMark diet="veg" lang={lang} showLabel />
+      <DietMark diet="egg" lang={lang} showLabel />
+      <DietMark diet="nonveg" lang={lang} showLabel />
+    </div>
+  </header>
+
+  <MenuBrowser client:load categories={views} labels={labels} config={config} />
+
+  <p class="container-x menu-footnote">{f(t.menu.footnote)}</p>
 </BaseLayout>
+
+<style>
+  .menu-hero {
+    padding-top: clamp(2.5rem, 2rem + 4vw, 5.5rem);
+    padding-bottom: 2rem;
+  }
+  .menu-key {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1.25rem;
+    margin-top: 1.75rem;
+    font-size: 0.875rem;
+  }
+  .menu-footnote {
+    padding-bottom: clamp(3rem, 2rem + 4vw, 6rem);
+    font-size: 0.875rem;
+    color: var(--bb-ink-muted);
+  }
+</style>
