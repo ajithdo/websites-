@@ -92,5 +92,12 @@ for (const [group, entries] of groups) {
   }
   lines.push('');
 }
+lines.push(
+  '## Fonts and icons',
+  '',
+  '- Fonts: Fraunces, Manrope, Playfair Display, DM Sans, Cormorant Garamond, Inter, Noto Sans Telugu and Noto Serif Telugu, under the SIL Open Font License 1.1, self-hosted via Fontsource.',
+  '- Icons: Lucide (ISC License) and Simple Icons (CC0) for the WhatsApp and social marks.',
+  '',
+);
 writeFileSync(join(root, 'CREDITS.md'), lines.join('\n'));
 console.log(`\n${fetched} photo(s) downloaded · CREDITS.md updated (${manifest.length} photos)`);
