@@ -1,0 +1,58 @@
+{
+  "slug": "breads-viennoiserie",
+  "name": "Breads & Viennoiserie",
+  "nameTe": "బ్రెడ్లు & వియన్నోయిసెరీ",
+  "order": 4,
+  "items": [
+    {
+      "id": "butter-croissant",
+      "name": "Butter Croissant",
+      "description": "Laminated with real butter: shattering crust, honeycomb crumb.",
+      "image": "menu/butter-croissant.jpg",
+      "alt": "Golden, flaky butter croissants",
+      "diet": "egg",
+      "price": 110,
+      "badges": []
+    },
+    {
+      "id": "almond-croissant",
+      "name": "Almond Croissant",
+      "description": "Twice-baked with frangipane and flaked almonds, dusted with sugar.",
+      "image": "menu/almond-croissant.jpg",
+      "alt": "Almond croissant topped with flaked almonds and powdered sugar",
+      "diet": "egg",
+      "price": 150,
+      "badges": []
+    },
+    {
+      "id": "multigrain-sourdough-loaf",
+      "name": "Multigrain Sourdough Loaf",
+      "description": "Slow-fermented for 24 hours, with oats, flax and sunflower seeds.",
+      "image": "menu/multigrain-sourdough-loaf.jpg",
+      "alt": "Seeded sourdough loaf with a dark, crackled crust",
+      "diet": "veg",
+      "price": 220,
+      "badges": []
+    },
+    {
+      "id": "soft-milk-bread",
+      "name": "Soft Milk Bread",
+      "description": "Pillowy, lightly sweet sandwich loaf. The one for your morning toast.",
+      "image": "menu/soft-milk-bread.jpg",
+      "alt": "Soft white loaf of bread",
+      "diet": "veg",
+      "price": 60,
+      "badges": []
+    },
+    {
+      "id": "garlic-cheese-pull-apart",
+      "name": "Garlic Cheese Pull-Apart",
+      "description": "Buttery garlic bread knots baked with molten mozzarella.",
+      "image": "menu/garlic-cheese-pull-apart.jpg",
+      "alt": "Pull-apart bread with melted cheese and herbs",
+      "diet": "veg",
+      "price": 180,
+      "badges": ["bestseller"]
+    }
+  ]
+}

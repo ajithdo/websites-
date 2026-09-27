@@ -1,0 +1,69 @@
+{
+  "slug": "pastries-desserts",
+  "name": "Pastries & Desserts",
+  "nameTe": "పేస్ట్రీలు & డెజర్ట్‌లు",
+  "order": 2,
+  "items": [
+    {
+      "id": "chocolate-truffle-pastry",
+      "name": "Chocolate Truffle Pastry",
+      "description": "A single slice of our chocolate truffle, ganache from edge to edge.",
+      "image": "menu/chocolate-truffle-pastry.jpg",
+      "alt": "Slice of layered chocolate cake with ganache",
+      "diet": "egg",
+      "price": 120,
+      "badges": []
+    },
+    {
+      "id": "red-velvet-pastry",
+      "name": "Red Velvet Pastry",
+      "description": "Red velvet layers under a cloud of cream-cheese frosting.",
+      "image": "menu/red-velvet-pastry.jpg",
+      "alt": "Slice of red velvet cake with white frosting",
+      "diet": "egg",
+      "price": 130,
+      "badges": []
+    },
+    {
+      "id": "pineapple-fresh-cream-pastry",
+      "name": "Pineapple Fresh Cream Pastry",
+      "description": "The classic: vanilla sponge, pineapple and fresh whipped cream.",
+      "image": "menu/pineapple-fresh-cream-pastry.jpg",
+      "alt": "Fresh cream pastry slice with fruit on top",
+      "diet": "egg",
+      "price": 90,
+      "badges": []
+    },
+    {
+      "id": "biscoff-cheesecake-slice",
+      "name": "Biscoff Cheesecake Slice",
+      "description": "Creamy cheesecake on a Biscoff base with a spiced caramel top.",
+      "image": "menu/biscoff-cheesecake-slice.jpg",
+      "alt": "Slice of cheesecake with a caramel topping and biscuit base",
+      "diet": "egg",
+      "price": 180,
+      "badges": []
+    },
+    {
+      "id": "tiramisu-cup",
+      "name": "Tiramisu Cup",
+      "description": "Espresso-soaked sponge, mascarpone cream and a dusting of cocoa.",
+      "image": "menu/tiramisu-cup.jpg",
+      "alt": "Tiramisu layered in a glass and dusted with cocoa",
+      "diet": "egg",
+      "price": 190,
+      "badges": []
+    },
+    {
+      "id": "rasmalai-tres-leches",
+      "name": "Rasmalai Tres Leches",
+      "nameTe": "రసమలై ట్రెస్ లెచెస్",
+      "description": "Sponge soaked in three milks with saffron and cardamom, finished with pistachio.",
+      "image": "menu/rasmalai-tres-leches.jpg",
+      "alt": "Milk-soaked cake slice with cream and nuts",
+      "diet": "egg",
+      "price": 160,
+      "badges": ["new"]
+    }
+  ]
+}

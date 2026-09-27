@@ -1,0 +1,38 @@
+---
+/**
+ * Inline SVG icon from the generated registry (src/lib/icons.ts).
+ * Decorative by default; pass `label` to make it announce itself.
+ */
+import { icons, type IconName } from '~/lib/icons';
+
+interface Props {
+  name: IconName;
+  size?: number;
+  strokeWidth?: number;
+  label?: string;
+  class?: string;
+}
+
+const { name, size = 20, strokeWidth = 1.6, label, class: className } = Astro.props;
+const icon = icons[name];
+const stroke = icon.kind === 'stroke';
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  width={size}
+  height={size}
+  class:list={['shrink-0', className]}
+  role={label ? 'img' : undefined}
+  aria-label={label}
+  aria-hidden={label ? undefined : 'true'}
+  focusable="false"
+  fill={stroke ? 'none' : 'currentColor'}
+  stroke={stroke ? 'currentColor' : undefined}
+  stroke-width={stroke ? strokeWidth : undefined}
+  stroke-linecap={stroke ? 'round' : undefined}
+  stroke-linejoin={stroke ? 'round' : undefined}
+>
+  <Fragment set:html={icon.body} />
+</svg>

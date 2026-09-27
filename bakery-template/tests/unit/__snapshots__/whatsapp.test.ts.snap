@@ -1,0 +1,42 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`cake message > matches the reviewed format 1`] = `
+"Hi Butter & Bloom! 🎂 I'd like to order a custom cake.
+
+*Occasion:* Birthday
+*Flavour:* Pistachio Rose (Premium)
+*Size:* 1.5 kg · serves ~12
+*Design:* Designer fondant
+*Shape:* Heart
+*Eggless:* Yes
+*Message on cake:* "Happy 30th, Priya"
+
+*When:* Sat, 10 Oct 2026 · 6 PM
+*Pickup or delivery:* Pickup from the counter
+
+*Name:* Ananya
+*Phone:* 98765 43210
+
+*Estimate:* ₹2,600 – ₹3,000
+_I understand the final price is confirmed after you see the design._
+
+I'll share a reference photo here."
+`;
+
+exports[`cart message > matches the reviewed format 1`] = `
+"Hi Butter & Bloom! I'd like to place an order:
+
+• Belgian Chocolate Truffle (1 kg, eggless) × 1 — ₹1,050
+• Butter Croissant × 4 — ₹440
+• Masala Chai × 2 — ₹80
+
+*Estimated total:* ₹1,570
+
+*Name:* Ananya
+*Phone:* 98765 43210
+*Pickup or delivery:* Delivery to Kazipet, near the railway station
+*Date needed:* Sat, 10 Oct 2026
+*Notes:* Please write "Happy Birthday Amma" on a card.
+
+_Website prices are indicative. Please confirm the final amount._"
+`;

@@ -1,0 +1,24 @@
+{
+  "occasion": "kids",
+  "order": 4,
+  "items": [
+    {
+      "image": "gallery/kids-01.jpg",
+      "alt": "Colourful cake for a child's birthday",
+      "caption": "A rainbow for a five-year-old",
+      "captionTe": "ఐదేళ్ల చిన్నారికి రెయిన్‌బో కేక్"
+    },
+    {
+      "image": "gallery/kids-02.jpg",
+      "alt": "Rainbow layer cake",
+      "caption": "Rainbow layers inside",
+      "captionTe": "లోపల రెయిన్‌బో పొరలు"
+    },
+    {
+      "image": "gallery/kids-03.jpg",
+      "alt": "Colourful cupcakes",
+      "caption": "Cupcakes for the class party",
+      "captionTe": "క్లాస్ పార్టీ కోసం కప్‌కేకులు"
+    }
+  ]
+}

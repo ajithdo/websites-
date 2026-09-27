@@ -4,6 +4,8 @@ import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { fontFamilies, type FontFamilyDef } from './src/config/fonts';
+import { siteSchema } from './src/config/schema';
+import { site } from './src/config/site';
 import interactionDirective from './src/directives/integration';
 
 /**
@@ -44,9 +46,34 @@ function fontsourceVariable(def: FontFamilyDef) {
   };
 }
 
+// Fail the build early, with a readable message, if src/config/site.ts has a typo.
+const parsed = siteSchema.safeParse(site);
+if (!parsed.success) {
+  const issues = parsed.error.issues
+    .map((i) => `  • site.${i.path.join('.')}: ${i.message}`)
+    .join('\n');
+  throw new Error(`src/config/site.ts is invalid:\n${issues}`);
+}
+
+/**
+ * Canonical origin: site.url when set, otherwise the host's build variables
+ * (Netlify `URL`, Cloudflare Pages `CF_PAGES_URL`), otherwise local preview.
+ */
+const siteUrl = site.url || process.env.URL || process.env.CF_PAGES_URL || 'http://localhost:4321';
+
 export default defineConfig({
-  site: 'http://localhost:4321',
-  integrations: [react(), sitemap(), interactionDirective()],
+  site: siteUrl,
+  trailingSlash: 'ignore',
+  integrations: [
+    react(),
+    sitemap({
+      filter: (page) => !/\/404\/?$/.test(page),
+      ...(site.features.telugu
+        ? { i18n: { defaultLocale: 'en', locales: { en: 'en-IN', te: 'te-IN' } } }
+        : {}),
+    }),
+    interactionDirective(),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },

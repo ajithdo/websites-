@@ -1,0 +1,80 @@
+---
+/**
+ * Live "Open now · closes 10 PM" / "Closed · opens 9 AM" line, computed in the
+ * bakery's timezone (site.timezone) on the visitor's device and refreshed every
+ * minute. Before the script runs it shows the plain hours summary.
+ */
+import { site } from '~/config/site';
+import { getDictionary, type Lang } from '~/i18n';
+import { dayRangeLabel, groupedHours } from '~/lib/hours';
+
+interface Props {
+  lang: Lang;
+  class?: string;
+}
+
+const { lang, class: className } = Astro.props;
+const t = getDictionary(lang);
+const rows = groupedHours(site.hours, lang);
+const fallback = rows
+  .filter((r) => r.text)
+  .map((r) => `${dayRangeLabel(r.days, t.daysShort)} · ${r.text}`)
+  .join('; ');
+const config = JSON.stringify({
+  hours: site.hours,
+  tz: site.timezone,
+  lang,
+  t: { ...t.status, days: t.days },
+});
+---
+
+<p class:list={['open-status', className]} data-open-status={config} aria-live="polite">
+  <span class="open-status-dot" aria-hidden="true"></span>
+  <span class="open-status-text">{fallback}</span>
+</p>
+
+<style>
+  .open-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 600;
+    min-height: 1.75rem;
+  }
+  .open-status-dot {
+    position: relative;
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 999px;
+    background: currentColor;
+    opacity: 0.35;
+    flex-shrink: 0;
+  }
+  .open-status[data-state='open'] .open-status-dot {
+    background: #2f9e55;
+    opacity: 1;
+  }
+  .open-status[data-state='open'] .open-status-dot::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: inherit;
+    border: 1.5px solid #2f9e55;
+    opacity: 0;
+    animation: status-ping 2.4s var(--ease) infinite;
+  }
+  .open-status[data-state='closed'] .open-status-dot {
+    background: #c0492f;
+    opacity: 1;
+  }
+  @keyframes status-ping {
+    0% {
+      transform: scale(0.6);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1.6);
+      opacity: 0;
+    }
+  }
+</style>

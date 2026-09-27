@@ -1,0 +1,24 @@
+{
+  "occasion": "anniversary",
+  "order": 2,
+  "items": [
+    {
+      "image": "gallery/anniversary-01.jpg",
+      "alt": "White cake decorated with fresh flowers",
+      "caption": "Twenty-five years, in buttercream",
+      "captionTe": "పాతికేళ్ల వేడుక కేక్"
+    },
+    {
+      "image": "gallery/anniversary-02.jpg",
+      "alt": "Heart-shaped cake",
+      "caption": "A heart-shaped surprise",
+      "captionTe": "హృదయాకారపు కేక్"
+    },
+    {
+      "image": "gallery/anniversary-03.jpg",
+      "alt": "Cake decorated with roses",
+      "caption": "Roses, piped by hand",
+      "captionTe": "చేతితో పైప్ చేసిన గులాబీలు"
+    }
+  ]
+}

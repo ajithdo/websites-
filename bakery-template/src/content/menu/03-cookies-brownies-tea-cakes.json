@@ -1,0 +1,69 @@
+{
+  "slug": "cookies-brownies-tea-cakes",
+  "name": "Cookies, Brownies & Tea Cakes",
+  "nameTe": "కుకీలు, బ్రౌనీలు & టీ కేకులు",
+  "order": 3,
+  "items": [
+    {
+      "id": "fudge-brownie",
+      "name": "Fudge Brownie",
+      "description": "Dense, fudgy and crackle-topped, with dark chocolate chunks.",
+      "image": "menu/fudge-brownie.jpg",
+      "alt": "Stack of fudgy chocolate brownies with crackled tops",
+      "diet": "egg",
+      "price": 90,
+      "badges": ["bestseller"]
+    },
+    {
+      "id": "nutella-brownie",
+      "name": "Nutella Brownie",
+      "description": "Our fudge brownie swirled with Nutella and toasted hazelnuts.",
+      "image": "menu/nutella-brownie.jpg",
+      "alt": "Chocolate brownie with a hazelnut spread swirl",
+      "diet": "egg",
+      "price": 120,
+      "badges": []
+    },
+    {
+      "id": "double-chocolate-cookies",
+      "name": "Double Chocolate Cookies (box of 6)",
+      "description": "Chewy cocoa cookies packed with milk and dark chocolate chips.",
+      "image": "menu/double-chocolate-cookies.jpg",
+      "alt": "Chocolate cookies studded with chocolate chips",
+      "diet": "egg",
+      "price": 240,
+      "badges": []
+    },
+    {
+      "id": "millet-jaggery-cookies",
+      "name": "Millet Jaggery Cookies (box of 8)",
+      "nameTe": "చిరుధాన్యాల బెల్లం కుకీలు",
+      "description": "Crisp ragi and jowar cookies sweetened with jaggery and a hint of ginger.",
+      "image": "menu/millet-jaggery-cookies.jpg",
+      "alt": "Rustic golden-brown cookies on a board",
+      "diet": "veg",
+      "price": 220,
+      "badges": ["new"]
+    },
+    {
+      "id": "banana-walnut-tea-cake",
+      "name": "Banana Walnut Tea Cake",
+      "description": "Moist banana loaf studded with toasted walnuts. Made for chai.",
+      "image": "menu/banana-walnut-tea-cake.jpg",
+      "alt": "Sliced banana loaf with walnuts",
+      "diet": "egg",
+      "price": 280,
+      "badges": []
+    },
+    {
+      "id": "butter-tea-biscuits",
+      "name": "Butter Tea Biscuits (250 g)",
+      "description": "Short, crumbly and properly buttery. A tin never lasts long.",
+      "image": "menu/butter-tea-biscuits.jpg",
+      "alt": "Round golden butter biscuits",
+      "diet": "veg",
+      "price": 160,
+      "badges": []
+    }
+  ]
+}

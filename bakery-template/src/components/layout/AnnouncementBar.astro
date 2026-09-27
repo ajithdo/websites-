@@ -1,0 +1,84 @@
+---
+/**
+ * Seasonal announcement (features.festiveBanner). Hidden after its `until`
+ * date (checked at build and in the browser, in IST) or once dismissed for
+ * the session.
+ */
+import Icon from '~/components/ui/Icon.astro';
+import { site } from '~/config/site';
+import { getDictionary, localizePath, lt, type Lang } from '~/i18n';
+import { zonedParts } from '~/lib/time';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDictionary(lang);
+const a = site.announcement;
+const today = zonedParts(new Date(), site.timezone).dateKey;
+const expired = a.until !== null && today > a.until;
+const show = site.features.festiveBanner && !expired;
+const link = a.href ? (a.href.startsWith('/') ? localizePath(a.href, lang) : a.href) : null;
+---
+
+{show && (
+  <div class="announcement band-secondary" data-announcement data-until={a.until ?? undefined}>
+    <div class="container-x announcement-row">
+      <Icon name="sparkles" size={16} class="hidden xs:block" />
+      {link ? (
+        <a href={link} class="announcement-text link-draw">
+          {lt(a.text, lang)}
+        </a>
+      ) : (
+        <p class="announcement-text">{lt(a.text, lang)}</p>
+      )}
+      <button
+        type="button"
+        class="announcement-close"
+        data-announcement-dismiss
+        aria-label={t.announcement.dismiss}
+      >
+        <Icon name="x" size={16} />
+      </button>
+    </div>
+  </div>
+)}
+
+<style>
+  .announcement-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 2.75rem;
+    padding-block: 0.4rem;
+    padding-right: 3.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-align: center;
+  }
+  .announcement-text {
+    color: inherit;
+  }
+  .announcement-close {
+    position: absolute;
+    right: calc(var(--gutter) - 0.75rem);
+    top: 50%;
+    translate: 0 -50%;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 999px;
+    color: inherit;
+    cursor: pointer;
+  }
+  .announcement-close:hover {
+    background: color-mix(in srgb, currentColor 10%, transparent);
+  }
+  :global(html.ann-off) .announcement {
+    display: none;
+  }
+</style>

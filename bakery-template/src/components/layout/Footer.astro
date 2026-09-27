@@ -1,0 +1,209 @@
+---
+import Icon from '~/components/ui/Icon.astro';
+import Logo from '~/components/ui/Logo.astro';
+import OpenStatus from '~/components/visit/OpenStatus.astro';
+import { site } from '~/config/site';
+import { getDictionary, localizePath, makeFormatter, type Lang } from '~/i18n';
+import { dayRangeLabel, groupedHours } from '~/lib/hours';
+import { directionsHref, mailHref, studioHref, telHref, whatsappHref } from '~/lib/links';
+import { openers } from '~/lib/whatsapp';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDictionary(lang);
+const f = makeFormatter(lang);
+const href = (p: string) => localizePath(p, lang);
+const rows = groupedHours(site.hours, lang);
+const a = site.contact.address;
+
+const links = [
+  { path: '/menu/', label: t.nav.menu, show: true },
+  { path: '/custom-cakes/', label: t.nav.customCakes, show: site.features.cakeBuilder },
+  { path: '/gallery/', label: t.nav.gallery, show: site.features.gallery },
+  { path: '/about/', label: t.nav.about, show: true },
+  { path: '/contact/', label: t.nav.visit, show: true },
+].filter((l) => l.show);
+
+type Social = { label: string; href: string; icon: 'instagram' | 'facebook' | 'youtube' };
+const socials: Social[] = [];
+if (site.socials.instagram) {
+  socials.push({
+    label: `Instagram @${site.socials.instagram.handle}`,
+    href: site.socials.instagram.url,
+    icon: 'instagram',
+  });
+}
+if (site.socials.facebook)
+  socials.push({ label: 'Facebook', href: site.socials.facebook, icon: 'facebook' });
+if (site.socials.youtube)
+  socials.push({ label: 'YouTube', href: site.socials.youtube, icon: 'youtube' });
+---
+
+<footer class="band-inverse site-footer">
+  <div class="container-x pb-10 pt-20 md:pt-28">
+    <div class="grid gap-14 md:grid-cols-12 md:gap-10">
+      <div class="md:col-span-5">
+        <a
+          href={href('/')}
+          class="inline-flex text-on-inverse no-underline"
+          aria-label={f(t.a11y.home)}
+        >
+          <Logo size="lg" tone="inverse" />
+        </a>
+        <p class="mt-6 max-w-sm text-on-inverse-muted">{f(t.footer.line)}</p>
+        <p class="footer-signoff font-display mt-10 max-w-md">{t.footer.signoff}</p>
+      </div>
+
+      <div class="md:col-span-3">
+        <h2 class="eyebrow">{t.footer.hoursTitle}</h2>
+        <ul class="mt-5 space-y-1.5">
+          {rows.map((r) => (
+            <li class="tabular">
+              <span class="font-semibold">{dayRangeLabel(r.days, t.daysShort)}</span>
+              <span class="text-on-inverse-muted"> · {r.text ?? t.status.closedAllDay}</span>
+            </li>
+          ))}
+        </ul>
+        <OpenStatus lang={lang} class="mt-4 text-sm" />
+      </div>
+
+      <div class="md:col-span-4">
+        <h2 class="eyebrow">{t.footer.addressTitle}</h2>
+        <address class="mt-5 not-italic">
+          <span data-brand-name class="font-semibold">
+            {site.brand.name}
+          </span>
+          <br />
+          {a.street}
+          <br />
+          {a.locality} {a.postalCode}, {a.region}
+        </address>
+        <div class="mt-4 flex flex-col items-start gap-1">
+          <a href={directionsHref} class="footer-link" target="_blank" rel="noopener">
+            <Icon name="navigation" size={16} />
+            {t.cta.getDirections}
+          </a>
+          <a href={telHref} class="footer-link tabular">
+            <Icon name="phone" size={16} />
+            {site.contact.phoneDisplay}
+          </a>
+          <a
+            href={whatsappHref(openers.order(site.brand.name))}
+            class="footer-link"
+            target="_blank"
+            rel="noopener"
+          >
+            <Icon name="whatsapp" size={16} />
+            {t.cta.whatsapp}
+          </a>
+          <a href={mailHref} class="footer-link">
+            <Icon name="mail" size={16} />
+            {site.contact.email}
+          </a>
+        </div>
+        {socials.length > 0 && (
+          <ul class="mt-6 flex gap-2" aria-label={t.footer.followTitle}>
+            {socials.map((s) => (
+              <li>
+                <a
+                  href={s.href}
+                  class="footer-social"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label={s.label}
+                >
+                  <Icon name={s.icon} size={18} />
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
+
+    <nav aria-label={t.a11y.footerNav} class="mt-16 border-t border-[color:var(--bb-line)] pt-6">
+      <ul class="flex flex-wrap gap-x-6 gap-y-1">
+        {links.map((l) => (
+          <li>
+            <a href={href(l.path)} class="footer-quick link-draw">
+              {l.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="mt-8 flex flex-col gap-2 text-sm text-on-inverse-muted md:flex-row md:items-center md:justify-between">
+      <p>
+        <span>{f(t.footer.rights)}</span>
+        {site.fssai && <span class="tabular"> · {f(t.footer.fssai, { number: site.fssai })}</span>}
+      </p>
+      {site.studio.footerCredit && (
+        <p>
+          <a
+            href={studioHref(t.demo.studioMessage)}
+            class="link-draw text-on-inverse-muted"
+            target="_blank"
+            rel="noopener"
+          >
+            {f(t.footer.credit)}
+          </a>
+        </p>
+      )}
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    position: relative;
+    z-index: 2;
+    /* Room for the fixed phone action bar, inside the dark band. */
+    padding-bottom: var(--action-bar-h);
+  }
+  .site-footer :global(.band-inverse) {
+    color: var(--bb-on-inverse);
+  }
+  .footer-signoff {
+    font-size: calc(clamp(1.35rem, 1.1rem + 1vw, 1.75rem) * var(--bb-heading-scale));
+    font-style: italic;
+    line-height: 1.3;
+    color: var(--bb-on-inverse);
+  }
+  .footer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 2.75rem;
+    color: var(--bb-on-inverse);
+    text-decoration: none;
+  }
+  .footer-link:hover {
+    text-decoration: underline;
+  }
+  .footer-link :global(svg) {
+    color: var(--bb-accent-on-inverse);
+  }
+  .footer-social {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid color-mix(in srgb, var(--bb-on-inverse) 35%, transparent);
+    border-radius: 999px;
+    color: var(--bb-on-inverse);
+    transition: background-color 0.2s ease;
+  }
+  .footer-social:hover {
+    background: color-mix(in srgb, var(--bb-on-inverse) 12%, transparent);
+  }
+  .footer-quick {
+    display: inline-block;
+    padding-block: 0.6rem;
+    font-weight: 600;
+    color: var(--bb-on-inverse);
+  }
+</style>

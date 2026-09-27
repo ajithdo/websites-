@@ -1,0 +1,50 @@
+{
+  "slug": "beverages",
+  "name": "Beverages",
+  "nameTe": "పానీయాలు",
+  "order": 6,
+  "items": [
+    {
+      "id": "classic-cold-coffee",
+      "name": "Classic Cold Coffee",
+      "nameTe": "కోల్డ్ కాఫీ",
+      "description": "Strong coffee blended with chilled milk and a scoop of ice cream.",
+      "image": "menu/classic-cold-coffee.jpg",
+      "alt": "Glass of iced coffee",
+      "diet": "veg",
+      "price": 140,
+      "badges": []
+    },
+    {
+      "id": "belgian-hot-chocolate",
+      "name": "Belgian Hot Chocolate",
+      "description": "Melted Belgian chocolate whisked into hot milk. Thick and rich.",
+      "image": "menu/belgian-hot-chocolate.jpg",
+      "alt": "Mug of hot chocolate",
+      "diet": "veg",
+      "price": 160,
+      "badges": []
+    },
+    {
+      "id": "masala-chai",
+      "name": "Masala Chai",
+      "nameTe": "మసాలా చాయ్",
+      "description": "Strong tea simmered with ginger, cardamom and milk.",
+      "image": "menu/masala-chai.jpg",
+      "alt": "Glass of milky masala chai",
+      "diet": "veg",
+      "price": 40,
+      "badges": []
+    },
+    {
+      "id": "lime-mint-cooler",
+      "name": "Lime Mint Cooler",
+      "description": "Fresh lime, crushed mint and a pinch of black salt, over ice.",
+      "image": "menu/lime-mint-cooler.jpg",
+      "alt": "Tall glass of lime and mint drink with ice",
+      "diet": "veg",
+      "price": 90,
+      "badges": []
+    }
+  ]
+}

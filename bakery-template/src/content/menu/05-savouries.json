@@ -1,0 +1,72 @@
+{
+  "slug": "savouries",
+  "name": "Savouries",
+  "nameTe": "సేవరీలు",
+  "order": 5,
+  "items": [
+    {
+      "id": "classic-veg-puff",
+      "name": "Classic Veg Puff",
+      "nameTe": "వెజ్ పఫ్",
+      "description": "Flaky puff pastry filled with spiced potato and peas.",
+      "image": "menu/classic-veg-puff.jpg",
+      "alt": "Golden puff pastries",
+      "diet": "veg",
+      "price": 35,
+      "badges": []
+    },
+    {
+      "id": "paneer-tikka-puff",
+      "name": "Paneer Tikka Puff",
+      "nameTe": "పనీర్ టిక్కా పఫ్",
+      "description": "Tandoori-spiced paneer and peppers in golden puff pastry.",
+      "image": "menu/paneer-tikka-puff.jpg",
+      "alt": "Savoury puff pastry with a spiced filling",
+      "diet": "veg",
+      "price": 50,
+      "badges": []
+    },
+    {
+      "id": "egg-puff",
+      "name": "Egg Puff",
+      "nameTe": "ఎగ్ పఫ్",
+      "description": "The bakery favourite: a boiled egg in onion masala, wrapped in puff.",
+      "image": "menu/egg-puff.jpg",
+      "alt": "Flaky puff pastry parcel",
+      "diet": "egg",
+      "price": 40,
+      "badges": []
+    },
+    {
+      "id": "chicken-keema-puff",
+      "name": "Chicken Keema Puff",
+      "nameTe": "చికెన్ కీమా పఫ్",
+      "description": "Minced chicken cooked with green chilli and garam masala.",
+      "image": "menu/chicken-keema-puff.jpg",
+      "alt": "Baked puff pastry with a savoury filling",
+      "diet": "nonveg",
+      "price": 60,
+      "badges": []
+    },
+    {
+      "id": "paneer-tikka-sandwich",
+      "name": "Paneer Tikka Sandwich",
+      "description": "Grilled paneer tikka, mint chutney and crunchy onions on milk bread.",
+      "image": "menu/paneer-tikka-sandwich.jpg",
+      "alt": "Grilled sandwich cut in half",
+      "diet": "veg",
+      "price": 140,
+      "badges": []
+    },
+    {
+      "id": "chicken-pesto-croissant-sandwich",
+      "name": "Chicken Pesto Croissant Sandwich",
+      "description": "Our butter croissant with herbed chicken, basil pesto and greens.",
+      "image": "menu/chicken-pesto-croissant-sandwich.jpg",
+      "alt": "Croissant sandwich filled with greens",
+      "diet": "nonveg",
+      "price": 190,
+      "badges": []
+    }
+  ]
+}

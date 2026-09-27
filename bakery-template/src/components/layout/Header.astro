@@ -1,0 +1,385 @@
+---
+import Icon from '~/components/ui/Icon.astro';
+import Logo from '~/components/ui/Logo.astro';
+import OpenStatus from '~/components/visit/OpenStatus.astro';
+import { site } from '~/config/site';
+import { getDictionary, localizePath, makeFormatter, type Lang } from '~/i18n';
+import { directionsHref, telHref, whatsappHref } from '~/lib/links';
+import { openers } from '~/lib/whatsapp';
+
+interface Props {
+  lang: Lang;
+  /** Unlocalized path of the current page, e.g. "/menu/". */
+  path: string;
+  /** Transparent header over a full-bleed hero. */
+  overlay?: boolean;
+}
+
+const { lang, path, overlay = false } = Astro.props;
+const t = getDictionary(lang);
+const f = makeFormatter(lang);
+const href = (p: string) => localizePath(p, lang);
+
+const nav = [
+  { path: '/menu/', label: t.nav.menu, show: true },
+  { path: '/custom-cakes/', label: t.nav.customCakes, show: site.features.cakeBuilder },
+  { path: '/gallery/', label: t.nav.gallery, show: site.features.gallery },
+  { path: '/about/', label: t.nav.about, show: true },
+  { path: '/contact/', label: t.nav.visit, show: true },
+].filter((item) => item.show);
+
+const isActive = (p: string) => path === p || (p !== '/' && path.startsWith(p));
+const order = whatsappHref(openers.order(site.brand.name));
+const otherLang: Lang = lang === 'en' ? 'te' : 'en';
+const otherHref = localizePath(path, otherLang);
+---
+
+<div class="scroll-sentinel" data-scroll-sentinel aria-hidden="true"></div>
+<header class="site-header" data-header data-overlay={overlay ? '' : undefined}>
+  <div class="header-bg" aria-hidden="true"></div>
+  <div class="header-row container-x">
+    <a href={href('/')} class="header-logo" aria-label={f(t.a11y.home)}>
+      <Logo size="md" tone={overlay ? 'inverse' : 'default'} />
+    </a>
+
+    <nav aria-label={t.a11y.mainNav} class="header-nav">
+      <ul>
+        {nav.map((item) => (
+          <li>
+            <a
+              href={href(item.path)}
+              class="link-draw"
+              aria-current={isActive(item.path) ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      {site.features.telugu && (
+        <a
+          href={otherHref}
+          class="lang-toggle"
+          hreflang={otherLang}
+          lang={otherLang}
+          data-lang-switch={otherLang}
+          aria-label={t.meta.otherLangLabel}
+        >
+          {t.meta.otherLangName}
+        </a>
+      )}
+      <a href={order} class="btn btn-sm header-order" data-magnetic target="_blank" rel="noopener">
+        <Icon name="whatsapp" size={18} />
+        <span>{t.cta.orderWhatsApp}</span>
+      </a>
+      <a
+        href={order}
+        class="btn btn-icon header-order-icon"
+        target="_blank"
+        rel="noopener"
+        aria-label={t.cta.orderWhatsApp}
+      >
+        <Icon name="whatsapp" size={20} />
+      </a>
+      <button
+        type="button"
+        class="btn btn-outline btn-icon header-menu"
+        data-menu-open
+        aria-haspopup="dialog"
+        aria-controls="mobile-menu"
+        aria-label={t.a11y.menuOpen}
+      >
+        <Icon name="menu" size={22} />
+      </button>
+    </div>
+  </div>
+</header>
+
+<dialog id="mobile-menu" class="mobile-menu" aria-labelledby="mobile-menu-title" data-mobile-menu>
+  <div class="mobile-menu-inner">
+    <div class="container-x flex h-[var(--header-h)] shrink-0 items-center justify-between">
+      <Logo size="md" />
+      <button
+        type="button"
+        class="btn btn-outline btn-icon"
+        data-menu-close
+        aria-label={t.a11y.menuClose}
+      >
+        <Icon name="x" size={22} />
+      </button>
+    </div>
+    <h2 id="mobile-menu-title" class="sr-only">
+      {t.a11y.mainNav}
+    </h2>
+    <nav aria-label={t.a11y.mainNav} class="container-x mobile-menu-nav">
+      <ul>
+        <li style="--i:0">
+          <a href={href('/')} aria-current={path === '/' ? 'page' : undefined}>
+            {t.nav.home}
+          </a>
+        </li>
+        {nav.map((item, i) => (
+          <li style={`--i:${i + 1}`}>
+            <a href={href(item.path)} aria-current={isActive(item.path) ? 'page' : undefined}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <div class="container-x mobile-menu-foot">
+      <OpenStatus lang={lang} class="text-sm" />
+      <div class="mt-5 grid grid-cols-3 gap-2">
+        <a href={telHref} class="mobile-menu-action">
+          <Icon name="phone" size={20} />
+          <span>{t.cta.call}</span>
+        </a>
+        <a href={order} class="mobile-menu-action" target="_blank" rel="noopener">
+          <Icon name="whatsapp" size={20} />
+          <span>{t.cta.whatsapp}</span>
+        </a>
+        <a href={directionsHref} class="mobile-menu-action" target="_blank" rel="noopener">
+          <Icon name="navigation" size={20} />
+          <span>{t.cta.directions}</span>
+        </a>
+      </div>
+      {site.features.telugu && (
+        <a
+          href={otherHref}
+          class="btn btn-outline mt-4 w-full"
+          hreflang={otherLang}
+          lang={otherLang}
+          data-lang-switch={otherLang}
+        >
+          <Icon name="languages" size={18} />
+          {t.meta.otherLangName}
+        </a>
+      )}
+    </div>
+  </div>
+</dialog>
+
+<style>
+  .scroll-sentinel {
+    position: absolute;
+    top: 6rem;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+  }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    height: var(--header-h);
+    color: var(--bb-ink);
+    pointer-events: none;
+  }
+  .header-bg {
+    position: absolute;
+    inset: 0;
+    background: color-mix(in srgb, var(--bb-bg) 94%, transparent);
+    backdrop-filter: saturate(1.4) blur(14px);
+    border-bottom: 1px solid var(--bb-line);
+    transform-origin: top;
+    transition:
+      transform 0.6s var(--ease),
+      opacity 0.4s ease,
+      box-shadow 0.6s var(--ease);
+  }
+  .header-row {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    pointer-events: auto;
+    transform-origin: top center;
+    transition: transform 0.6s var(--ease);
+  }
+  .header-logo {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    color: inherit;
+    text-decoration: none;
+    transform-origin: left center;
+    transition: transform 0.6s var(--ease);
+  }
+
+  /* Scrolled: the bar condenses (transform only, so nothing below shifts). */
+  .site-header[data-scrolled] .header-bg {
+    transform: scaleY(0.82);
+    box-shadow: 0 12px 30px -24px rgb(0 0 0 / 0.45);
+  }
+  .site-header[data-scrolled] .header-row {
+    transform: translateY(-0.45rem);
+  }
+  .site-header[data-scrolled] .header-logo {
+    transform: scale(0.9);
+  }
+
+  /* Over the hero photo, before scrolling. */
+  .site-header[data-overlay]:not([data-scrolled]) {
+    color: #fff;
+  }
+  .site-header[data-overlay]:not([data-scrolled]) .header-bg {
+    opacity: 0;
+  }
+  .site-header[data-overlay]:not([data-scrolled]) :global(.header-menu) {
+    --btn-fg: #fff;
+    --btn-border: rgb(255 255 255 / 0.6);
+  }
+  .site-header[data-overlay]:not([data-scrolled]) :global(.logo) {
+    --logo-accent: #e8c78a;
+  }
+
+  .header-nav {
+    display: none;
+  }
+  .header-nav ul {
+    display: flex;
+    gap: clamp(1.25rem, 2.2vw, 2.25rem);
+    font-size: 0.9375rem;
+    font-weight: 600;
+  }
+  .header-nav a {
+    color: inherit;
+    padding-block: 0.6rem;
+  }
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .header-order {
+    display: none;
+  }
+  .lang-toggle {
+    display: none;
+    align-items: center;
+    min-height: 2.75rem;
+    padding-inline: 0.75rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: inherit;
+    text-decoration: none;
+    font-family: var(--font-telugu-sans), var(--font-sans);
+  }
+  .lang-toggle:hover {
+    text-decoration: underline;
+  }
+
+  @media (min-width: 40rem) {
+    .header-order {
+      display: inline-flex;
+    }
+    .header-order-icon {
+      display: none;
+    }
+  }
+  @media (min-width: 64rem) {
+    .header-nav {
+      display: block;
+    }
+    .header-menu {
+      display: none;
+    }
+    .lang-toggle {
+      display: inline-flex;
+    }
+  }
+
+  /* Full-screen mobile menu */
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: var(--bb-bg);
+    color: var(--bb-ink);
+    clip-path: circle(0 at calc(100% - 2.75rem) 2rem);
+    transition:
+      clip-path 0.7s var(--ease),
+      display 0.7s allow-discrete,
+      overlay 0.7s allow-discrete;
+  }
+  .mobile-menu[open] {
+    clip-path: circle(150% at calc(100% - 2.75rem) 2rem);
+  }
+  @starting-style {
+    .mobile-menu[open] {
+      clip-path: circle(0 at calc(100% - 2.75rem) 2rem);
+    }
+  }
+  .mobile-menu::backdrop {
+    background: transparent;
+  }
+  .mobile-menu-inner {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
+  }
+  .mobile-menu-nav {
+    padding-block: 1.5rem 2rem;
+  }
+  .mobile-menu-nav a {
+    display: block;
+    padding-block: 0.35rem;
+    font-family: var(--font-display);
+    font-weight: var(--bb-heading-weight);
+    font-size: calc(clamp(2.1rem, 1.4rem + 3.6vw, 3rem) * var(--bb-heading-scale));
+    letter-spacing: var(--bb-heading-tracking);
+    line-height: 1.15;
+    color: inherit;
+    text-decoration: none;
+  }
+  .mobile-menu-nav a[aria-current='page'] {
+    font-style: italic;
+    color: var(--bb-accent-ink);
+  }
+  .mobile-menu[open] .mobile-menu-nav li {
+    animation: menu-in 0.8s var(--ease) both;
+    animation-delay: calc(0.12s + var(--i) * 0.05s);
+  }
+  @keyframes menu-in {
+    from {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+  }
+  .mobile-menu-foot {
+    margin-top: auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--bb-line);
+  }
+  .mobile-menu-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    min-height: 4rem;
+    border: 1px solid var(--bb-line-strong);
+    border-radius: var(--bb-radius-card);
+    font-size: 0.8125rem;
+    font-weight: 650;
+    color: inherit;
+    text-decoration: none;
+  }
+  :global(html:has(.mobile-menu[open])) {
+    overflow: hidden;
+  }
+</style>

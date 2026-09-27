@@ -1,0 +1,23 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { getDictionary, langPaths, makeFormatter, type Lang } from '~/i18n';
+
+export function getStaticPaths() {
+  return langPaths();
+}
+
+const { lang } = Astro.props as { lang: Lang };
+const t = getDictionary(lang);
+const f = makeFormatter(lang);
+---
+
+<BaseLayout
+  lang={lang}
+  path="/"
+  title={f(t.home.meta.title)}
+  description={f(t.home.meta.description)}
+>
+  <section class="section container-x">
+    <h1 class="text-display-lg">{f(t.home.meta.title)}</h1>
+  </section>
+</BaseLayout>

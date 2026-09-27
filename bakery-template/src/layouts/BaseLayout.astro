@@ -1,0 +1,232 @@
+---
+import { Font, fontData } from 'astro:assets';
+import '~/styles/global.css';
+import AnnouncementBar from '~/components/layout/AnnouncementBar.astro';
+import DemoRibbon from '~/components/layout/DemoRibbon.astro';
+import Footer from '~/components/layout/Footer.astro';
+import Header from '~/components/layout/Header.astro';
+import MobileActionBar from '~/components/layout/MobileActionBar.astro';
+import type { FontVariable } from '~/config/fonts';
+import { site } from '~/config/site';
+import { themeIds, themes, themeStylesheet } from '~/config/themes';
+import { activeLanguages, getDictionary, htmlLang, localizePath, type Lang } from '~/i18n';
+import { storageKeys } from '~/lib/storage';
+
+interface Props {
+  lang: Lang;
+  /** Unlocalized path of this page, e.g. "/menu/". */
+  path: string;
+  title: string;
+  description: string;
+  /** Transparent header over a full-bleed hero. */
+  overlayHeader?: boolean;
+  /** Sticky Call · WhatsApp · Directions bar on phones. */
+  actionBar?: boolean;
+  /** Extra JSON-LD objects for this page. */
+  jsonLd?: object[];
+  /** Absolute or root-relative OG image; defaults to the site image. */
+  ogImage?: string;
+  noindex?: boolean;
+  /** Page may show the first-visit logo intro (home). */
+  intro?: boolean;
+}
+
+const {
+  lang,
+  path,
+  title,
+  description,
+  overlayHeader = false,
+  actionBar = true,
+  jsonLd = [],
+  ogImage,
+  noindex = false,
+  intro = false,
+} = Astro.props;
+
+const t = getDictionary(lang);
+const demo = site.features.demoMode;
+const themeList = demo ? [...themeIds] : [site.theme];
+const fontVars = new Set<FontVariable>(
+  themeList.flatMap((id) => [themes[id].fonts.heading, themes[id].fonts.body]),
+);
+if (site.features.telugu) {
+  fontVars.add('--font-telugu-serif');
+  fontVars.add('--font-telugu-sans');
+}
+
+// Preload only the active theme's display face (latin, upright): it sets the hero headline.
+const heroFont = themes[site.theme].fonts.heading;
+const heroFontUrl = fontData[heroFont]?.find((f) => f.style === 'normal')?.src[0]?.url;
+
+const siteUrl = Astro.site ?? new URL('http://localhost:4321');
+const canonical = new URL(localizePath(path, lang), siteUrl).href;
+const alternates = activeLanguages().map((l) => ({
+  hreflang: htmlLang[l],
+  href: new URL(localizePath(path, l), siteUrl).href,
+}));
+const og = new URL(ogImage ?? site.seo.ogImage ?? '/og.jpg', siteUrl).href;
+const robots = demo || noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large';
+
+const headConfig = {
+  demo,
+  telugu: site.features.telugu,
+  themes: [...themeIds],
+  intro: site.motion.intro,
+  keys: storageKeys,
+};
+---
+
+<!doctype html>
+<html
+  lang={htmlLang[lang]}
+  data-theme={site.theme}
+  data-demo={demo ? '' : undefined}
+  data-brand={site.brand.name}
+  data-smooth-scroll={site.motion.smoothScroll ? '' : undefined}
+  data-intro-page={intro ? '' : undefined}
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {alternates.length > 1 &&
+      alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+    {alternates.length > 1 && (
+      <link rel="alternate" hreflang="x-default" href={alternates[0]!.href} />
+    )}
+    <meta name="robots" content={robots} />
+    <meta name="theme-color" content={themes[site.theme].colors.bg} />
+    <meta name="color-scheme" content={demo ? 'light dark' : themes[site.theme].scheme} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.brand.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang === 'te' ? 'te_IN' : 'en_IN'} />
+    <meta property="og:image" content={og} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={site.brand.name} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={og} />
+
+    <link rel="icon" href="/brand/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    {heroFontUrl && (
+      <link rel="preload" href={heroFontUrl} as="font" type="font/woff2" crossorigin />
+    )}
+    {[...fontVars].map((v) => (
+      <Font cssVariable={v} />
+    ))}
+
+    <style is:inline set:html={themeStylesheet(themeList, site.theme)} />
+
+    <script is:inline define:vars={{ cfg: headConfig }}>
+      (function () {
+        const d = document.documentElement;
+        d.classList.add('js');
+        const q = new URLSearchParams(location.search);
+        function get(store, key) {
+          try {
+            return window[store].getItem(key);
+          } catch (e) {
+            return null;
+          }
+        }
+        function set(store, key, value) {
+          try {
+            window[store].setItem(key, value);
+          } catch (e) {
+            /* storage blocked: skip */
+          }
+        }
+        if (
+          cfg.telugu &&
+          get('localStorage', cfg.keys.lang) === 'te' &&
+          !/^\/te(\/|$)/.test(location.pathname)
+        ) {
+          location.replace('/te' + location.pathname + location.search + location.hash);
+          return;
+        }
+        if (cfg.demo) {
+          let theme = q.get('theme');
+          if (cfg.themes.indexOf(theme) !== -1) set('sessionStorage', cfg.keys.theme, theme);
+          else theme = get('sessionStorage', cfg.keys.theme);
+          if (cfg.themes.indexOf(theme) !== -1) d.setAttribute('data-theme', theme);
+          if (q.get('name')) d.classList.add('brand-preview');
+        }
+        if (get('sessionStorage', cfg.keys.announcement)) d.classList.add('ann-off');
+        if (
+          cfg.intro &&
+          d.hasAttribute('data-intro-page') &&
+          !matchMedia('(prefers-reduced-motion: reduce)').matches &&
+          !get('sessionStorage', cfg.keys.intro)
+        ) {
+          d.classList.add('intro');
+        }
+      })();
+    </script>
+    {jsonLd.map((data) => (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(data)} />
+    ))}
+    <slot name="head" />
+  </head>
+  <body data-action-bar={actionBar ? '' : undefined}>
+    <a href="#main" class="skip-link">
+      {t.a11y.skip}
+    </a>
+    <div class="grain" aria-hidden="true"></div>
+    {demo && <DemoRibbon lang={lang} />}
+    <AnnouncementBar lang={lang} />
+    <Header lang={lang} path={path} overlay={overlayHeader} />
+    <main id="main" tabindex="-1" data-overlay-main={overlayHeader ? '' : undefined}>
+      <slot />
+    </main>
+    <Footer lang={lang} />
+    {actionBar && <MobileActionBar lang={lang} />}
+    <slot name="end" />
+  </body>
+</html>
+
+<script>
+  import '~/scripts/site';
+</script>
+
+<style>
+  .skip-link {
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+    z-index: 100;
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--bb-radius-control);
+    background: var(--bb-ink);
+    color: var(--bb-bg);
+    font-weight: 700;
+    transform: translateY(-200%);
+    transition: transform 0.3s var(--ease);
+  }
+  .skip-link:focus-visible {
+    transform: none;
+  }
+  main {
+    position: relative;
+    display: block;
+    outline: none;
+  }
+  main[data-overlay-main] {
+    margin-top: calc(-1 * var(--header-h));
+  }
+  :global(html.brand-preview [data-brand-name]) {
+    visibility: hidden;
+  }
+</style>

@@ -1,0 +1,20 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { getDictionary, makeFormatter } from '~/i18n';
+
+const lang = 'en' as const;
+const t = getDictionary(lang);
+const f = makeFormatter(lang);
+---
+
+<BaseLayout
+  lang={lang}
+  path="/404/"
+  title={f(t.notFound.meta.title)}
+  description={t.notFound.meta.description}
+  noindex
+>
+  <section class="section container-x">
+    <h1 class="text-display-lg">{t.notFound.title}</h1>
+  </section>
+</BaseLayout>

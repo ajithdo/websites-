@@ -1,0 +1,61 @@
+---
+/** Full weekly hours with today highlighted (by the open-status script, in IST). */
+import { site } from '~/config/site';
+import { getDictionary, type Lang } from '~/i18n';
+import { rangesText } from '~/lib/hours';
+import { weekOrder } from '~/lib/time';
+
+interface Props {
+  lang: Lang;
+  class?: string;
+}
+
+const { lang, class: className } = Astro.props;
+const t = getDictionary(lang);
+---
+
+<table class:list={['hours-table w-full text-left', className]} data-hours-table>
+  <caption class="sr-only">{t.status.hours}</caption>
+  <tbody>
+    {weekOrder.map((day) => (
+      <tr data-day={day}>
+        <th scope="row" class="py-2.5 pr-4 font-semibold">
+          {t.days[day]}
+          <span class="today-tag" hidden>
+            {t.status.today}
+          </span>
+        </th>
+        <td class="tabular py-2.5 text-right">
+          {rangesText(site.hours[day], lang) ?? t.status.closedAllDay}
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+<style>
+  .hours-table tr {
+    border-bottom: 1px solid var(--bb-line);
+  }
+  .hours-table tr[data-today] {
+    color: var(--bb-accent-ink);
+  }
+  .hours-table tr[data-today] th {
+    font-weight: 750;
+  }
+  .today-tag {
+    display: inline-block;
+    margin-left: 0.5rem;
+    padding: 0.1rem 0.5rem;
+    border-radius: 999px;
+    border: 1px solid currentColor;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    vertical-align: 0.15em;
+  }
+  :global(.band-inverse) .hours-table tr[data-today] {
+    color: var(--bb-accent-on-inverse);
+  }
+</style>

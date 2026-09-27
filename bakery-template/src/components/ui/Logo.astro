@@ -1,0 +1,78 @@
+---
+/**
+ * Header / footer logo. In "text" mode the wordmark is live text in the
+ * theme's display font (so theme switching and the ?name= preview restyle it);
+ * in "image" mode it uses brand.logo.wordmark.
+ */
+import { site } from '~/config/site';
+import { markDot, markHandle, markLoops } from '~/lib/brand-mark';
+
+interface Props {
+  size?: 'sm' | 'md' | 'lg';
+  tone?: 'default' | 'inverse';
+  class?: string;
+}
+
+const { size = 'md', tone = 'default', class: className } = Astro.props;
+const markPx = { sm: 26, md: 32, lg: 44 }[size];
+const imageMode = site.brand.logo.mode === 'image';
+---
+
+<span
+  class:list={['logo inline-flex items-center gap-2.5', `logo-${size}`, className]}
+  data-tone={tone}
+>
+  {imageMode ? (
+    <img src={site.brand.logo.wordmark} alt={site.brand.name} class="logo-image" height={markPx} />
+  ) : (
+    <>
+      <svg
+        viewBox="0 0 64 64"
+        width={markPx}
+        height={markPx}
+        aria-hidden="true"
+        focusable="false"
+        class="logo-mark shrink-0"
+      >
+        <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2">
+          {markLoops.map((d, i) => (
+            <path d={d} stroke={i === 2 ? 'var(--logo-accent)' : 'currentColor'} />
+          ))}
+          <path d={markHandle} stroke="currentColor" stroke-width="4.4" />
+        </g>
+        <circle cx={markDot.cx} cy={markDot.cy} r={markDot.r} fill="var(--logo-accent)" />
+      </svg>
+      <span class="logo-word font-display" data-brand-name>
+        {site.brand.name}
+      </span>
+    </>
+  )}
+</span>
+
+<style>
+  .logo {
+    --logo-accent: var(--bb-accent);
+    color: inherit;
+    line-height: 1;
+  }
+  .logo[data-tone='inverse'] {
+    --logo-accent: var(--bb-accent-on-inverse);
+  }
+  .logo-word {
+    white-space: nowrap;
+    font-weight: calc(var(--bb-heading-weight) + 60);
+    letter-spacing: -0.015em;
+  }
+  .logo-sm .logo-word {
+    font-size: calc(1.15rem * var(--bb-heading-scale));
+  }
+  .logo-md .logo-word {
+    font-size: calc(1.35rem * var(--bb-heading-scale));
+  }
+  .logo-lg .logo-word {
+    font-size: calc(2rem * var(--bb-heading-scale));
+  }
+  .logo-image {
+    width: auto;
+  }
+</style>

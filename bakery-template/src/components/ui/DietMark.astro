@@ -1,0 +1,50 @@
+---
+/**
+ * Indian food marks: veg (green dot), egg (amber dot), non-veg (brown
+ * triangle, the current FSSAI shape). Always drawn on a light tile so they
+ * read the same in every theme. The label is announced to screen readers.
+ */
+import { getDictionary, type Lang } from '~/i18n';
+
+interface Props {
+  diet: 'veg' | 'egg' | 'nonveg';
+  lang: Lang;
+  size?: number;
+  showLabel?: boolean;
+  class?: string;
+}
+
+const { diet, lang, size = 16, showLabel = false, class: className } = Astro.props;
+const t = getDictionary(lang);
+const color = { veg: '#1B7D35', egg: '#B26A00', nonveg: '#7A3B12' }[diet];
+const label = t.diet[diet];
+---
+
+<span class:list={['inline-flex items-center gap-2', className]}>
+  <svg
+    viewBox="0 0 16 16"
+    width={size}
+    height={size}
+    role="img"
+    aria-label={showLabel ? undefined : label}
+    aria-hidden={showLabel ? 'true' : undefined}
+    class="shrink-0"
+  >
+    <rect
+      x="0.75"
+      y="0.75"
+      width="14.5"
+      height="14.5"
+      rx="2"
+      fill="#FFFFFF"
+      stroke={color}
+      stroke-width="1.5"
+    ></rect>
+    {diet === 'nonveg' ? (
+      <path d="M8 3.6 12.3 11.4H3.7Z" fill={color} />
+    ) : (
+      <circle cx="8" cy="8" r="3.6" fill={color} />
+    )}
+  </svg>
+  {showLabel && <span>{label}</span>}
+</span>

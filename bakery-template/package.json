@@ -23,7 +23,10 @@
     "qa:screens": "tsx scripts/qa-screens.ts",
     "qa:lighthouse": "node scripts/qa-lighthouse.mjs",
     "qa:client-mode": "node scripts/qa-client-mode.mjs",
-    "photos:fetch": "node scripts/photos/fetch.mjs"
+    "photos:fetch": "node scripts/photos/fetch.mjs",
+    "brand": "tsx scripts/make-brand.ts",
+    "icons": "node scripts/build-icons.mjs",
+    "photos:placeholders": "node scripts/photos/placeholders.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^7.0.0",
@@ -66,10 +69,13 @@
     "eslint-plugin-jsx-a11y-x": "^0.2.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.12.0",
+    "lucide": "^1.48.0",
+    "opentype.js": "^2.0.0",
     "prettier": "^3.9.9",
     "prettier-plugin-astro": "^1.1.0",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "schema-dts": "^2.0.0",
+    "simple-icons": "^16.32.0",
     "tsx": "^4.23.15",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.70.1",

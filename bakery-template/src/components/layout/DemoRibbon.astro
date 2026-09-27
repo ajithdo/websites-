@@ -1,0 +1,72 @@
+---
+/** Honest-demo ribbon: "Sample website by <studio> · Get one for your bakery →". */
+import Icon from '~/components/ui/Icon.astro';
+import { getDictionary, makeFormatter, type Lang } from '~/i18n';
+import { studioHref } from '~/lib/links';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDictionary(lang);
+const f = makeFormatter(lang);
+---
+
+<div class="demo-ribbon" data-demo="ribbon">
+  <a
+    href={studioHref(t.demo.studioMessage)}
+    class="container-x demo-ribbon-link"
+    target="_blank"
+    rel="noopener"
+  >
+    <Icon name="sparkles" size={14} />
+    <span>{f(t.demo.ribbon)}</span>
+    <span aria-hidden="true" class="opacity-60">
+      ·
+    </span>
+    <span class="demo-ribbon-cta">
+      <span class="hidden sm:inline">{t.demo.ribbonCta}</span>
+      <span class="sm:hidden">{t.demo.ribbonCtaShort}</span>
+      <Icon name="arrow-right" size={14} />
+    </span>
+  </a>
+</div>
+
+<style>
+  .demo-ribbon {
+    position: relative;
+    z-index: 41;
+    background: var(--bb-inverse);
+    color: var(--bb-on-inverse);
+  }
+  .demo-ribbon-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.25rem;
+    padding-block: 0.35rem;
+    font-size: 0.8125rem;
+    line-height: 1.3;
+    color: inherit;
+    text-align: center;
+    text-decoration: none;
+  }
+  .demo-ribbon-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-weight: 700;
+    color: var(--bb-accent-on-inverse);
+    white-space: nowrap;
+  }
+  .demo-ribbon-link:hover .demo-ribbon-cta {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .demo-ribbon-link:focus-visible {
+    outline-color: var(--bb-focus-on-inverse);
+    outline-offset: -3px;
+  }
+</style>

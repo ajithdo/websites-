@@ -1,0 +1,30 @@
+{
+  "occasion": "wedding",
+  "order": 3,
+  "items": [
+    {
+      "image": "gallery/wedding-01.jpg",
+      "alt": "Tall tiered wedding cake",
+      "caption": "Three tiers for the wedding",
+      "captionTe": "మూడు అంతస్తుల పెళ్లి కేక్"
+    },
+    {
+      "image": "gallery/wedding-02.jpg",
+      "alt": "Wedding cake with fresh flowers",
+      "caption": "Fresh florals, clean finish",
+      "captionTe": "తాజా పూలతో పెళ్లి కేక్"
+    },
+    {
+      "image": "gallery/wedding-03.jpg",
+      "alt": "Semi-naked cake with berries and flowers",
+      "caption": "Semi-naked, for a garden engagement",
+      "captionTe": "నిశ్చితార్థం కోసం సెమీ-నేకెడ్ కేక్"
+    },
+    {
+      "image": "gallery/wedding-04.jpg",
+      "alt": "Engagement cake on a dessert table",
+      "caption": "Engagement dessert table",
+      "captionTe": "నిశ్చితార్థం డెజర్ట్ టేబుల్"
+    }
+  ]
+}

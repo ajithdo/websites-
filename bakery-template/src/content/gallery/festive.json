@@ -1,0 +1,30 @@
+{
+  "occasion": "festive",
+  "order": 5,
+  "items": [
+    {
+      "image": "gallery/festive-01.jpg",
+      "alt": "Gift box of sweets and treats",
+      "caption": "Diwali hamper",
+      "captionTe": "దీపావళి హ్యాంపర్"
+    },
+    {
+      "image": "gallery/festive-02.jpg",
+      "alt": "Gift box of cookies",
+      "caption": "Cookie tin for gifting",
+      "captionTe": "బహుమతి కుకీ డబ్బా"
+    },
+    {
+      "image": "gallery/festive-03.jpg",
+      "alt": "Festive table with lights and sweets",
+      "caption": "Festival of lights",
+      "captionTe": "దీపాల పండుగ"
+    },
+    {
+      "image": "gallery/festive-04.jpg",
+      "alt": "Decorated festive cookies",
+      "caption": "Christmas cookies",
+      "captionTe": "క్రిస్మస్ కుకీలు"
+    }
+  ]
+}
