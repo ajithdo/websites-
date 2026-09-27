@@ -5,6 +5,8 @@
  * the demo tools never cover the page itself.
  */
 import ThemeSwitcher, { type ThemeOption } from '~/components/islands/demo/ThemeSwitcher';
+// Inlined here (not imported as CSS) so client builds, which never render the ribbon, ship none of it.
+import switcherCssRaw from '~/components/islands/demo/theme-switcher.css?raw';
 import Icon from '~/components/ui/Icon.astro';
 import { fontFamilies, type FontVariable } from '~/config/fonts';
 import { themeIds, themes } from '~/config/themes';
@@ -18,6 +20,7 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+const switcherCss = switcherCssRaw.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ');
 const t = getDictionary(lang);
 const f = makeFormatter(lang);
 
@@ -39,6 +42,7 @@ const themeOptions: ThemeOption[] = themeIds.map((id) => {
 });
 ---
 
+<style is:inline set:html={switcherCss} />
 <div class="demo-ribbon" data-demo="ribbon">
   <div class="container-x demo-ribbon-inner">
     <a

@@ -92,6 +92,8 @@ if (!parsed.success) {
 const siteUrl = site.url || process.env.URL || process.env.CF_PAGES_URL || 'http://localhost:4321';
 
 export default defineConfig({
+  // BB_OUT_DIR lets QA build a second copy (e.g. the client-mode check) beside dist/.
+  outDir: process.env.BB_OUT_DIR ?? './dist',
   site: siteUrl,
   trailingSlash: 'ignore',
   // Small pages: inline the CSS so the first paint needs no extra round trip.

@@ -32,3 +32,6 @@ docs/qa/lighthouse/
 
 # Full screenshot matrix (npm run qa:screens); a curated set lives in docs/screenshots/
 docs/screenshots/matrix/
+
+# Client-mode check build (npm run qa:client-mode)
+dist-client/

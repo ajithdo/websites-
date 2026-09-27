@@ -5,7 +5,6 @@ import { fmt } from '~/lib/format';
 import { writeString } from '~/lib/storage';
 import { applyBrandPreview, carryParams } from '~/scripts/preview';
 import { Icon } from '../shared/Icon';
-import './theme-switcher.css';
 
 export interface ThemeOption {
   id: string;
