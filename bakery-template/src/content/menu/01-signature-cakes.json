@@ -4,47 +4,71 @@
   "nameTe": "ప్రత్యేక కేకులు",
   "order": 1,
   "note": "Prices for ½ kg / 1 kg. Every cake can be made eggless.",
+  "noteTe": "½ కేజీ / 1 కేజీ ధరలు. ప్రతి కేక్‌ను ఎగ్‌లెస్‌గా తయారు చేయవచ్చు.",
   "items": [
     {
       "id": "belgian-chocolate-truffle",
       "name": "Belgian Chocolate Truffle",
       "nameTe": "బెల్జియన్ చాక్లెట్ ట్రఫుల్",
       "description": "Dark chocolate sponge, silky ganache and a glossy truffle glaze.",
+      "descriptionTe": "డార్క్ చాక్లెట్ స్పాంజ్, మృదువైన గనాష్, మెరిసే ట్రఫుల్ గ్లేజ్.",
       "image": "menu/belgian-chocolate-truffle.jpg",
       "alt": "Chocolate cake with a glossy dark ganache finish",
       "diet": "egg",
       "egglessAvailable": true,
       "variants": [
-        { "label": "½ kg", "price": 550 },
-        { "label": "1 kg", "price": 950 }
+        {
+          "label": "½ kg",
+          "price": 550
+        },
+        {
+          "label": "1 kg",
+          "price": 950
+        }
       ],
       "badges": ["bestseller"]
     },
     {
       "id": "red-velvet-cream-cheese",
       "name": "Red Velvet & Cream Cheese",
+      "nameTe": "రెడ్ వెల్వెట్ & క్రీమ్ చీజ్",
       "description": "Cocoa-kissed red sponge layered with tangy cream-cheese frosting.",
+      "descriptionTe": "కోకో రుచితో ఎర్రని స్పాంజ్, పులుపు-తీపి క్రీమ్ చీజ్ ఫ్రాస్టింగ్ పొరలు.",
       "image": "menu/red-velvet-cream-cheese.jpg",
       "alt": "Red velvet cake with white cream cheese frosting between the layers",
       "diet": "egg",
       "egglessAvailable": true,
       "variants": [
-        { "label": "½ kg", "price": 600 },
-        { "label": "1 kg", "price": 1050 }
+        {
+          "label": "½ kg",
+          "price": 600
+        },
+        {
+          "label": "1 kg",
+          "price": 1050
+        }
       ],
       "badges": ["bestseller"]
     },
     {
       "id": "salted-caramel-butterscotch",
       "name": "Salted Caramel Butterscotch",
+      "nameTe": "సాల్టెడ్ కారమెల్ బటర్‌స్కాచ్",
       "description": "Butterscotch sponge, house-made caramel and a crunch of praline.",
+      "descriptionTe": "బటర్‌స్కాచ్ స్పాంజ్, ఇంట్లో చేసిన కారమెల్, కరకరలాడే ప్రాలీన్.",
       "image": "menu/salted-caramel-butterscotch.jpg",
       "alt": "Cake with caramel dripping down its sides",
       "diet": "egg",
       "egglessAvailable": true,
       "variants": [
-        { "label": "½ kg", "price": 500 },
-        { "label": "1 kg", "price": 900 }
+        {
+          "label": "½ kg",
+          "price": 500
+        },
+        {
+          "label": "1 kg",
+          "price": 900
+        }
       ],
       "badges": []
     },
@@ -53,13 +77,20 @@
       "name": "Rasmalai Fusion Cake",
       "nameTe": "రసమలై ఫ్యూజన్ కేక్",
       "description": "Saffron-milk soaked sponge, cardamom cream and pistachio slivers.",
+      "descriptionTe": "కుంకుమపువ్వు పాలలో నానిన స్పాంజ్, యాలకుల క్రీమ్, పిస్తా ముక్కలు.",
       "image": "menu/rasmalai-fusion-cake.jpg",
       "alt": "Cream cake topped with pistachio slivers and saffron",
       "diet": "egg",
       "egglessAvailable": true,
       "variants": [
-        { "label": "½ kg", "price": 650 },
-        { "label": "1 kg", "price": 1150 }
+        {
+          "label": "½ kg",
+          "price": 650
+        },
+        {
+          "label": "1 kg",
+          "price": 1150
+        }
       ],
       "badges": ["new"]
     },
@@ -68,13 +99,20 @@
       "name": "Fresh Mango Cream",
       "nameTe": "తాజా మామిడి క్రీమ్",
       "description": "Light vanilla sponge with fresh Banganapalli mango and whipped cream.",
+      "descriptionTe": "తేలికపాటి వెనిల్లా స్పాంజ్, తాజా బంగినపల్లి మామిడి, విప్డ్ క్రీమ్.",
       "image": "menu/fresh-mango-cream.jpg",
       "alt": "Layered cream cake with fresh mango pieces",
       "diet": "egg",
       "egglessAvailable": true,
       "variants": [
-        { "label": "½ kg", "price": 600 },
-        { "label": "1 kg", "price": 1050 }
+        {
+          "label": "½ kg",
+          "price": 600
+        },
+        {
+          "label": "1 kg",
+          "price": 1050
+        }
       ],
       "badges": ["seasonal"]
     },
@@ -83,41 +121,64 @@
       "name": "Pistachio Rose",
       "nameTe": "పిస్తా రోజ్",
       "description": "Pistachio sponge, rose-scented cream and candied petals.",
+      "descriptionTe": "పిస్తా స్పాంజ్, గులాబీ సువాసన క్రీమ్, చక్కెర పూసిన రేకులు.",
       "image": "menu/pistachio-rose.jpg",
       "alt": "Pale green cake decorated with rose petals and pistachios",
       "diet": "egg",
       "egglessAvailable": true,
       "variants": [
-        { "label": "½ kg", "price": 700 },
-        { "label": "1 kg", "price": 1250 }
+        {
+          "label": "½ kg",
+          "price": 700
+        },
+        {
+          "label": "1 kg",
+          "price": 1250
+        }
       ],
       "badges": []
     },
     {
       "id": "lotus-biscoff",
       "name": "Lotus Biscoff",
+      "nameTe": "లోటస్ బిస్కాఫ్",
       "description": "Spiced biscuit cream, Biscoff crumb and a caramel drip.",
+      "descriptionTe": "మసాలా బిస్కెట్ క్రీమ్, బిస్కాఫ్ పొడి, కారమెల్ డ్రిప్.",
       "image": "menu/lotus-biscoff.jpg",
       "alt": "Caramel-coloured cake topped with spiced biscuits",
       "diet": "egg",
       "egglessAvailable": true,
       "variants": [
-        { "label": "½ kg", "price": 700 },
-        { "label": "1 kg", "price": 1250 }
+        {
+          "label": "½ kg",
+          "price": 700
+        },
+        {
+          "label": "1 kg",
+          "price": 1250
+        }
       ],
       "badges": ["bestseller"]
     },
     {
       "id": "baked-blueberry-cheesecake",
       "name": "Baked Blueberry Cheesecake",
+      "nameTe": "బేక్డ్ బ్లూబెర్రీ చీజ్‌కేక్",
       "description": "New York-style baked cheesecake under a bright blueberry compote.",
+      "descriptionTe": "న్యూయార్క్ శైలి బేక్డ్ చీజ్‌కేక్‌పై తాజా బ్లూబెర్రీ కంపోట్.",
       "image": "menu/baked-blueberry-cheesecake.jpg",
       "alt": "Baked cheesecake topped with blueberry compote",
       "diet": "egg",
       "egglessAvailable": true,
       "variants": [
-        { "label": "½ kg", "price": 750 },
-        { "label": "1 kg", "price": 1350 }
+        {
+          "label": "½ kg",
+          "price": 750
+        },
+        {
+          "label": "1 kg",
+          "price": 1350
+        }
       ],
       "badges": []
     }

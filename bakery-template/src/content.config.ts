@@ -29,6 +29,8 @@ const menuItem = z
     name: z.string().min(1),
     nameTe: z.string().optional(),
     description: z.string().min(1).max(140),
+    /** Telugu description, shown on /te/ pages (orders on WhatsApp stay in English). */
+    descriptionTe: z.string().max(200).optional(),
     image,
     /** Describe what the photo actually shows. */
     alt: z.string().min(8),
@@ -56,6 +58,7 @@ const menu = defineCollection({
     nameTe: z.string().optional(),
     order: z.number(),
     note: z.string().optional(),
+    noteTe: z.string().optional(),
     items: z.array(menuItem).min(1),
   }),
 });

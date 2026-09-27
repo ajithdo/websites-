@@ -14,6 +14,7 @@ export interface MenuItem {
   name: string;
   nameTe?: string | undefined;
   description: string;
+  descriptionTe?: string | undefined;
   image: string;
   alt: string;
   diet: Diet;
@@ -29,6 +30,7 @@ export interface MenuCategory {
   name: string;
   nameTe?: string | undefined;
   note?: string | undefined;
+  noteTe?: string | undefined;
   items: MenuItem[];
 }
 
@@ -49,6 +51,7 @@ async function load() {
       name: c.name,
       nameTe: c.nameTe,
       note: c.note,
+      noteTe: c.noteTe,
       items: c.items.map((item) => ({ ...item, category: c.slug })),
     }));
 

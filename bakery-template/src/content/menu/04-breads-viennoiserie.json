@@ -7,7 +7,9 @@
     {
       "id": "butter-croissant",
       "name": "Butter Croissant",
+      "nameTe": "బటర్ క్రొయిసాంట్",
       "description": "Laminated with real butter: shattering crust, honeycomb crumb.",
+      "descriptionTe": "నిజమైన వెన్నతో పొరలుగా: కరకరలాడే పైపొర, తేనెపట్టు లాంటి లోపలి భాగం.",
       "image": "menu/butter-croissant.jpg",
       "alt": "Golden, flaky butter croissants",
       "diet": "egg",
@@ -17,7 +19,9 @@
     {
       "id": "almond-croissant",
       "name": "Almond Croissant",
+      "nameTe": "ఆల్మండ్ క్రొయిసాంట్",
       "description": "Twice-baked with frangipane and flaked almonds, dusted with sugar.",
+      "descriptionTe": "ఫ్రాంజిపేన్, బాదం ముక్కలతో రెండుసార్లు బేక్ చేసి, పైన చక్కెర పొడి.",
       "image": "menu/almond-croissant.jpg",
       "alt": "Almond croissant topped with flaked almonds and powdered sugar",
       "diet": "egg",
@@ -27,7 +31,9 @@
     {
       "id": "multigrain-sourdough-loaf",
       "name": "Multigrain Sourdough Loaf",
+      "nameTe": "మల్టీగ్రెయిన్ సోర్‌డో బ్రెడ్",
       "description": "Slow-fermented for 24 hours, with oats, flax and sunflower seeds.",
+      "descriptionTe": "ఓట్స్, అవిసె, పొద్దుతిరుగుడు గింజలతో 24 గంటలు నెమ్మదిగా పులియబెట్టిన బ్రెడ్.",
       "image": "menu/multigrain-sourdough-loaf.jpg",
       "alt": "Seeded sourdough loaf with a dark, crackled crust",
       "diet": "veg",
@@ -37,7 +43,9 @@
     {
       "id": "soft-milk-bread",
       "name": "Soft Milk Bread",
+      "nameTe": "సాఫ్ట్ మిల్క్ బ్రెడ్",
       "description": "Pillowy, lightly sweet sandwich loaf. The one for your morning toast.",
+      "descriptionTe": "దూదిలా మెత్తని, కొద్దిగా తీపి బ్రెడ్. ఉదయం టోస్ట్‌కు సరైనది.",
       "image": "menu/soft-milk-bread.jpg",
       "alt": "Soft white loaf of bread",
       "diet": "veg",
@@ -47,7 +55,9 @@
     {
       "id": "garlic-cheese-pull-apart",
       "name": "Garlic Cheese Pull-Apart",
+      "nameTe": "గార్లిక్ చీజ్ పుల్-అపార్ట్",
       "description": "Buttery garlic bread knots baked with molten mozzarella.",
+      "descriptionTe": "కరిగిన మొజరెల్లాతో బేక్ చేసిన వెన్న-వెల్లుల్లి బ్రెడ్ ముడులు.",
       "image": "menu/garlic-cheese-pull-apart.jpg",
       "alt": "Pull-apart bread with melted cheese and herbs",
       "diet": "veg",

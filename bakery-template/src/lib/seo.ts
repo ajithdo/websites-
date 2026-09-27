@@ -85,10 +85,11 @@ export function menuJsonLd(
   siteUrl: URL,
   lang: Lang,
 ): WithContext<Menu> {
+  const te = lang === 'te';
   const item = (i: MenuCategory['items'][number]): SchemaMenuItem => ({
     '@type': 'MenuItem',
-    name: i.name,
-    description: i.description,
+    name: (te && i.nameTe) || i.name,
+    description: (te && i.descriptionTe) || i.description,
     ...(i.diet === 'veg' ? { suitableForDiet: 'https://schema.org/VegetarianDiet' } : {}),
     offers: i.variants?.length
       ? i.variants.map((v) => ({
@@ -108,7 +109,7 @@ export function menuJsonLd(
     inLanguage: lang === 'te' ? 'te' : 'en-IN',
     hasMenuSection: categories.map((c) => ({
       '@type': 'MenuSection',
-      name: c.name,
+      name: (te && c.nameTe) || c.name,
       hasMenuItem: c.items.map(item),
     })),
   };

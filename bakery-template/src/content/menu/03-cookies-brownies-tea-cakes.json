@@ -7,7 +7,9 @@
     {
       "id": "fudge-brownie",
       "name": "Fudge Brownie",
+      "nameTe": "ఫడ్జ్ బ్రౌనీ",
       "description": "Dense, fudgy and crackle-topped, with dark chocolate chunks.",
+      "descriptionTe": "దట్టమైన, మెత్తని బ్రౌనీ, పైన పగుళ్ల పొర, డార్క్ చాక్లెట్ ముక్కలతో.",
       "image": "menu/fudge-brownie.jpg",
       "alt": "Stack of fudgy chocolate brownies with crackled tops",
       "diet": "egg",
@@ -17,7 +19,9 @@
     {
       "id": "nutella-brownie",
       "name": "Nutella Brownie",
+      "nameTe": "న్యూటెల్లా బ్రౌనీ",
       "description": "Our fudge brownie swirled with Nutella and toasted hazelnuts.",
+      "descriptionTe": "న్యూటెల్లా, వేయించిన హేజల్‌నట్‌లతో మా ఫడ్జ్ బ్రౌనీ.",
       "image": "menu/nutella-brownie.jpg",
       "alt": "Chocolate brownie with a hazelnut spread swirl",
       "diet": "egg",
@@ -27,7 +31,9 @@
     {
       "id": "double-chocolate-cookies",
       "name": "Double Chocolate Cookies (box of 6)",
+      "nameTe": "డబుల్ చాక్లెట్ కుకీలు (6 కుకీల బాక్స్)",
       "description": "Chewy cocoa cookies packed with milk and dark chocolate chips.",
+      "descriptionTe": "మిల్క్, డార్క్ చాక్లెట్ చిప్స్‌తో నిండిన మెత్తని కోకో కుకీలు.",
       "image": "menu/double-chocolate-cookies.jpg",
       "alt": "Chocolate cookies studded with chocolate chips",
       "diet": "egg",
@@ -37,8 +43,9 @@
     {
       "id": "millet-jaggery-cookies",
       "name": "Millet Jaggery Cookies (box of 8)",
-      "nameTe": "చిరుధాన్యాల బెల్లం కుకీలు",
+      "nameTe": "చిరుధాన్యాల బెల్లం కుకీలు (8 కుకీల బాక్స్)",
       "description": "Crisp ragi and jowar cookies sweetened with jaggery and a hint of ginger.",
+      "descriptionTe": "బెల్లం, కొద్దిగా అల్లంతో రాగి, జొన్న కరకర కుకీలు.",
       "image": "menu/millet-jaggery-cookies.jpg",
       "alt": "Rustic golden-brown cookies on a board",
       "diet": "veg",
@@ -48,7 +55,9 @@
     {
       "id": "banana-walnut-tea-cake",
       "name": "Banana Walnut Tea Cake",
+      "nameTe": "బనానా వాల్‌నట్ టీ కేక్",
       "description": "Moist banana loaf studded with toasted walnuts. Made for chai.",
+      "descriptionTe": "వేయించిన వాల్‌నట్‌లతో మెత్తని అరటిపండు కేక్. చాయ్‌తో తినడానికే.",
       "image": "menu/banana-walnut-tea-cake.jpg",
       "alt": "Sliced banana loaf with walnuts",
       "diet": "egg",
@@ -58,7 +67,9 @@
     {
       "id": "butter-tea-biscuits",
       "name": "Butter Tea Biscuits (250 g)",
+      "nameTe": "బటర్ టీ బిస్కెట్లు",
       "description": "Short, crumbly and properly buttery. A tin never lasts long.",
+      "descriptionTe": "పొడిపొడిగా, నిండుగా వెన్న రుచి. డబ్బా ఎక్కువ రోజులు నిలవదు.",
       "image": "menu/butter-tea-biscuits.jpg",
       "alt": "Round golden butter biscuits",
       "diet": "veg",

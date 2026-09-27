@@ -23,13 +23,13 @@ const views: CategoryView[] = await Promise.all(
     slug: c.slug,
     name: c.name,
     nameTe: c.nameTe,
-    note: c.note,
+    note: lang === 'te' && c.noteTe ? c.noteTe : c.note,
     items: await Promise.all(
       c.items.map(async (item) => ({
         id: item.id,
         name: item.name,
         nameTe: item.nameTe,
-        description: item.description,
+        description: lang === 'te' && item.descriptionTe ? item.descriptionTe : item.description,
         alt: item.alt,
         diet: item.diet,
         egglessAvailable: item.egglessAvailable,

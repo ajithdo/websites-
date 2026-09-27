@@ -62,7 +62,9 @@ const sizeLabel = (item: MenuItem) =>
                   <span class="signature-name-te">{item.nameTe}</span>
                 )}
               </span>
-              <span class="signature-desc">{item.description}</span>
+              <span class="signature-desc">
+                {lang === 'te' && item.descriptionTe ? item.descriptionTe : item.description}
+              </span>
               <span class="signature-meta">
                 <DietMark diet={item.diet} lang={lang} />
                 <span class="tabular font-semibold">

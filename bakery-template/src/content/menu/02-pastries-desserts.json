@@ -7,7 +7,9 @@
     {
       "id": "chocolate-truffle-pastry",
       "name": "Chocolate Truffle Pastry",
+      "nameTe": "చాక్లెట్ ట్రఫుల్ పేస్ట్రీ",
       "description": "A single slice of our chocolate truffle, ganache from edge to edge.",
+      "descriptionTe": "మా చాక్లెట్ ట్రఫుల్ కేక్ ఒక ముక్క, అంచుల వరకు గనాష్.",
       "image": "menu/chocolate-truffle-pastry.jpg",
       "alt": "Slice of layered chocolate cake with ganache",
       "diet": "egg",
@@ -17,7 +19,9 @@
     {
       "id": "red-velvet-pastry",
       "name": "Red Velvet Pastry",
+      "nameTe": "రెడ్ వెల్వెట్ పేస్ట్రీ",
       "description": "Red velvet layers under a cloud of cream-cheese frosting.",
+      "descriptionTe": "క్రీమ్ చీజ్ ఫ్రాస్టింగ్ కింద రెడ్ వెల్వెట్ పొరలు.",
       "image": "menu/red-velvet-pastry.jpg",
       "alt": "Slice of red velvet cake with white frosting",
       "diet": "egg",
@@ -27,7 +31,9 @@
     {
       "id": "pineapple-fresh-cream-pastry",
       "name": "Pineapple Fresh Cream Pastry",
+      "nameTe": "పైనాపిల్ ఫ్రెష్ క్రీమ్ పేస్ట్రీ",
       "description": "The classic: vanilla sponge, pineapple and fresh whipped cream.",
+      "descriptionTe": "ఎప్పటికీ ఇష్టమైనది: వెనిల్లా స్పాంజ్, పైనాపిల్, తాజా విప్డ్ క్రీమ్.",
       "image": "menu/pineapple-fresh-cream-pastry.jpg",
       "alt": "Fresh cream pastry slice with fruit on top",
       "diet": "egg",
@@ -37,7 +43,9 @@
     {
       "id": "biscoff-cheesecake-slice",
       "name": "Biscoff Cheesecake Slice",
+      "nameTe": "బిస్కాఫ్ చీజ్‌కేక్ స్లైస్",
       "description": "Creamy cheesecake on a Biscoff base with a spiced caramel top.",
+      "descriptionTe": "బిస్కాఫ్ బేస్‌పై క్రీమీ చీజ్‌కేక్, పైన మసాలా కారమెల్.",
       "image": "menu/biscoff-cheesecake-slice.jpg",
       "alt": "Slice of cheesecake with a caramel topping and biscuit base",
       "diet": "egg",
@@ -47,7 +55,9 @@
     {
       "id": "tiramisu-cup",
       "name": "Tiramisu Cup",
+      "nameTe": "తిరామిసు కప్",
       "description": "Espresso-soaked sponge, mascarpone cream and a dusting of cocoa.",
+      "descriptionTe": "ఎస్ప్రెస్సోలో నానిన స్పాంజ్, మస్కార్పోనే క్రీమ్, పైన కోకో పొడి.",
       "image": "menu/tiramisu-cup.jpg",
       "alt": "Tiramisu layered in a glass and dusted with cocoa",
       "diet": "egg",
@@ -59,6 +69,7 @@
       "name": "Rasmalai Tres Leches",
       "nameTe": "రసమలై ట్రెస్ లెచెస్",
       "description": "Sponge soaked in three milks with saffron and cardamom, finished with pistachio.",
+      "descriptionTe": "మూడు రకాల పాలలో నానిన స్పాంజ్, కుంకుమపువ్వు, యాలకులు, పైన పిస్తా.",
       "image": "menu/rasmalai-tres-leches.jpg",
       "alt": "Milk-soaked cake slice with cream and nuts",
       "diet": "egg",
