@@ -1,8 +1,17 @@
 ---
-/** Honest-demo ribbon: "Sample website by <studio> · Get one for your bakery →". */
+/**
+ * Honest-demo ribbon: "Sample website by <studio> · Get one for your bakery →",
+ * with the "Try another look" theme switcher at its end (demo mode only), so
+ * the demo tools never cover the page itself.
+ */
+import ThemeSwitcher, { type ThemeOption } from '~/components/islands/demo/ThemeSwitcher';
 import Icon from '~/components/ui/Icon.astro';
+import { fontFamilies, type FontVariable } from '~/config/fonts';
+import { themeIds, themes } from '~/config/themes';
 import { getDictionary, makeFormatter, type Lang } from '~/i18n';
+import { fmt } from '~/lib/format';
 import { studioHref } from '~/lib/links';
+import { storageKeys } from '~/lib/storage';
 
 interface Props {
   lang: Lang;
@@ -11,26 +20,51 @@ interface Props {
 const { lang } = Astro.props;
 const t = getDictionary(lang);
 const f = makeFormatter(lang);
+
+// Each look: swatches, and its name set in its own display face.
+const fontName = (v: FontVariable) => fontFamilies.find((ff) => ff.cssVariable === v)?.name ?? '';
+const themeOptions: ThemeOption[] = themeIds.map((id) => {
+  const th = themes[id];
+  return {
+    id,
+    name: th.name,
+    headingFont: th.fonts.heading,
+    fonts: fmt(t.demo.theme.fonts, {
+      heading: fontName(th.fonts.heading),
+      body: fontName(th.fonts.body),
+    }),
+    swatches: [th.colors.bg, th.colors.accent, th.colors.secondary, th.colors.inverse],
+    bg: th.colors.bg,
+  };
+});
 ---
 
 <div class="demo-ribbon" data-demo="ribbon">
-  <a
-    href={studioHref(t.demo.studioMessage)}
-    class="container-x demo-ribbon-link"
-    target="_blank"
-    rel="noopener"
-  >
-    <Icon name="sparkles" size={14} />
-    <span>{f(t.demo.ribbon)}</span>
-    <span aria-hidden="true" class="opacity-60">
-      ·
-    </span>
-    <span class="demo-ribbon-cta">
-      <span class="hidden sm:inline">{t.demo.ribbonCta}</span>
-      <span class="sm:hidden">{t.demo.ribbonCtaShort}</span>
-      <Icon name="arrow-right" size={14} />
-    </span>
-  </a>
+  <div class="container-x demo-ribbon-inner">
+    <a
+      href={studioHref(t.demo.studioMessage)}
+      class="demo-ribbon-link"
+      target="_blank"
+      rel="noopener"
+    >
+      <Icon name="sparkles" size={14} class="demo-ribbon-icon" />
+      <span>{f(t.demo.ribbon)}</span>
+      <span aria-hidden="true" class="opacity-60">
+        ·
+      </span>
+      <span class="demo-ribbon-cta">
+        <span class="hidden sm:inline">{t.demo.ribbonCta}</span>
+        <span class="sm:hidden">{t.demo.ribbonCtaShort}</span>
+        <Icon name="arrow-right" size={14} />
+      </span>
+    </a>
+    <ThemeSwitcher
+      client:interaction
+      themes={themeOptions}
+      labels={t.demo.theme}
+      storageKey={storageKeys.theme}
+    />
+  </div>
 </div>
 
 <style>
@@ -40,18 +74,37 @@ const f = makeFormatter(lang);
     background: var(--bb-inverse);
     color: var(--bb-on-inverse);
   }
-  .demo-ribbon-link {
+  .demo-ribbon-inner {
     display: flex;
     align-items: center;
+    gap: 0.75rem;
+    min-height: 2.75rem;
+    padding-block: 0.2rem;
+  }
+  .demo-ribbon-link {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.15rem 0.5rem;
+    min-width: 0;
     min-height: 2.25rem;
-    padding-block: 0.35rem;
     font-size: 0.8125rem;
     line-height: 1.3;
     color: inherit;
     text-align: center;
     text-decoration: none;
+  }
+  /* Phones: text left, the look switcher on the right. */
+  @media (max-width: 47.99rem) {
+    .demo-ribbon-link {
+      justify-content: flex-start;
+      text-align: start;
+    }
+    .demo-ribbon-link :global(.demo-ribbon-icon) {
+      display: none;
+    }
   }
   .demo-ribbon-cta {
     display: inline-flex;
@@ -67,6 +120,6 @@ const f = makeFormatter(lang);
   }
   .demo-ribbon-link:focus-visible {
     outline-color: var(--bb-focus-on-inverse);
-    outline-offset: -3px;
+    outline-offset: 2px;
   }
 </style>

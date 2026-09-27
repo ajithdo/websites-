@@ -7,13 +7,11 @@ import Footer from '~/components/layout/Footer.astro';
 import Header from '~/components/layout/Header.astro';
 import Intro from '~/components/layout/Intro.astro';
 import MobileActionBar from '~/components/layout/MobileActionBar.astro';
-import ThemeSwitcher, { type ThemeOption } from '~/components/islands/demo/ThemeSwitcher';
-import { fontFamilies, type FontVariable } from '~/config/fonts';
+import type { FontVariable } from '~/config/fonts';
 import { site } from '~/config/site';
 import { themeIds, themes, themeStylesheet } from '~/config/themes';
 import { activeLanguages, getDictionary, htmlLang, localizePath, lt, type Lang } from '~/i18n';
 import { bakeryJsonLd } from '~/lib/seo';
-import { fmt } from '~/lib/format';
 import { storageKeys } from '~/lib/storage';
 
 interface Props {
@@ -73,23 +71,6 @@ const og = new URL(ogImage ?? site.seo.ogImage ?? '/og.jpg', siteUrl).href;
 const robots = demo || noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large';
 // Every real page describes the bakery; pages add their own (e.g. the menu).
 const schema = path === '/404/' ? jsonLd : [bakeryJsonLd(siteUrl, lang), ...jsonLd];
-
-// Demo theme switcher options: swatches, and each theme's name set in its own display face.
-const fontName = (v: FontVariable) => fontFamilies.find((f) => f.cssVariable === v)?.name ?? '';
-const themeOptions: ThemeOption[] = themeIds.map((id) => {
-  const th = themes[id];
-  return {
-    id,
-    name: th.name,
-    headingFont: th.fonts.heading,
-    fonts: fmt(t.demo.theme.fonts, {
-      heading: fontName(th.fonts.heading),
-      body: fontName(th.fonts.body),
-    }),
-    swatches: [th.colors.bg, th.colors.accent, th.colors.secondary, th.colors.inverse],
-    bg: th.colors.bg,
-  };
-});
 
 const headConfig = {
   demo,
@@ -220,14 +201,6 @@ const headConfig = {
       <slot />
     </main>
     <Footer lang={lang} />
-    {demo && (
-      <ThemeSwitcher
-        client:interaction
-        themes={themeOptions}
-        labels={t.demo.theme}
-        storageKey={storageKeys.theme}
-      />
-    )}
     {actionBar && <MobileActionBar lang={lang} />}
     <slot name="end" />
   </body>

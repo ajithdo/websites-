@@ -78,8 +78,12 @@ const cardPrice = card.variants ? card.variants[0]!.price : (card.price ?? 0);
   <div class="container-x hero-content">
     <div class="hero-copy">
       <p class="hero-eyebrow">
-        <span data-brand-name>{site.brand.name}</span>
-        <span aria-hidden="true">·</span>
+        <span class="hero-eyebrow-brand" data-brand-name>
+          {site.brand.name}
+        </span>
+        <span class="hero-eyebrow-brand" aria-hidden="true">
+          ·
+        </span>
         <span>{lt(site.brand.descriptor, lang)}</span>
       </p>
       <h1 id="hero-title" class="text-display-xl hero-title">
@@ -272,6 +276,12 @@ const cardPrice = card.variants ? card.variants[0]!.price : (card.price ?? 0);
     width: 1.75rem;
     height: 1px;
     background: #e8c78a;
+  }
+  /* Phones: the header already shows the name; keep the line to one row. */
+  @media (max-width: 47.99rem) {
+    .hero-eyebrow-brand {
+      display: none;
+    }
   }
   :lang(te) .hero-eyebrow {
     letter-spacing: 0.02em;

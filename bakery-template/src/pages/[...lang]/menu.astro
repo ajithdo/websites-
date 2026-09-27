@@ -97,8 +97,20 @@ const config: MenuConfig = {
 
 <style>
   .menu-hero {
-    padding-top: clamp(2.5rem, 2rem + 4vw, 5.5rem);
-    padding-bottom: 2rem;
+    padding-top: clamp(1.75rem, 1.25rem + 3vw, 5.5rem);
+    padding-bottom: clamp(1rem, 0.5rem + 2vw, 2rem);
+  }
+  /* Phones: the filter chips below show the same marks with labels. */
+  @media (max-width: 47.99rem) {
+    .menu-key {
+      display: none !important;
+    }
+    .menu-hero h1 {
+      font-size: calc(clamp(2.25rem, 1.6rem + 3.2vw, 3.5rem) * var(--bb-heading-scale));
+    }
+    .menu-hero .lede {
+      font-size: 1rem;
+    }
   }
   .menu-key {
     display: flex;

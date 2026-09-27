@@ -1,59 +1,43 @@
-/* Demo theme switcher: a floating button and a small panel above it. */
+/* Demo theme switcher: a small button at the end of the demo ribbon, with a
+   panel that drops down beneath it (over the header). */
 .theme-switcher {
-  position: fixed;
-  left: 1rem;
-  bottom: calc(var(--action-bar-h) + 1rem);
-  z-index: 46;
-}
-/* Stay clear of the cake builder's own bottom bar on phones. */
-@media (max-width: 63.99rem) {
-  body:has(.builder-bar) .theme-switcher {
-    bottom: calc(5.5rem + env(safe-area-inset-bottom));
-  }
-}
-@media (min-width: 64rem) {
-  .theme-switcher {
-    left: 1.5rem;
-    bottom: 1.5rem;
-  }
+  position: relative;
+  flex: none;
 }
 
 .theme-trigger {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
-  min-width: 3rem;
-  min-height: 3rem;
-  padding: 0 0.9rem;
-  border: 1px solid var(--bb-line-strong);
+  justify-content: center;
+  gap: 0.45rem;
+  min-width: 2.25rem;
+  min-height: 2.25rem;
+  padding: 0 0.8rem;
+  border: 1px solid color-mix(in srgb, var(--bb-on-inverse) 38%, transparent);
   border-radius: 999px;
-  background: color-mix(in srgb, var(--bb-surface) 92%, transparent);
-  color: var(--bb-ink);
-  font-size: 0.8125rem;
+  background: transparent;
+  color: var(--bb-on-inverse);
+  font-size: 0.75rem;
   font-weight: 700;
-  box-shadow: 0 14px 30px -18px rgb(0 0 0 / 0.55);
-  backdrop-filter: blur(10px) saturate(1.2);
+  white-space: nowrap;
   cursor: pointer;
   transition:
-    transform 0.4s var(--ease),
+    background-color 0.2s ease,
     border-color 0.2s ease;
 }
-.theme-trigger:hover {
-  border-color: var(--bb-ink);
-  transform: translateY(-1px);
+.theme-trigger:hover,
+.theme-trigger[aria-expanded='true'] {
+  border-color: var(--bb-on-inverse);
+  background: color-mix(in srgb, var(--bb-on-inverse) 12%, transparent);
 }
 .theme-trigger:focus-visible {
-  outline: 2px solid var(--bb-focus);
-  outline-offset: 3px;
-}
-.theme-trigger[aria-expanded='true'] {
-  border-color: var(--bb-ink);
+  outline: 2px solid var(--bb-focus-on-inverse);
+  outline-offset: 2px;
 }
 /* Phones: an icon button (the label stays as its accessible name). */
 @media (max-width: 47.99rem) {
   .theme-trigger {
     padding: 0;
-    justify-content: center;
   }
   .theme-trigger-label {
     position: absolute;
@@ -67,10 +51,10 @@
 
 .theme-panel {
   position: absolute;
-  left: 0;
-  bottom: calc(100% + 0.75rem);
-  width: min(23rem, calc(100vw - 2rem));
-  max-height: calc(100dvh - var(--action-bar-h) - 6rem);
+  right: 0;
+  top: calc(100% + 0.6rem);
+  width: min(23rem, calc(100vw - 1.5rem));
+  max-height: calc(100dvh - 5rem);
   overflow-y: auto;
   overscroll-behavior: contain;
   padding: 1.1rem 1.1rem 1.2rem;
@@ -78,8 +62,9 @@
   border-radius: max(var(--bb-radius-card), 12px);
   background: var(--bb-surface);
   color: var(--bb-ink);
+  text-align: start;
   box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.5);
-  transform-origin: bottom left;
+  transform-origin: top right;
 }
 @media (prefers-reduced-motion: no-preference) {
   .theme-panel {
@@ -89,7 +74,7 @@
 @keyframes theme-panel-in {
   from {
     opacity: 0;
-    transform: translateY(8px) scale(0.98);
+    transform: translateY(-8px) scale(0.98);
   }
 }
 .theme-panel-head {
