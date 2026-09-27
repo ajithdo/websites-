@@ -7,3 +7,10 @@
 
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
+
+/site.webmanifest
+  Content-Type: application/manifest+json
+  Cache-Control: public, max-age=86400
+
+/og.jpg
+  Cache-Control: public, max-age=86400

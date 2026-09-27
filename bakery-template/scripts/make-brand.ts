@@ -2,7 +2,6 @@
  * Generates the brand assets from src/config/site.ts:
  *   public/brand/logo-mark.svg   whisk-bloom mark (a whisk whose wires open like petals)
  *   public/brand/logo.svg        mark + wordmark (brand name set in Fraunces, as outlines)
- *   public/brand/favicon.svg     mark on a solid tile, legible at 16 px
  *   public/brand/grain.png       paper-grain tile used across the site
  *   src/lib/brand-mark.ts        mark geometry for the live header logo and intro
  *
@@ -23,7 +22,6 @@ mkdirSync(out('public/brand'), { recursive: true });
 
 const INK = themes.classic.colors.ink;
 const GOLD = themes.classic.colors.accent;
-const CREAM = themes.classic.colors.bg;
 const r2 = (n: number) => Math.round(n * 100) / 100;
 const xml = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 
@@ -60,15 +58,6 @@ const markBody = (ink: string, accent: string, stroke = 1.6) => `
 writeFileSync(
   out('public/brand/logo-mark.svg'),
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="${xml(site.brand.name)} mark">${markBody(INK, GOLD)}
-</svg>
-`,
-);
-
-writeFileSync(
-  out('public/brand/favicon.svg'),
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <rect width="64" height="64" rx="14" fill="${INK}"/>
-  <g transform="translate(32 33) scale(0.92) translate(-32 -33)">${markBody(CREAM, GOLD, 2.6)}</g>
 </svg>
 `,
 );

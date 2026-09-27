@@ -7,6 +7,7 @@ import { getDictionary, langPaths, lt, makeFormatter, type Lang } from '~/i18n';
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import { responsiveImage } from '~/lib/images';
 import { getMenu } from '~/lib/menu';
+import { menuJsonLd } from '~/lib/seo';
 
 export function getStaticPaths() {
   return langPaths();
@@ -69,6 +70,7 @@ const config: MenuConfig = {
   path="/menu/"
   title={f(t.menu.meta.title)}
   description={f(t.menu.meta.description)}
+  jsonLd={[menuJsonLd(categories, Astro.site ?? new URL('http://localhost:4321'), lang)]}
 >
   <header class="container-x menu-hero">
     <p class="eyebrow" data-reveal>

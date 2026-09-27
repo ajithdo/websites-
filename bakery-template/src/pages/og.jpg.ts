@@ -1,0 +1,7 @@
+import type { APIRoute } from 'astro';
+import { renderOgImage } from '~/lib/server/og-image';
+
+export const GET: APIRoute = async () =>
+  new Response(new Uint8Array(await renderOgImage()), {
+    headers: { 'Content-Type': 'image/jpeg' },
+  });
