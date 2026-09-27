@@ -1,0 +1,106 @@
+---
+/**
+ * First-visit intro (home only, once per session): the whisk-bloom mark draws
+ * itself, the name fades in, the curtain lifts. Under 1.2 s, skipped by any
+ * tap or key, never shown with reduced motion. Pure CSS, so it finishes (and
+ * stops blocking) even if JavaScript fails.
+ */
+import { site } from '~/config/site';
+import { markDot, markHandle, markLoops } from '~/lib/brand-mark';
+---
+
+<div class="intro-overlay" aria-hidden="true" data-intro>
+  <div class="intro-center">
+    <svg class="intro-mark" viewBox="0 0 64 64" width="84" height="84">
+      <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+        {markLoops.map((d, i) => (
+          <path
+            d={d}
+            pathLength="1"
+            class="intro-stroke"
+            style={`--d:${i * 70}ms`}
+            stroke={i === 2 ? 'var(--bb-accent)' : 'currentColor'}
+          />
+        ))}
+        <path
+          d={markHandle}
+          pathLength="1"
+          class="intro-stroke"
+          style="--d:360ms"
+          stroke="currentColor"
+          stroke-width="3.6"
+        ></path>
+      </g>
+      <circle
+        class="intro-dot"
+        cx={markDot.cx}
+        cy={markDot.cy}
+        r={markDot.r}
+        fill="var(--bb-accent)"
+      ></circle>
+    </svg>
+    <span class="intro-word font-display" data-brand-name>
+      {site.brand.name}
+    </span>
+  </div>
+</div>
+
+<style>
+  .intro-overlay {
+    display: none;
+  }
+  :global(html.intro) .intro-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: grid;
+    place-items: center;
+    background: var(--bb-bg);
+    color: var(--bb-ink);
+    animation: intro-lift 0.42s var(--ease) 0.78s forwards;
+  }
+  .intro-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .intro-stroke {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: intro-draw 0.55s var(--ease) var(--d) forwards;
+  }
+  .intro-dot {
+    transform-origin: 32px 35px;
+    transform: scale(0);
+    animation: intro-pop 0.35s var(--ease) 0.45s forwards;
+  }
+  .intro-word {
+    font-size: calc(1.6rem * var(--bb-heading-scale));
+    opacity: 0;
+    transform: translateY(0.5rem);
+    animation: intro-word 0.45s var(--ease) 0.3s forwards;
+  }
+  @keyframes intro-draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes intro-pop {
+    to {
+      transform: scale(1);
+    }
+  }
+  @keyframes intro-word {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes intro-lift {
+    to {
+      clip-path: inset(0 0 100% 0);
+      visibility: hidden;
+    }
+  }
+</style>

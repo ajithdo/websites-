@@ -1,0 +1,196 @@
+---
+import DietMark from '~/components/ui/DietMark.astro';
+import Icon from '~/components/ui/Icon.astro';
+import Picture from '~/components/ui/Picture.astro';
+import SectionHeading from '~/components/ui/SectionHeading.astro';
+import { getDictionary, localizePath, type Lang } from '~/i18n';
+import { formatINR } from '~/lib/format';
+import { fromPrice, type MenuItem } from '~/lib/menu';
+
+interface Props {
+  lang: Lang;
+  items: MenuItem[];
+}
+
+const { lang, items } = Astro.props;
+const t = getDictionary(lang);
+const href = (p: string) => localizePath(p, lang);
+const sizeLabel = (item: MenuItem) =>
+  item.variants?.map((v) => v.label.replace('kg', t.common.kg)).join(' · ');
+---
+
+<section class="section signature" aria-labelledby="signature-title">
+  <div class="container-x signature-head">
+    <SectionHeading
+      id="signature-title"
+      eyebrow={t.home.signature.eyebrow}
+      title={t.home.signature.title}
+      lede={t.home.signature.body}
+    />
+    <a href={href('/menu/')} class="link-arrow" data-reveal>
+      {t.home.signature.cta}
+      <Icon name="arrow-right" size={18} />
+    </a>
+  </div>
+
+  <ul class="track signature-list">
+    {items.map((item, i) => {
+      const badge = item.badges[0];
+      return (
+        <li class="signature-item" data-reveal style={`--i:${i % 3}`}>
+          <a href={href(`/menu/#${item.id}`)} class="signature-card zoom-on-hover">
+            <span class="signature-media">
+              <Picture
+                src={item.image}
+                alt={item.alt}
+                widths={[320, 480, 640, 800]}
+                sizes="(min-width: 64rem) 30vw, min(78vw, 22rem)"
+                aspect={4 / 5}
+              />
+              {badge && (
+                <span
+                  class:list={['badge signature-badge', badge === 'bestseller' && 'badge-accent']}
+                >
+                  {t.badges[badge]}
+                </span>
+              )}
+            </span>
+            <span class="signature-body">
+              <span class="signature-name font-display">
+                {item.name}
+                {lang === 'te' && item.nameTe && (
+                  <span class="signature-name-te">{item.nameTe}</span>
+                )}
+              </span>
+              <span class="signature-desc">{item.description}</span>
+              <span class="signature-meta">
+                <DietMark diet={item.diet} lang={lang} />
+                <span class="tabular font-semibold">
+                  {item.variants ? `${t.menu.from} ` : ''}
+                  {formatINR(fromPrice(item))}
+                </span>
+                {sizeLabel(item) && <span class="signature-sizes">{sizeLabel(item)}</span>}
+                {item.egglessAvailable && (
+                  <span class="signature-eggless">
+                    <Icon name="egg-off" size={14} />
+                    {t.diet.eggless}
+                  </span>
+                )}
+              </span>
+            </span>
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+</section>
+
+<style>
+  .signature-head {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: clamp(2.5rem, 2rem + 2vw, 4rem);
+  }
+  @media (min-width: 64rem) {
+    .signature-head {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+  }
+  .signature-list {
+    grid-auto-columns: min(78vw, 22rem);
+    padding-bottom: 0.5rem;
+  }
+  @media (min-width: 64rem) {
+    .signature-list {
+      grid-auto-flow: row;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: clamp(1.5rem, 3vw, 3rem);
+      row-gap: 4rem;
+      overflow: visible;
+      max-width: 82rem;
+      margin-inline: auto;
+    }
+    .signature-item:nth-child(3n + 2) {
+      margin-top: 5rem;
+    }
+  }
+  .signature-card {
+    display: flex;
+    flex-direction: column;
+    color: inherit;
+    text-decoration: none;
+  }
+  .signature-media {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: var(--bb-radius-card);
+    background: var(--bb-bg-alt);
+  }
+  .signature-item:nth-child(3n + 1) .signature-media {
+    border-radius: var(--bb-radius-arch);
+  }
+  .signature-badge {
+    position: absolute;
+    left: 0.85rem;
+    top: 0.85rem;
+  }
+  /* Arched frames: centre the badge under the apex so the curve never clips it. */
+  .signature-item:nth-child(3n + 1) .signature-badge {
+    left: 50%;
+    top: 1.25rem;
+    translate: -50% 0;
+  }
+  .signature-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    padding-top: 1.1rem;
+  }
+  .signature-name {
+    font-size: calc(1.45rem * var(--bb-heading-scale));
+    line-height: 1.15;
+  }
+  .signature-name-te {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 0.95rem;
+    color: var(--bb-ink-muted);
+  }
+  .signature-card:hover .signature-name {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+  .signature-desc {
+    color: var(--bb-ink-muted);
+    font-size: 0.9375rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .signature-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.75rem;
+    margin-top: 0.35rem;
+    font-size: 0.875rem;
+  }
+  .signature-sizes {
+    color: var(--bb-ink-muted);
+  }
+  .signature-eggless {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-basis: 100%;
+    color: var(--bb-ink-muted);
+    font-size: 0.8125rem;
+  }
+</style>

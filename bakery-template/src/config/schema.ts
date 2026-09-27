@@ -27,6 +27,9 @@ const imagePath = z
     'Image paths are relative to src/assets/images, e.g. "hero/hero.jpg"',
   );
 
+/** A photo slot plus its alt text (describe what the photo actually shows). */
+const photo = z.object({ src: imagePath, alt: localized });
+
 const digits = (label: string) =>
   z.string().regex(/^\d{10,15}$/, `${label}: digits only with country code, e.g. 919000000000`);
 
@@ -153,14 +156,21 @@ export const siteSchema = z.object({
     signature: z.array(z.string()).min(4).max(6),
     /** Menu item id featured on the desktop hero card. */
     heroCard: z.string(),
-    storyImages: z.tuple([imagePath, imagePath]),
-    builderTeaserImage: imagePath,
+    storyImages: z.tuple([photo, photo]),
+    builderTeaserImage: photo,
   }),
+  about: z.object({
+    hero: photo,
+    strip: z.array(photo).min(3),
+    hands: photo,
+  }),
+  contactPage: z.object({ corporateImage: photo }),
+  notFoundImage: photo,
   occasions: z
     .array(
       z.object({
         id: z.enum(occasionIds),
-        image: imagePath.nullable(),
+        image: photo.nullable(),
         /** Show as a "Shop by occasion" tile on Home. */
         tile: z.boolean(),
       }),
@@ -229,3 +239,4 @@ export type LocalizedText = z.input<typeof localized>;
 export type WeekHours = SiteConfig['hours'];
 export type Flavour = SiteConfig['cakeBuilder']['flavours'][number];
 export type BuilderPricing = SiteConfig['cakeBuilder']['pricing'];
+export type Photo = z.input<typeof photo>;

@@ -92,3 +92,48 @@ export async function responsiveImage(
     lqip: blur,
   };
 }
+
+export interface HeroSources {
+  desktop: { avif: string; webp: string; fallback: string; width: number; height: number };
+  mobile: { avif: string; webp: string } | null;
+}
+
+/** Art-directed hero: a portrait crop for phones, landscape for larger screens. */
+export async function heroSources(
+  desktopPath: string,
+  mobilePath: string | null,
+): Promise<HeroSources> {
+  const desk = img(desktopPath);
+  const deskWidths = [960, 1280, 1600, 1920, 2400].filter((w) => w <= desk.width);
+  const deskCommon = { src: desk, width: desk.width, height: desk.height, widths: deskWidths };
+  const [avif, webp, fallback] = await Promise.all([
+    getImage({ ...deskCommon, format: 'avif', quality: 55 }),
+    getImage({ ...deskCommon, format: 'webp', quality: 68 }),
+    getImage({ src: desk, width: Math.min(1600, desk.width), format: 'jpg', quality: 72 }),
+  ]);
+  let mobile: HeroSources['mobile'] = null;
+  if (mobilePath) {
+    const mob = img(mobilePath);
+    const mobCommon = {
+      src: mob,
+      width: mob.width,
+      height: mob.height,
+      widths: [480, 720, 960, 1200].filter((w) => w <= mob.width),
+    };
+    const [mAvif, mWebp] = await Promise.all([
+      getImage({ ...mobCommon, format: 'avif', quality: 55 }),
+      getImage({ ...mobCommon, format: 'webp', quality: 68 }),
+    ]);
+    mobile = { avif: mAvif.srcSet.attribute, webp: mWebp.srcSet.attribute };
+  }
+  return {
+    desktop: {
+      avif: avif.srcSet.attribute,
+      webp: webp.srcSet.attribute,
+      fallback: fallback.src,
+      width: desk.width,
+      height: desk.height,
+    },
+    mobile,
+  };
+}

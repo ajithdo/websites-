@@ -1,6 +1,21 @@
 ---
-import BaseLayout from '~/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import BuilderTeaser from '~/components/home/BuilderTeaser.astro';
+import CtaBand from '~/components/home/CtaBand.astro';
+import Faq from '~/components/home/Faq.astro';
+import Hero from '~/components/home/Hero.astro';
+import HowItWorks from '~/components/home/HowItWorks.astro';
+import InstagramGrid from '~/components/home/InstagramGrid.astro';
+import OccasionTiles from '~/components/home/OccasionTiles.astro';
+import SignatureBakes from '~/components/home/SignatureBakes.astro';
+import StoryTeaser from '~/components/home/StoryTeaser.astro';
+import Testimonials from '~/components/home/Testimonials.astro';
+import VisitUs from '~/components/home/VisitUs.astro';
+import { site } from '~/config/site';
 import { getDictionary, langPaths, makeFormatter, type Lang } from '~/i18n';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { heroSources } from '~/lib/images';
+import { getMenu } from '~/lib/menu';
 
 export function getStaticPaths() {
   return langPaths();
@@ -9,6 +24,21 @@ export function getStaticPaths() {
 const { lang } = Astro.props as { lang: Lang };
 const t = getDictionary(lang);
 const f = makeFormatter(lang);
+
+const { byId } = await getMenu();
+const signature = site.home.signature.map((id) => byId.get(id)!);
+const heroCard = byId.get(site.home.heroCard)!;
+const hero = await heroSources(site.hero.image, site.hero.mobileImage);
+
+const reviews = (await getCollection('testimonials'))
+  .map((e) => e.data)
+  .sort((a, b) => a.order - b.order);
+const instagram = (await getCollection('gallery'))
+  .map((e) => e.data)
+  .sort((a, b) => a.order - b.order)
+  .map((g) => g.items[0]!)
+  .slice(0, 6)
+  .map((i) => ({ image: i.image, alt: lang === 'te' && i.captionTe ? i.captionTe : i.alt }));
 ---
 
 <BaseLayout
@@ -16,8 +46,41 @@ const f = makeFormatter(lang);
   path="/"
   title={f(t.home.meta.title)}
   description={f(t.home.meta.description)}
+  overlayHeader
+  intro
 >
-  <section class="section container-x">
-    <h1 class="text-display-lg">{f(t.home.meta.title)}</h1>
-  </section>
+  <Fragment slot="head">
+    {hero.mobile && (
+      <link
+        rel="preload"
+        as="image"
+        type="image/avif"
+        imagesrcset={hero.mobile.avif}
+        imagesizes="100vw"
+        media="(max-width: 47.99rem)"
+        fetchpriority="high"
+      />
+    )}
+    <link
+      rel="preload"
+      as="image"
+      type="image/avif"
+      imagesrcset={hero.desktop.avif}
+      imagesizes="100vw"
+      media={hero.mobile ? '(min-width: 48rem)' : undefined}
+      fetchpriority="high"
+    />
+  </Fragment>
+
+  <Hero lang={lang} sources={hero} card={heroCard} />
+  <SignatureBakes lang={lang} items={signature} />
+  <StoryTeaser lang={lang} />
+  <OccasionTiles lang={lang} />
+  <HowItWorks lang={lang} />
+  {site.features.cakeBuilder && <BuilderTeaser lang={lang} />}
+  {site.features.testimonials && <Testimonials lang={lang} reviews={reviews} />}
+  {site.features.instagramGrid && <InstagramGrid lang={lang} images={instagram} />}
+  <VisitUs lang={lang} />
+  {site.features.faq && <Faq lang={lang} />}
+  <CtaBand lang={lang} />
 </BaseLayout>

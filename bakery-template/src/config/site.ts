@@ -125,17 +125,133 @@ export const site: SiteConfig = {
       'garlic-cheese-pull-apart',
     ],
     heroCard: 'almond-croissant',
-    storyImages: ['story/story-1.jpg', 'story/story-2.jpg'],
-    builderTeaserImage: 'misc/builder-teaser.jpg',
+    storyImages: [
+      {
+        src: 'story/story-1.jpg',
+        alt: {
+          en: 'A baker’s floured hands shaping dough on a wooden counter',
+          te: 'చెక్క బల్లపై పిండిని మలుస్తున్న బేకర్ చేతులు',
+        },
+      },
+      {
+        src: 'story/story-2.jpg',
+        alt: {
+          en: 'A tray of golden croissants fresh from the oven',
+          te: 'ఓవెన్ నుంచి వచ్చిన బంగారు రంగు క్రొయిసాంట్‌ల ట్రే',
+        },
+      },
+    ],
+    builderTeaserImage: {
+      src: 'misc/builder-teaser.jpg',
+      alt: {
+        en: 'Piping cream onto a layered cake',
+        te: 'పొరల కేక్‌పై క్రీమ్ పైప్ చేస్తున్న దృశ్యం',
+      },
+    },
+  },
+
+  about: {
+    hero: {
+      src: 'about/about-hero.jpg',
+      alt: {
+        en: 'Pastries and cakes arranged on a bakery counter',
+        te: 'బేకరీ కౌంటర్‌పై అమర్చిన పేస్ట్రీలు, కేకులు',
+      },
+    },
+    strip: [
+      {
+        src: 'about/strip-1.jpg',
+        alt: { en: 'Kneading dough by hand', te: 'చేతితో పిండి పిసుకుతున్న దృశ్యం' },
+      },
+      {
+        src: 'about/strip-2.jpg',
+        alt: { en: 'Piping cream rosettes', te: 'క్రీమ్ పువ్వులు పైప్ చేస్తున్న దృశ్యం' },
+      },
+      {
+        src: 'about/strip-3.jpg',
+        alt: { en: 'Loaves of bread coming out of the oven', te: 'ఓవెన్ నుంచి వస్తున్న బ్రెడ్లు' },
+      },
+      {
+        src: 'about/strip-4.jpg',
+        alt: { en: 'Flour dusted over a work table', te: 'పని బల్లపై చల్లిన పిండి' },
+      },
+    ],
+    hands: {
+      src: 'about/hands.jpg',
+      alt: { en: 'A baker’s hands dusted with flour', te: 'పిండి అంటిన బేకర్ చేతులు' },
+    },
+  },
+
+  contactPage: {
+    corporateImage: {
+      src: 'misc/corporate.jpg',
+      alt: { en: 'Gift boxes tied with ribbon', te: 'రిబ్బన్‌తో కట్టిన బహుమతి పెట్టెలు' },
+    },
+  },
+
+  notFoundImage: {
+    src: 'misc/not-found.jpg',
+    alt: { en: 'A croissant with a bite taken out of it', te: 'ఒక ముక్క కొరికిన క్రొయిసాంట్' },
   },
 
   occasions: [
-    { id: 'birthday', image: 'occasions/birthday.jpg', tile: true },
-    { id: 'anniversary', image: 'occasions/anniversary.jpg', tile: true },
-    { id: 'wedding', image: 'occasions/wedding.jpg', tile: true },
-    { id: 'kids', image: 'occasions/kids.jpg', tile: true },
-    { id: 'festive', image: 'occasions/festive.jpg', tile: true },
-    { id: 'corporate', image: 'occasions/corporate.jpg', tile: true },
+    {
+      id: 'birthday',
+      image: {
+        src: 'occasions/birthday.jpg',
+        alt: { en: 'A birthday cake with candles', te: 'కొవ్వొత్తులతో పుట్టినరోజు కేక్' },
+      },
+      tile: true,
+    },
+    {
+      id: 'anniversary',
+      image: {
+        src: 'occasions/anniversary.jpg',
+        alt: { en: 'An elegant cake decorated with flowers', te: 'పూలతో అలంకరించిన సొగసైన కేక్' },
+      },
+      tile: true,
+    },
+    {
+      id: 'wedding',
+      image: {
+        src: 'occasions/wedding.jpg',
+        alt: { en: 'A tall tiered wedding cake', te: 'ఎత్తైన అంతస్తుల పెళ్లి కేక్' },
+      },
+      tile: true,
+    },
+    {
+      id: 'kids',
+      image: {
+        src: 'occasions/kids.jpg',
+        alt: {
+          en: 'A colourful cake for a child’s party',
+          te: 'పిల్లల పార్టీ కోసం రంగురంగుల కేక్',
+        },
+      },
+      tile: true,
+    },
+    {
+      id: 'festive',
+      image: {
+        src: 'occasions/festive.jpg',
+        alt: {
+          en: 'A festive gift hamper of sweets and treats',
+          te: 'తీపి వంటకాలతో పండుగ బహుమతి హ్యాంపర్',
+        },
+      },
+      tile: true,
+    },
+    {
+      id: 'corporate',
+      image: {
+        src: 'occasions/corporate.jpg',
+        alt: {
+          en: 'Branded gift boxes tied with ribbon',
+          te: 'రిబ్బన్‌తో కట్టిన బ్రాండెడ్ బహుమతి పెట్టెలు',
+        },
+      },
+      tile: true,
+    },
     { id: 'baby-shower', image: null, tile: false },
     { id: 'other', image: null, tile: false },
   ],

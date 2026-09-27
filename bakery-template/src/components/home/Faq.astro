@@ -1,0 +1,133 @@
+---
+import Icon from '~/components/ui/Icon.astro';
+import SectionHeading from '~/components/ui/SectionHeading.astro';
+import { site } from '~/config/site';
+import { getDictionary, makeFormatter, type Lang } from '~/i18n';
+import { whatsappHref } from '~/lib/links';
+import { openers } from '~/lib/whatsapp';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDictionary(lang);
+const f = makeFormatter(lang);
+---
+
+<section class="section faq" aria-labelledby="faq-title">
+  <div class="container-x faq-grid">
+    <div class="faq-aside">
+      <div class="faq-sticky">
+        <SectionHeading
+          id="faq-title"
+          eyebrow={t.home.faq.eyebrow}
+          title={t.home.faq.title}
+          size="md"
+        />
+        <a
+          href={whatsappHref(openers.order(site.brand.name))}
+          class="link-arrow mt-6"
+          target="_blank"
+          rel="noopener"
+        >
+          <Icon name="whatsapp" size={18} />
+          {t.cta.chatWhatsApp}
+        </a>
+      </div>
+    </div>
+    <div class="faq-list">
+      {t.home.faq.items.map((item, i) => (
+        <details class="faq-item" name="faq" data-reveal style={`--i:${i}`}>
+          <summary>
+            <span class="faq-q font-display">{item.q}</span>
+            <span class="faq-icon" aria-hidden="true">
+              <Icon name="plus" size={20} />
+            </span>
+          </summary>
+          <div class="faq-a">
+            <p>{f(item.a)}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-grid {
+    display: grid;
+    gap: 2.5rem;
+  }
+  @media (min-width: 64rem) {
+    .faq-grid {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+    .faq-aside {
+      grid-column: 1 / span 4;
+    }
+    .faq-sticky {
+      position: sticky;
+      top: calc(var(--header-h) + 2rem);
+    }
+    .faq-list {
+      grid-column: 6 / span 7;
+    }
+  }
+  .faq-item {
+    border-bottom: 1px solid var(--bb-line);
+    interpolate-size: allow-keywords;
+  }
+  .faq-item:first-child {
+    border-top: 1px solid var(--bb-line);
+  }
+  .faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    min-height: 3.5rem;
+    padding-block: 1.35rem;
+    cursor: pointer;
+    list-style: none;
+  }
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-q {
+    font-size: calc(clamp(1.1rem, 1rem + 0.5vw, 1.35rem) * var(--bb-heading-scale));
+    line-height: 1.3;
+  }
+  .faq-icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid var(--bb-line-strong);
+    border-radius: 999px;
+    transition:
+      transform 0.5s var(--ease),
+      background-color 0.3s ease;
+  }
+  .faq-item[open] .faq-icon {
+    transform: rotate(45deg);
+    background: var(--bb-ink);
+    color: var(--bb-bg);
+  }
+  .faq-a {
+    padding-bottom: 1.5rem;
+    max-width: 40rem;
+    color: var(--bb-ink-muted);
+  }
+  .faq-item::details-content {
+    block-size: 0;
+    overflow: hidden;
+    transition:
+      block-size 0.5s var(--ease),
+      content-visibility 0.5s allow-discrete;
+  }
+  .faq-item[open]::details-content {
+    block-size: auto;
+  }
+</style>

@@ -1,0 +1,143 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Icon from '~/components/ui/Icon.astro';
+import SectionHeading from '~/components/ui/SectionHeading.astro';
+import StarRating from '~/components/ui/StarRating.astro';
+import { site } from '~/config/site';
+import { getDictionary, makeFormatter, type Lang } from '~/i18n';
+
+interface Props {
+  lang: Lang;
+  reviews: CollectionEntry<'testimonials'>['data'][];
+}
+
+const { lang, reviews } = Astro.props;
+const t = getDictionary(lang);
+const f = makeFormatter(lang);
+const demo = site.features.demoMode;
+---
+
+<section class="section bg-bg-alt reviews" aria-labelledby="reviews-title" data-carousel>
+  <div class="container-x reviews-head">
+    <SectionHeading
+      id="reviews-title"
+      eyebrow={t.home.testimonials.eyebrow}
+      title={t.home.testimonials.title}
+    />
+    <div class="reviews-nav">
+      <button
+        type="button"
+        class="btn btn-outline btn-icon"
+        data-carousel-prev
+        aria-label={t.home.testimonials.prev}
+      >
+        <Icon name="arrow-left" size={20} />
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline btn-icon"
+        data-carousel-next
+        aria-label={t.home.testimonials.next}
+      >
+        <Icon name="arrow-right" size={20} />
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="track reviews-track"
+    data-carousel-track
+    role="region"
+    aria-roledescription="carousel"
+    aria-label={t.home.testimonials.title}
+    tabindex="0"
+  >
+    {reviews.map((r, i) => (
+      <div
+        class="review"
+        role="group"
+        aria-roledescription="slide"
+        aria-label={f(t.home.testimonials.slide, { n: i + 1, total: reviews.length })}
+      >
+        <figure class="review-card">
+          <div class="flex items-center justify-between gap-3">
+            <StarRating value={r.rating} lang={lang} />
+            {demo && (
+              <span class="sample-pill" data-demo="sample">
+                {t.demo.sampleReview}
+              </span>
+            )}
+          </div>
+          <blockquote class="review-quote font-display">
+            <p>“{lang === 'te' && r.quoteTe ? r.quoteTe : r.quote}”</p>
+          </blockquote>
+          <figcaption class="review-by">
+            <span class="font-semibold text-ink">{r.name}</span>
+            <span aria-hidden="true">·</span>
+            <span>{t.occasions[r.occasion].label}</span>
+          </figcaption>
+        </figure>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .reviews-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+  }
+  .reviews-nav {
+    display: none;
+    gap: 0.5rem;
+  }
+  @media (min-width: 48rem) {
+    .reviews-nav {
+      display: flex;
+    }
+  }
+  .reviews-track {
+    grid-auto-columns: min(86vw, 26rem);
+    padding-bottom: 0.5rem;
+  }
+  @media (min-width: 64rem) {
+    .reviews-track {
+      grid-auto-columns: calc((min(100vw, 82rem) - 2 * var(--gutter) - 2rem) / 2.6);
+      gap: 1.5rem;
+      padding-inline: max(var(--gutter), calc((100vw - 82rem) / 2 + var(--gutter)));
+      scroll-padding-inline: max(var(--gutter), calc((100vw - 82rem) / 2 + var(--gutter)));
+    }
+  }
+  .reviews-track:focus-visible {
+    outline-offset: -4px;
+  }
+  .review-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    height: 100%;
+    padding: clamp(1.5rem, 1.2rem + 1.5vw, 2.5rem);
+    background: var(--bb-surface);
+    border: 1px solid var(--bb-line);
+    border-radius: var(--bb-radius-card);
+  }
+  .review-quote {
+    flex: 1;
+    font-size: calc(clamp(1.2rem, 1.05rem + 0.6vw, 1.5rem) * var(--bb-heading-scale));
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+  }
+  :lang(te) .review-quote {
+    line-height: 1.6;
+  }
+  .review-by {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    font-size: 0.875rem;
+    color: var(--bb-ink-muted);
+  }
+</style>

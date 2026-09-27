@@ -1,0 +1,104 @@
+---
+import Icon from '~/components/ui/Icon.astro';
+import Picture from '~/components/ui/Picture.astro';
+import SectionHeading from '~/components/ui/SectionHeading.astro';
+import { site } from '~/config/site';
+import { getDictionary, makeFormatter, type Lang } from '~/i18n';
+
+interface Props {
+  lang: Lang;
+  images: { image: string; alt: string }[];
+}
+
+const { lang, images } = Astro.props;
+const t = getDictionary(lang);
+const f = makeFormatter(lang);
+const insta = site.socials.instagram;
+---
+
+{insta && (
+  <section class="section insta" aria-labelledby="insta-title">
+    <div class="container-x">
+      <div class="insta-head">
+        <SectionHeading
+          id="insta-title"
+          eyebrow={t.home.instagram.eyebrow}
+          title={t.home.instagram.title}
+          size="md"
+        />
+        <a href={insta.url} class="link-arrow" target="_blank" rel="noopener" data-reveal>
+          <Icon name="instagram" size={18} />
+          {f(t.home.instagram.follow)}
+          <Icon name="arrow-up-right" size={16} />
+        </a>
+      </div>
+      <ul class="insta-grid">
+        {images.map((g, i) => (
+          <li data-reveal style={`--i:${i % 3}`}>
+            <a href={insta.url} target="_blank" rel="noopener" class="insta-tile zoom-on-hover">
+              <Picture
+                src={g.image}
+                alt={g.alt}
+                widths={[200, 320, 480]}
+                sizes="(min-width: 48rem) 16vw, 33vw"
+                aspect={1}
+              />
+              <span class="insta-hover" aria-hidden="true">
+                <Icon name="instagram" size={22} />
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}
+
+<style>
+  .insta-head {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  @media (min-width: 48rem) {
+    .insta-head {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+  }
+  .insta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.4rem;
+    margin-top: 2.5rem;
+  }
+  @media (min-width: 48rem) {
+    .insta-grid {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 0.6rem;
+    }
+  }
+  .insta-tile {
+    position: relative;
+    display: block;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: calc(var(--bb-radius-card) * 0.6);
+    background: var(--bb-bg-alt);
+  }
+  .insta-hover {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    background: rgb(var(--bb-scrim) / 0.35);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .insta-tile:hover .insta-hover,
+  .insta-tile:focus-visible .insta-hover {
+    opacity: 1;
+  }
+</style>

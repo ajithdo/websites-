@@ -1,0 +1,117 @@
+---
+import Icon from '~/components/ui/Icon.astro';
+import Picture from '~/components/ui/Picture.astro';
+import SectionHeading from '~/components/ui/SectionHeading.astro';
+import { site } from '~/config/site';
+import { getDictionary, localizePath, lt, type Lang } from '~/i18n';
+import { formatINRRange } from '~/lib/format';
+import { estimateCake, type Pricing } from '~/lib/pricing';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDictionary(lang);
+const b = t.home.builder;
+const photo = site.home.builderTeaserImage;
+// A real estimate from the live pricing rules: premium, 1.5 kg, semi-custom.
+const sample = estimateCake(
+  { tier: 'premium', sizeKg: 1.5, style: 'semi-custom', eggless: false, shape: 'round' },
+  site.cakeBuilder.pricing as Pricing,
+);
+const rows = [
+  [t.builder.steps.occasion.label, b.previewOccasion],
+  [t.builder.steps.flavour.label, b.previewFlavour],
+  [t.builder.steps.size.label, b.previewSize],
+  [t.builder.steps.design.label, b.previewDesign],
+];
+---
+
+<section class="section builder-teaser" aria-labelledby="builder-teaser-title">
+  <div class="container-x builder-grid">
+    <div class="builder-copy">
+      <SectionHeading id="builder-teaser-title" eyebrow={b.eyebrow} title={b.title} lede={b.body}>
+        <div class="mt-9">
+          <a href={localizePath('/custom-cakes/', lang)} class="btn" data-magnetic>
+            {b.cta}
+            <Icon name="arrow-right" size={18} />
+          </a>
+        </div>
+      </SectionHeading>
+    </div>
+
+    <div class="builder-visual">
+      <div class="builder-photo arch" data-reveal="clip">
+        <Picture
+          src={photo.src}
+          alt={lt(photo.alt, lang)}
+          widths={[480, 720, 960, 1200]}
+          sizes="(min-width: 64rem) 40vw, 86vw"
+          aspect={4 / 5}
+        />
+      </div>
+      <div class="ticket builder-ticket" data-reveal style="--i:3" aria-hidden="true">
+        <p class="ticket-title">
+          <span>{t.builder.summaryCard.title}</span>
+          <Icon name="cake" size={16} />
+        </p>
+        <dl class="ticket-rows">
+          {rows.map(([k, v]) => (
+            <div class="ticket-row">
+              <dt>{k}</dt>
+              <dd>{v}</dd>
+            </div>
+          ))}
+        </dl>
+        {sample && (
+          <div class="ticket-total">
+            <span class="text-sm text-ink-muted">{b.previewEstimate}</span>
+            <strong>{formatINRRange(sample.low, sample.high)}</strong>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .builder-grid {
+    display: grid;
+    gap: 3.5rem;
+  }
+  @media (min-width: 64rem) {
+    .builder-grid {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      align-items: center;
+    }
+    .builder-copy {
+      grid-column: 1 / span 5;
+    }
+    .builder-visual {
+      grid-column: 7 / span 6;
+    }
+  }
+  .builder-visual {
+    position: relative;
+    padding-left: 12%;
+    padding-bottom: 3rem;
+  }
+  .builder-photo {
+    aspect-ratio: 4 / 5;
+    background: var(--bb-bg-alt);
+  }
+  .builder-ticket {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: min(20rem, 88%);
+    rotate: -3deg;
+  }
+  @media (min-width: 64rem) {
+    .builder-ticket {
+      left: -2rem;
+      bottom: 2rem;
+    }
+  }
+</style>

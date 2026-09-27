@@ -1,0 +1,156 @@
+---
+import Icon from '~/components/ui/Icon.astro';
+import Picture from '~/components/ui/Picture.astro';
+import SectionHeading from '~/components/ui/SectionHeading.astro';
+import { site } from '~/config/site';
+import { markHandle, markLoops } from '~/lib/brand-mark';
+import { getDictionary, localizePath, lt, type Lang } from '~/i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDictionary(lang);
+const [main, inset] = site.home.storyImages;
+const stampText =
+  lang === 'te'
+    ? 'ప్రతి ఉదయం తాజాగా · చేతితో తయారు · '
+    : 'BAKED FRESH EVERY MORNING · MADE BY HAND · ';
+---
+
+<section class="section band-secondary story" aria-labelledby="story-title">
+  <div class="container-x story-grid">
+    <div class="story-media">
+      <div class="story-main arch" data-reveal="clip">
+        <Picture
+          src={main.src}
+          alt={lt(main.alt, lang)}
+          widths={[400, 600, 800, 1000]}
+          sizes="(min-width: 64rem) 34vw, 72vw"
+          aspect={3 / 4}
+        />
+      </div>
+      <div class="story-inset" data-reveal="clip" style="--i:3">
+        <Picture
+          src={inset.src}
+          alt={lt(inset.alt, lang)}
+          widths={[300, 450, 600]}
+          sizes="(min-width: 64rem) 20vw, 44vw"
+          aspect={1}
+        />
+      </div>
+      <svg class="story-stamp" viewBox="0 0 120 120" aria-hidden="true">
+        <defs>
+          <path id="stamp-circle" d="M60 60 m-44 0 a44 44 0 1 1 88 0 a44 44 0 1 1 -88 0"></path>
+        </defs>
+        <circle cx="60" cy="60" r="57" fill="var(--bb-bg)"></circle>
+        <circle
+          cx="60"
+          cy="60"
+          r="31"
+          fill="none"
+          stroke="var(--bb-accent)"
+          stroke-width="0.8"
+        ></circle>
+        <text class="story-stamp-text">
+          <textPath href="#stamp-circle">{stampText.repeat(2)}</textPath>
+        </text>
+        <g
+          transform="translate(45.6 44) scale(0.45)"
+          fill="none"
+          stroke="var(--bb-ink)"
+          stroke-width="2.4"
+          stroke-linecap="round"
+        >
+          {markLoops.map((d, i) => (
+            <path d={d} stroke={i === 2 ? 'var(--bb-accent-ink)' : 'var(--bb-ink)'} />
+          ))}
+          <path d={markHandle} stroke-width="4.8" />
+        </g>
+      </svg>
+    </div>
+
+    <div class="story-copy">
+      <SectionHeading
+        id="story-title"
+        eyebrow={t.home.story.eyebrow}
+        title={t.home.story.title}
+        lede={t.home.story.body}
+      >
+        <a href={localizePath('/about/', lang)} class="link-arrow mt-8 self-start">
+          {t.cta.readStory}
+          <Icon name="arrow-right" size={18} />
+        </a>
+      </SectionHeading>
+    </div>
+  </div>
+</section>
+
+<style>
+  .story-grid {
+    display: grid;
+    gap: 4rem;
+  }
+  @media (min-width: 64rem) {
+    .story-grid {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      align-items: center;
+    }
+    .story-media {
+      grid-column: 1 / span 6;
+    }
+    .story-copy {
+      grid-column: 8 / span 5;
+    }
+  }
+  .story-media {
+    position: relative;
+    padding-right: 22%;
+    padding-bottom: 14%;
+  }
+  .story-main {
+    aspect-ratio: 3 / 4;
+    background: var(--bb-bg-alt);
+  }
+  .story-inset {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 46%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border: 6px solid var(--bb-surface);
+    border-radius: var(--bb-radius-card);
+    rotate: 3deg;
+    box-shadow: 0 24px 40px -24px rgb(20 12 8 / 0.5);
+  }
+  .story-stamp {
+    position: absolute;
+    left: -0.5rem;
+    top: -2rem;
+    width: clamp(5.5rem, 4rem + 6vw, 8rem);
+    height: auto;
+  }
+  .story-stamp-text {
+    font-family: var(--font-sans);
+    font-size: 8.4px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    fill: var(--bb-ink);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .story-stamp text {
+      transform-origin: 60px 60px;
+      animation: stamp-spin 40s linear infinite;
+    }
+  }
+  @keyframes stamp-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .story :global(.lede) {
+    color: var(--bb-on-secondary-muted);
+  }
+</style>

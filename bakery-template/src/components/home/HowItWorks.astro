@@ -1,0 +1,82 @@
+---
+import SectionHeading from '~/components/ui/SectionHeading.astro';
+import { getDictionary, makeFormatter, type Lang } from '~/i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDictionary(lang);
+const f = makeFormatter(lang);
+---
+
+<section class="section band-inverse how" aria-labelledby="how-title">
+  <div class="container-x">
+    <SectionHeading id="how-title" eyebrow={t.home.how.eyebrow} title={t.home.how.title} />
+    <ol class="how-steps">
+      {t.home.how.steps.map((step, i) => (
+        <li class="how-step" data-reveal style={`--i:${i}`}>
+          <span class="how-num font-display" aria-hidden="true">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <h3 class="how-title font-display">{step.title}</h3>
+          <p class="how-body">{f(step.body)}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .how-steps {
+    display: grid;
+    gap: 0;
+    margin-top: clamp(2.5rem, 2rem + 3vw, 5rem);
+    counter-reset: step;
+  }
+  .how-step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 4.25rem 1fr;
+    column-gap: 1rem;
+    padding-block: 1.75rem;
+    border-top: 1px solid color-mix(in srgb, var(--bb-on-inverse) 18%, transparent);
+  }
+  .how-num {
+    grid-row: span 2;
+    font-size: calc(2.75rem * var(--bb-heading-scale));
+    line-height: 0.9;
+    font-style: italic;
+    color: var(--bb-accent-on-inverse);
+  }
+  .how-title {
+    font-size: calc(1.35rem * var(--bb-heading-scale));
+    line-height: 1.2;
+  }
+  .how-body {
+    margin-top: 0.5rem;
+    color: var(--bb-on-inverse-muted);
+    max-width: 30rem;
+  }
+  @media (min-width: 64rem) {
+    .how-steps {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .how-step {
+      grid-template-columns: 1fr;
+      padding: 0 1.75rem 0.5rem;
+      border-top: 0;
+      border-left: 1px solid color-mix(in srgb, var(--bb-on-inverse) 18%, transparent);
+    }
+    .how-step:first-child {
+      padding-left: 0;
+      border-left: 0;
+    }
+    .how-num {
+      grid-row: auto;
+      font-size: calc(4.5rem * var(--bb-heading-scale));
+      margin-bottom: 1.5rem;
+    }
+  }
+</style>

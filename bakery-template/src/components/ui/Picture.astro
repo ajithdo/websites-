@@ -1,0 +1,67 @@
+---
+/**
+ * Responsive photo from a slot path (src/assets/images/<path>): AVIF + WebP
+ * sources, explicit width/height (no layout shift), lazy by default, and an
+ * optional blur-up placeholder painted behind the image while it loads.
+ */
+import { Picture as AstroPicture } from 'astro:assets';
+import { img, lqip } from '~/lib/images';
+
+interface Props {
+  src: string;
+  alt: string;
+  /** Candidate widths for srcset. */
+  widths: number[];
+  sizes: string;
+  /** Crop to this aspect ratio (width / height). Omit to keep the photo's shape. */
+  aspect?: number;
+  /** Above-the-fold image: eager, high fetch priority. */
+  priority?: boolean;
+  /** CSS object-position. */
+  position?: string;
+  blur?: boolean;
+  quality?: number;
+  class?: string;
+  imgClass?: string;
+}
+
+const {
+  src,
+  alt,
+  widths,
+  sizes,
+  aspect,
+  priority = false,
+  position,
+  blur = true,
+  quality = 70,
+  class: className,
+  imgClass,
+} = Astro.props;
+
+const meta = img(src);
+const usable = widths.filter((w) => w <= meta.width);
+const width = Math.min(Math.max(...widths), meta.width);
+const height = aspect ? Math.round(width / aspect) : Math.round((width * meta.height) / meta.width);
+const placeholder = blur && !priority ? await lqip(src) : undefined;
+---
+
+<AstroPicture
+  src={meta}
+  alt={alt}
+  widths={usable.length ? usable : [width]}
+  sizes={sizes}
+  width={width}
+  height={height}
+  formats={['avif', 'webp']}
+  fallbackFormat="jpg"
+  fit="cover"
+  {...position ? { position } : {}}
+  quality={quality}
+  priority={priority}
+  class:list={['bb-img', imgClass]}
+  pictureAttributes={{
+    class: ['bb-picture', className].filter(Boolean).join(' '),
+    style: placeholder ? `background-image:url(${placeholder})` : undefined,
+  }}
+/>

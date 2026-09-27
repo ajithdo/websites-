@@ -563,3 +563,143 @@
   animation-duration: 0.6s;
   animation-timing-function: var(--ease);
 }
+
+/* Photos: blur-up placeholder behind the image, and hover zoom on fine pointers. */
+.bb-picture {
+  display: block;
+  background-size: cover;
+  background-position: center;
+}
+.bb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .zoom-on-hover .bb-img {
+    transition: transform 1.1s var(--ease);
+  }
+  .zoom-on-hover:hover .bb-img {
+    transform: scale(1.05);
+  }
+}
+
+/* The order ticket: a receipt-like card that previews the WhatsApp order. */
+.ticket {
+  --notch: 7px;
+  position: relative;
+  padding: 1.5rem 1.4rem 1.35rem;
+  background: var(--bb-surface);
+  color: var(--bb-ink);
+  border-radius: 4px;
+  mask:
+    radial-gradient(circle at 50% 0, transparent var(--notch), #000 calc(var(--notch) + 0.5px))
+      top / calc(var(--notch) * 3.2) 51% repeat-x,
+    radial-gradient(circle at 50% 100%, transparent var(--notch), #000 calc(var(--notch) + 0.5px))
+      bottom / calc(var(--notch) * 3.2) 51% repeat-x;
+  filter: drop-shadow(0 18px 28px rgb(20 12 8 / 0.18)) drop-shadow(0 1px 1px rgb(20 12 8 / 0.08));
+}
+:root[data-theme='cocoa'] .ticket {
+  filter: drop-shadow(0 18px 28px rgb(0 0 0 / 0.5));
+}
+.ticket-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px dashed var(--bb-line-strong);
+  font-size: 0.6875rem;
+  font-weight: 750;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bb-accent-ink);
+}
+.ticket-rows {
+  display: grid;
+  gap: 0.55rem;
+  padding-block: 1rem;
+  font-size: 0.9375rem;
+}
+.ticket-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.ticket-row dt {
+  color: var(--bb-ink-muted);
+}
+.ticket-row dd {
+  font-weight: 650;
+  text-align: right;
+}
+.ticket-total {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  padding-top: 0.9rem;
+  border-top: 1px dashed var(--bb-line-strong);
+}
+.ticket-total strong {
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-weight: var(--bb-heading-weight);
+  font-size: calc(1.5rem * var(--bb-heading-scale));
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* Small labels */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  background: var(--bb-surface);
+  color: var(--bb-ink);
+  font-size: 0.6875rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.12);
+}
+.badge-accent {
+  background: var(--bb-accent);
+  color: var(--bb-on-accent);
+}
+.sample-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.55rem;
+  border: 1px solid var(--bb-line-strong);
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bb-ink-muted);
+  white-space: nowrap;
+}
+
+/* Horizontal scroll tracks (carousels) */
+.track {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 1rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  padding-inline: var(--gutter);
+  scroll-padding-inline: var(--gutter);
+  scrollbar-width: none;
+}
+.track::-webkit-scrollbar {
+  display: none;
+}
+.track > * {
+  scroll-snap-align: start;
+}

@@ -1,0 +1,79 @@
+---
+import Icon from '~/components/ui/Icon.astro';
+import SectionHeading from '~/components/ui/SectionHeading.astro';
+import HoursTable from '~/components/visit/HoursTable.astro';
+import MapFacade from '~/components/visit/MapFacade.astro';
+import OpenStatus from '~/components/visit/OpenStatus.astro';
+import { site } from '~/config/site';
+import { getDictionary, type Lang } from '~/i18n';
+import { directionsHref, telHref } from '~/lib/links';
+
+interface Props {
+  lang: Lang;
+  headingLevel?: 'h1' | 'h2';
+  title?: string;
+  eyebrow?: string;
+}
+
+const { lang, headingLevel = 'h2', title, eyebrow } = Astro.props;
+const t = getDictionary(lang);
+const a = site.contact.address;
+---
+
+<section id="visit" class="section bg-bg-alt" aria-labelledby="visit-title">
+  <div class="container-x visit-grid">
+    <div class="visit-map" data-reveal>
+      <MapFacade lang={lang} />
+    </div>
+    <div class="visit-info">
+      <SectionHeading
+        id="visit-title"
+        as={headingLevel}
+        eyebrow={eyebrow ?? t.home.visit.eyebrow}
+        title={title ?? t.home.visit.title}
+        size="md"
+      />
+      <OpenStatus lang={lang} class="mt-6" />
+      <div class="mt-6" data-reveal>
+        <p class="text-sm font-semibold text-ink-muted">{t.home.visit.addressLabel}</p>
+        <address class="mt-1 not-italic">
+          <span data-brand-name>{site.brand.name}</span>, {a.street}
+          <br />
+          {a.locality} {a.postalCode}, {a.region}
+        </address>
+      </div>
+      <div class="mt-6 flex flex-wrap gap-3" data-reveal>
+        <a href={directionsHref} class="btn" target="_blank" rel="noopener">
+          <Icon name="navigation" size={18} />
+          {t.cta.getDirections}
+        </a>
+        <a href={telHref} class="btn btn-outline">
+          <Icon name="phone" size={18} />
+          {t.cta.call}
+        </a>
+      </div>
+      <HoursTable lang={lang} class="mt-8" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .visit-grid {
+    display: grid;
+    gap: 3rem;
+  }
+  @media (min-width: 64rem) {
+    .visit-grid {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      align-items: start;
+    }
+    .visit-map {
+      grid-column: 1 / span 7;
+      position: sticky;
+      top: calc(var(--header-h) + 2rem);
+    }
+    .visit-info {
+      grid-column: 9 / span 4;
+    }
+  }
+</style>

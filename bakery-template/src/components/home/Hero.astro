@@ -1,0 +1,430 @@
+---
+import Icon from '~/components/ui/Icon.astro';
+import Picture from '~/components/ui/Picture.astro';
+import { site } from '~/config/site';
+import { getDictionary, localizePath, lt, makeFormatter, type Lang } from '~/i18n';
+import { formatINR } from '~/lib/format';
+import type { HeroSources } from '~/lib/images';
+import type { MenuItem } from '~/lib/menu';
+
+interface Props {
+  lang: Lang;
+  sources: HeroSources;
+  card: MenuItem;
+}
+
+const { lang, sources, card } = Astro.props;
+const t = getDictionary(lang);
+const f = makeFormatter(lang);
+const href = (p: string) => localizePath(p, lang);
+const demo = site.features.demoMode;
+const rating = site.googleRating;
+const showRating = rating && (demo || rating.url);
+const cardPrice = card.variants ? card.variants[0]!.price : (card.price ?? 0);
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-media" aria-hidden="false">
+    <div class="hero-kenburns">
+      <picture>
+        {sources.mobile && (
+          <>
+            <source
+              media="(max-width: 47.99rem)"
+              type="image/avif"
+              srcset={sources.mobile.avif}
+              sizes="100vw"
+            />
+            <source
+              media="(max-width: 47.99rem)"
+              type="image/webp"
+              srcset={sources.mobile.webp}
+              sizes="100vw"
+            />
+          </>
+        )}
+        <source type="image/avif" srcset={sources.desktop.avif} sizes="100vw" />
+        <source type="image/webp" srcset={sources.desktop.webp} sizes="100vw" />
+        <img
+          src={sources.desktop.fallback}
+          width={sources.desktop.width}
+          height={sources.desktop.height}
+          alt={lt(site.hero.alt, lang)}
+          fetchpriority="high"
+          loading="eager"
+          decoding="async"
+          class="hero-img"
+          style={`--pos:${site.hero.position};--pos-m:${site.hero.mobilePosition}`}
+        />
+      </picture>
+    </div>
+    {site.hero.video && (
+      <video
+        class="hero-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="none"
+        poster={sources.desktop.fallback}
+        aria-hidden="true"
+      >
+        <source src={site.hero.video} type="video/mp4" />
+      </video>
+    )}
+    <div class="hero-scrim" aria-hidden="true"></div>
+  </div>
+
+  <div class="container-x hero-content">
+    <div class="hero-copy">
+      <p class="hero-eyebrow">
+        <span data-brand-name>{site.brand.name}</span>
+        <span aria-hidden="true">·</span>
+        <span>{lt(site.brand.descriptor, lang)}</span>
+      </p>
+      <h1 id="hero-title" class="text-display-xl hero-title">
+        <span class="hero-line">{t.home.hero.titleLead}</span>
+        <span class="hero-line">
+          <em>{t.home.hero.titleAccent}</em> {t.home.hero.titleTail}
+        </span>
+      </h1>
+      <p class="hero-sub">{f(t.home.hero.subtitle)}</p>
+      <div class="hero-ctas">
+        {site.features.cakeBuilder && (
+          <a href={href('/custom-cakes/')} class="btn" data-magnetic>
+            {t.cta.designCake}
+            <Icon name="arrow-right" size={18} />
+          </a>
+        )}
+        <a href={href('/menu/')} class="btn btn-light">
+          {t.cta.exploreMenu}
+        </a>
+      </div>
+      <ul class="hero-trust">
+        {showRating && rating && (
+          <li>
+            <Icon name="star" size={16} />
+            <span class="tabular">{f(t.home.hero.trustRating, { value: rating.value })}</span>
+            {demo && (
+              <span class="sample-tag" title={t.demo.sampleRating} data-demo="sample">
+                {t.demo.sample}
+              </span>
+            )}
+          </li>
+        )}
+        <li>
+          <Icon name="egg-off" size={16} />
+          <span>{t.home.hero.trustEggless}</span>
+        </li>
+        <li>
+          <Icon name="croissant" size={16} />
+          <span>{t.home.hero.trustSameDay}</span>
+        </li>
+      </ul>
+    </div>
+
+    <a
+      href={href(`/menu/#${card.id}`)}
+      class="hero-card shadow-soft"
+      aria-label={`${t.home.hero.cardLabel}: ${card.name}`}
+    >
+      <Picture
+        src={card.image}
+        alt=""
+        widths={[240, 360, 480]}
+        sizes="240px"
+        aspect={1}
+        class="hero-card-img"
+        blur={false}
+      />
+      <span class="hero-card-body">
+        <span class="hero-card-label">{t.home.hero.cardLabel}</span>
+        <span class="hero-card-name font-display">{card.name}</span>
+        <span class="hero-card-meta">
+          <span>{t.home.hero.cardNote}</span>
+          <span class="tabular">{formatINR(cardPrice)}</span>
+        </span>
+      </span>
+    </a>
+  </div>
+
+  <div class="hero-scroll" aria-hidden="true">
+    <span>{t.home.hero.scrollHint}</span>
+    <span class="hero-scroll-line"></span>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: flex-end;
+    min-height: 88svh;
+    color: #fff;
+    overflow: hidden;
+  }
+  @media (min-width: 48rem) {
+    .hero {
+      min-height: min(94svh, 62rem);
+    }
+  }
+  .hero-media {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgb(var(--bb-scrim));
+  }
+  .hero-kenburns,
+  .hero-kenburns picture,
+  .hero-video {
+    position: absolute;
+    inset: 0;
+  }
+  .hero-img,
+  .hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--pos-m, 50% 50%);
+  }
+  @media (min-width: 48rem) {
+    .hero-img {
+      object-position: var(--pos, 50% 50%);
+    }
+  }
+  .hero-scrim {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        to top,
+        rgb(var(--bb-scrim) / 0.9) 0%,
+        rgb(var(--bb-scrim) / 0.55) 38%,
+        rgb(var(--bb-scrim) / 0) 68%
+      ),
+      linear-gradient(to bottom, rgb(var(--bb-scrim) / 0.5) 0%, rgb(var(--bb-scrim) / 0) 24%);
+  }
+  @media (min-width: 64rem) {
+    .hero-scrim {
+      background:
+        linear-gradient(
+          100deg,
+          rgb(var(--bb-scrim) / 0.82) 0%,
+          rgb(var(--bb-scrim) / 0.45) 42%,
+          rgb(var(--bb-scrim) / 0) 70%
+        ),
+        linear-gradient(to bottom, rgb(var(--bb-scrim) / 0.45) 0%, rgb(var(--bb-scrim) / 0) 22%);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-kenburns {
+      animation: kenburns 26s ease-in-out infinite alternate;
+    }
+    @supports (animation-timeline: scroll()) {
+      .hero-media {
+        animation: hero-parallax linear both;
+        animation-timeline: scroll(root);
+        animation-range: 0 100vh;
+      }
+    }
+  }
+  @keyframes kenburns {
+    from {
+      transform: scale(1.02);
+    }
+    to {
+      transform: scale(1.1) translate3d(-1.2%, -1%, 0);
+    }
+  }
+  @keyframes hero-parallax {
+    to {
+      transform: translate3d(0, 18%, 0);
+    }
+  }
+
+  .hero-content {
+    position: relative;
+    padding-top: calc(var(--header-h) + 3rem);
+    padding-bottom: clamp(2.5rem, 2rem + 4vw, 5.5rem);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 3rem;
+  }
+  .hero-copy {
+    max-width: 44rem;
+  }
+  .hero-eyebrow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 650;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.86);
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 1.75rem;
+    height: 1px;
+    background: #e8c78a;
+  }
+  :lang(te) .hero-eyebrow {
+    letter-spacing: 0.02em;
+    font-size: 0.875rem;
+  }
+  .hero-title {
+    margin-top: 1.1rem;
+    color: #fff;
+    text-wrap: balance;
+  }
+  .hero-line {
+    display: block;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: #f0d9ad;
+  }
+  .hero-sub {
+    margin-top: 1.25rem;
+    max-width: 34rem;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: rgb(255 255 255 / 0.88);
+  }
+  @media (min-width: 64rem) {
+    .hero-sub {
+      font-size: 1.1875rem;
+    }
+  }
+  .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+  .hero-trust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.25rem;
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgb(255 255 255 / 0.22);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: rgb(255 255 255 / 0.9);
+  }
+  .hero-trust li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+  .hero-trust :global(svg) {
+    color: #e8c78a;
+  }
+  .sample-tag {
+    padding: 0.1rem 0.45rem;
+    border: 1px solid rgb(255 255 255 / 0.5);
+    border-radius: 999px;
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .hero-card {
+    display: none;
+  }
+  @media (min-width: 64rem) {
+    .hero-card {
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      width: 15.5rem;
+      margin-bottom: 0.5rem;
+      padding: 0.75rem 0.75rem 1.1rem;
+      background: var(--bb-surface);
+      color: var(--bb-ink);
+      border-radius: calc(var(--bb-radius-card) + 4px);
+      text-decoration: none;
+      transform: rotate(2.5deg);
+      transition: transform 0.7s var(--ease);
+    }
+    .hero-card:hover {
+      transform: rotate(0deg) translateY(-4px);
+    }
+  }
+  .hero-card :global(.hero-card-img) {
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: var(--bb-radius-card);
+  }
+  .hero-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.9rem 0.35rem 0;
+  }
+  .hero-card-label {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--bb-accent-ink);
+  }
+  .hero-card-name {
+    font-size: 1.35rem;
+    line-height: 1.15;
+  }
+  .hero-card-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: 0.35rem;
+    font-size: 0.8125rem;
+    color: var(--bb-ink-muted);
+  }
+
+  .hero-scroll {
+    display: none;
+  }
+  @media (min-width: 64rem) and (prefers-reduced-motion: no-preference) {
+    .hero-scroll {
+      position: absolute;
+      left: 50%;
+      bottom: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.6875rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgb(255 255 255 / 0.7);
+      translate: -50% 0;
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 2.5rem;
+      background: linear-gradient(to bottom, rgb(255 255 255 / 0.8), transparent);
+      animation: scroll-line 2.4s var(--ease) infinite;
+      transform-origin: top;
+    }
+  }
+  @keyframes scroll-line {
+    0% {
+      transform: scaleY(0);
+    }
+    50% {
+      transform: scaleY(1);
+    }
+    100% {
+      transform: scaleY(1);
+      opacity: 0;
+    }
+  }
+</style>

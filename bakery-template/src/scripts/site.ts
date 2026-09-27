@@ -3,9 +3,12 @@
  * Each feature is small and independent; everything degrades to plain HTML.
  */
 import { initAnnouncement } from './announcement';
+import { initCarousels } from './carousel';
 import { initHeader } from './header';
+import { initIntro } from './intro';
 import { initLangSwitch } from './lang';
 import { initMagnetic } from './magnetic';
+import { initMapFacades } from './map-facade';
 import { initMobileMenu } from './mobile-menu';
 import { initOpenStatus } from './open-status';
 import { initDemoPreview } from './preview';
@@ -14,6 +17,7 @@ import { initSmoothScroll } from './smooth-scroll';
 
 const root = document.documentElement;
 
+initIntro(root);
 initDemoPreview(root);
 initReveal();
 initHeader();
@@ -22,4 +26,6 @@ initOpenStatus();
 initAnnouncement();
 initLangSwitch();
 initMagnetic();
+initCarousels();
+initMapFacades();
 initSmoothScroll(root);

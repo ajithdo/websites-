@@ -1,0 +1,159 @@
+---
+import Icon from '~/components/ui/Icon.astro';
+import Picture from '~/components/ui/Picture.astro';
+import SectionHeading from '~/components/ui/SectionHeading.astro';
+import { site } from '~/config/site';
+import { getDictionary, localizePath, lt, type Lang } from '~/i18n';
+import { whatsappHref } from '~/lib/links';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDictionary(lang);
+const tiles = site.occasions.filter((o) => o.tile && o.image);
+const tileHref = (id: string) =>
+  site.features.cakeBuilder
+    ? localizePath(`/custom-cakes/?occasion=${id}`, lang)
+    : whatsappHref(
+        `Hi ${site.brand.name}! I'd like to order a cake for a ${id.replace('-', ' ')}.`,
+      );
+---
+
+<section class="section" aria-labelledby="occasions-title">
+  <div class="container-x">
+    <SectionHeading
+      id="occasions-title"
+      eyebrow={t.home.occasions.eyebrow}
+      title={t.home.occasions.title}
+    />
+    <ul class="occasion-grid">
+      {tiles.map((o, i) => (
+        <li data-reveal style={`--i:${i % 3}`}>
+          <a href={tileHref(o.id)} class="occasion-tile zoom-on-hover">
+            <Picture
+              src={o.image!.src}
+              alt={lt(o.image!.alt, lang)}
+              widths={[300, 450, 600, 800]}
+              sizes="(min-width: 64rem) 30vw, (min-width: 40rem) 45vw, 46vw"
+              aspect={4 / 5}
+              class="occasion-media"
+            />
+            <span class="occasion-shade" aria-hidden="true" />
+            <span class="occasion-text">
+              <span class="occasion-title font-display">{t.occasions[o.id].tile}</span>
+              <span class="occasion-more">
+                <span class="occasion-more-inner">
+                  <span class="occasion-line">{t.occasions[o.id].line}</span>
+                  <span class="occasion-cta">
+                    {t.home.occasions.tileCta}
+                    <Icon name="arrow-right" size={16} />
+                  </span>
+                </span>
+              </span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .occasion-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin-top: clamp(2.5rem, 2rem + 2vw, 4rem);
+  }
+  @media (min-width: 64rem) {
+    .occasion-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+  }
+  .occasion-tile {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: var(--bb-radius-card);
+    color: #fff;
+    text-decoration: none;
+    isolation: isolate;
+    background: var(--bb-bg-alt);
+  }
+  .occasion-tile :global(.occasion-media) {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+  }
+  .occasion-shade {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      to top,
+      rgb(var(--bb-scrim) / 0.82) 0%,
+      rgb(var(--bb-scrim) / 0.2) 48%,
+      transparent 70%
+    );
+    transition: background-color 0.6s var(--ease);
+  }
+  .occasion-text {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: clamp(0.9rem, 0.6rem + 1.4vw, 1.75rem);
+  }
+  .occasion-title {
+    font-size: calc(clamp(1.15rem, 0.9rem + 1.2vw, 2rem) * var(--bb-heading-scale));
+    line-height: 1.1;
+  }
+  .occasion-more {
+    display: grid;
+    font-size: 0.8125rem;
+    color: rgb(255 255 255 / 0.9);
+  }
+  .occasion-more-inner {
+    display: grid;
+    gap: 0.5rem;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .occasion-line {
+    display: none;
+  }
+  .occasion-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 700;
+  }
+  @media (min-width: 40rem) {
+    .occasion-line {
+      display: block;
+    }
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .occasion-more {
+      grid-template-rows: 0fr;
+      opacity: 0;
+      transition:
+        grid-template-rows 0.6s var(--ease),
+        opacity 0.4s ease;
+    }
+    .occasion-tile:hover .occasion-more,
+    .occasion-tile:focus-visible .occasion-more {
+      grid-template-rows: 1fr;
+      opacity: 1;
+    }
+    .occasion-tile:hover .occasion-shade {
+      background-color: rgb(var(--bb-scrim) / 0.18);
+    }
+  }
+</style>

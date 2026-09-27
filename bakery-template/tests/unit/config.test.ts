@@ -21,10 +21,15 @@ describe('site config', () => {
     const paths = [
       site.hero.image,
       site.hero.mobileImage,
-      ...site.home.storyImages,
-      site.home.builderTeaserImage,
-      ...site.occasions.map((o) => o.image),
+      ...site.home.storyImages.map((p) => p.src),
+      site.home.builderTeaserImage.src,
+      ...site.occasions.map((o) => o.image?.src),
       ...site.cakeBuilder.flavours.map((f) => f.image),
+      site.about.hero.src,
+      ...site.about.strip.map((p) => p.src),
+      site.about.hands.src,
+      site.contactPage.corporateImage.src,
+      site.notFoundImage.src,
     ].filter((p): p is string => Boolean(p));
     expect(paths.filter((p) => !existsSync(join('src/assets/images', p)))).toEqual([]);
   });

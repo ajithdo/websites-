@@ -35,6 +35,8 @@ export default defineConfig(
       globals: { ...globals.browser, ...globals.node },
     },
     rules: {
+      // Scrollable regions (carousels, cart lists) must be focusable for keyboard scrolling.
+      'astro/jsx-a11y/no-noninteractive-tabindex': ['error', { roles: ['tabpanel', 'region'] }],
       '@typescript-eslint/no-unused-vars': [
         'error',
         { argsIgnorePattern: '^_', varsIgnorePattern: '^_', caughtErrors: 'none' },

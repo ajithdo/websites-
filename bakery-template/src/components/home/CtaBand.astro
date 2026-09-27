@@ -1,0 +1,65 @@
+---
+import Icon from '~/components/ui/Icon.astro';
+import { site } from '~/config/site';
+import { getDictionary, type Lang } from '~/i18n';
+import { markDot, markHandle, markLoops } from '~/lib/brand-mark';
+import { whatsappHref } from '~/lib/links';
+import { openers } from '~/lib/whatsapp';
+
+interface Props {
+  lang: Lang;
+}
+
+const t = getDictionary(Astro.props.lang);
+---
+
+<section class="section band-secondary cta-band" aria-labelledby="cta-title">
+  <div class="container-x cta-inner" data-reveal>
+    <svg class="cta-mark" viewBox="0 0 64 64" width="56" height="56" aria-hidden="true">
+      <g fill="none" stroke-linecap="round" stroke-width="1.6">
+        {markLoops.map((d, i) => (
+          <path d={d} stroke={i === 2 ? 'var(--bb-accent-ink)' : 'var(--bb-on-secondary)'} />
+        ))}
+        <path d={markHandle} stroke="var(--bb-on-secondary)" stroke-width="3.4" />
+      </g>
+      <circle cx={markDot.cx} cy={markDot.cy} r={markDot.r} fill="var(--bb-accent-ink)"></circle>
+    </svg>
+    <h2 id="cta-title" class="text-display-lg cta-title">
+      {t.home.cta.title}
+    </h2>
+    <p class="lede cta-body">{t.home.cta.body}</p>
+    <a
+      href={whatsappHref(openers.celebration(site.brand.name))}
+      class="btn btn-ink cta-btn"
+      target="_blank"
+      rel="noopener"
+      data-magnetic
+    >
+      <Icon name="whatsapp" size={20} />
+      {t.home.cta.button}
+    </a>
+  </div>
+</section>
+
+<style>
+  .cta-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .cta-title {
+    margin-top: 1.75rem;
+    max-width: 16ch;
+  }
+  .cta-body {
+    margin-top: 1.25rem;
+    text-align: center;
+  }
+  .cta-btn {
+    margin-top: 2.25rem;
+    min-height: 3.5rem;
+    padding-inline: 1.75rem;
+    font-size: 1rem;
+  }
+</style>

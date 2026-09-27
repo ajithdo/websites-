@@ -1,0 +1,126 @@
+---
+/**
+ * Map placeholder that swaps in the Google Maps embed (no API key) when it
+ * scrolls into view or is tapped. Keeps the heavy iframe and its third-party
+ * cookies off the initial page load.
+ */
+import Icon from '~/components/ui/Icon.astro';
+import { markHandle, markLoops } from '~/lib/brand-mark';
+import { getDictionary, makeFormatter, type Lang } from '~/i18n';
+import { mapEmbedSrc } from '~/lib/links';
+
+interface Props {
+  lang: Lang;
+  class?: string;
+}
+
+const { lang, class: className } = Astro.props;
+const t = getDictionary(lang);
+const f = makeFormatter(lang);
+---
+
+<div
+  class:list={['map-facade', className]}
+  data-map-facade
+  data-src={mapEmbedSrc}
+  data-title={f(t.home.visit.mapLabel)}
+>
+  <svg
+    class="map-art"
+    viewBox="0 0 600 450"
+    preserveAspectRatio="xMidYMid slice"
+    aria-hidden="true"
+  >
+    <rect width="600" height="450" fill="var(--bb-bg-alt)"></rect>
+    <path
+      d="M40 330 C120 300 150 360 240 340 S380 250 460 280 S560 330 600 300 L600 450 L0 450 L0 350 Z"
+      fill="var(--bb-secondary)"
+      opacity="0.45"
+    ></path>
+    <g fill="none" stroke="var(--bb-line-strong)" stroke-linecap="round" opacity="0.55">
+      <path d="M-10 120 L610 150" stroke-width="10"></path>
+      <path d="M180 -10 L230 460" stroke-width="10"></path>
+      <path d="M420 -10 C400 120 440 260 390 460" stroke-width="7"></path>
+      <path d="M-10 250 L610 230" stroke-width="5"></path>
+      <path d="M90 -10 L60 460" stroke-width="4"></path>
+      <path d="M300 -10 L320 460" stroke-width="4"></path>
+      <path d="M520 -10 L540 460" stroke-width="4"></path>
+      <path d="M-10 60 L610 80" stroke-width="3"></path>
+      <path d="M-10 390 L610 370" stroke-width="3"></path>
+    </g>
+    <g
+      fill="none"
+      stroke="var(--bb-accent)"
+      stroke-width="3"
+      stroke-linecap="round"
+      stroke-dasharray="2 9"
+      opacity="0.9"
+    >
+      <path d="M205 330 C230 280 260 250 300 225"></path>
+    </g>
+  </svg>
+  <div class="map-pin" aria-hidden="true">
+    <svg viewBox="0 0 64 64" width="30" height="30">
+      <g fill="none" stroke-linecap="round" stroke-width="2.4">
+        {markLoops.map((d, i) => (
+          <path d={d} stroke={i === 2 ? 'var(--bb-accent)' : 'currentColor'} />
+        ))}
+        <path d={markHandle} stroke="currentColor" stroke-width="4.8" />
+      </g>
+    </svg>
+  </div>
+  <button type="button" class="btn btn-outline btn-sm map-load" data-map-load>
+    <Icon name="map-pin" size={16} />
+    {t.home.visit.mapLoad}
+  </button>
+  <p class="sr-only">{t.home.visit.mapNote}</p>
+</div>
+
+<style>
+  .map-facade {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: var(--bb-radius-card);
+    border: 1px solid var(--bb-line);
+    background: var(--bb-bg-alt);
+  }
+  .map-art {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .map-pin {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: grid;
+    place-items: center;
+    width: 4rem;
+    height: 4rem;
+    translate: -50% -60%;
+    border-radius: 999px 999px 999px 4px;
+    rotate: -45deg;
+    background: var(--bb-ink);
+    color: var(--bb-bg);
+    box-shadow: 0 14px 30px -12px rgb(0 0 0 / 0.5);
+  }
+  .map-pin svg {
+    rotate: 45deg;
+  }
+  .map-load {
+    position: absolute;
+    left: 50%;
+    bottom: 1rem;
+    translate: -50% 0;
+    background: var(--bb-surface);
+  }
+  .map-facade :global(iframe) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+</style>
