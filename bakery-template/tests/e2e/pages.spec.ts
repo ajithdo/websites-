@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
 
 test.beforeEach(async ({ page, context }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
@@ -39,8 +39,15 @@ test('contact enquiry validates, then opens WhatsApp with the message', async ({
   await expect(page).toHaveURL(/\/contact\/$/);
 });
 
+/** Islands drop their `ssr` attribute once hydrated. */
+const hydrated = (page: Page) =>
+  page.waitForFunction(
+    () => !document.querySelector('astro-island[ssr]:not([client="interaction"])'),
+  );
+
 test('gallery lightbox works with the keyboard and filters by occasion', async ({ page }) => {
   await page.goto('/gallery/');
+  await hydrated(page);
   await expect(page.locator('.gallery-item')).toHaveCount(21);
 
   const first = page.locator('.gallery-tile').first();
@@ -63,6 +70,7 @@ test('gallery lightbox works with the keyboard and filters by occasion', async (
   await expect(page.locator('.gallery-item')).toHaveCount(4);
   await expect(page).toHaveURL(/\?occasion=festive$/);
   await page.reload();
+  await hydrated(page);
   await expect(page.locator('.gallery-item')).toHaveCount(4);
   await expect(page.getByRole('button', { name: /^Festive/ })).toHaveAttribute(
     'aria-pressed',

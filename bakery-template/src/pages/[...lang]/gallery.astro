@@ -65,7 +65,8 @@ const config: GalleryConfig = {
   <PageHeader eyebrow={t.gallery.eyebrow} title={t.gallery.title} lede={t.gallery.intro} split />
 
   <section class="container-x gallery-section" aria-label={t.gallery.eyebrow}>
-    <GalleryBrowser client:idle items={items} labels={labels} config={config} />
+    {/* client:load, not idle: a tap before hydration would open the raw image file. */}
+    <GalleryBrowser client:load items={items} labels={labels} config={config} />
   </section>
 
   <CtaBand lang={lang} />

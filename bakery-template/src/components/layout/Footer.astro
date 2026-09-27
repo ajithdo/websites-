@@ -163,6 +163,9 @@ if (site.socials.youtube)
     z-index: 2;
     /* Room for the fixed phone action bar, inside the dark band. */
     padding-bottom: var(--action-bar-h);
+    /* Off-screen until the visitor scrolls near: skip its layout and fonts on load. */
+    content-visibility: auto;
+    contain-intrinsic-size: auto 42rem;
   }
   .site-footer :global(.band-inverse) {
     color: var(--bb-on-inverse);

@@ -26,3 +26,6 @@ Thumbs.db
 .vscode/*
 !.vscode/extensions.json
 .idea/
+
+# Raw Lighthouse reports (summary lives in docs/qa/lighthouse.md)
+docs/qa/lighthouse/

@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { defineConfig, fontProviders } from 'astro/config';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
@@ -13,6 +13,22 @@ import interactionDirective from './src/directives/integration';
  * one variant per style × subset, each with its unicode-range so browsers only
  * download what a page actually renders.
  */
+const RUPEE = 0x20b9;
+
+/** "U+20AD-20C0" without one code point → ["U+20AD-20B8", "U+20BA-20C0"]. */
+function withoutCodePoint(range: string, cp: number): string[] {
+  const [start = '', end = start] = range.trim().replace(/^U\+/i, '').split('-');
+  const from = parseInt(start, 16);
+  const to = parseInt(end, 16);
+  if (Number.isNaN(from) || cp < from || cp > to) return [range.trim()];
+  const hex = (n: number) => n.toString(16).toUpperCase().padStart(4, '0');
+  const span = (a: number, b: number) => (a === b ? `U+${hex(a)}` : `U+${hex(a)}-${hex(b)}`);
+  const parts: string[] = [];
+  if (from < cp) parts.push(span(from, cp - 1));
+  if (cp < to) parts.push(span(cp + 1, to));
+  return parts;
+}
+
 function fontsourceVariable(def: FontFamilyDef) {
   const dir = `./node_modules/@fontsource-variable/${def.slug}`;
   const unicode = JSON.parse(readFileSync(`${dir}/unicode.json`, 'utf8')) as Record<string, string>;
@@ -22,20 +38,34 @@ function fontsourceVariable(def: FontFamilyDef) {
   const wght = meta.variable?.wght;
   const weight = wght ? `${wght.min} ${wght.max}` : '400';
 
-  const variants = def.styles.flatMap((style) =>
-    def.subsets.map((subset) => {
+  const variants = def.styles.flatMap((style) => {
+    // A tiny "₹ only" file (npm run fonts:rupee) keeps prices from pulling in
+    // the whole extended-Latin file just for the rupee sign.
+    const rupee = `./src/assets/fonts/rupee/${def.slug}-${def.axes}-${style}.woff2`;
+    const hasRupee = def.subsets.includes('latin-ext') && existsSync(rupee);
+    const faces = def.subsets.map((subset) => {
       const range = unicode[subset];
       if (!range) throw new Error(`Font ${def.name}: subset "${subset}" not found in ${dir}`);
-      const [first, ...rest] = range.split(',');
+      const ranges = range.split(',').flatMap((r) => (hasRupee ? withoutCodePoint(r, RUPEE) : [r]));
       return {
         weight,
         style,
         display: 'swap' as const,
         src: [`${dir}/files/${def.slug}-${subset}-${def.axes}-${style}.woff2`] as [string],
-        unicodeRange: [first!, ...rest] as [string, ...string[]],
+        unicodeRange: ranges as [string, ...string[]],
       };
-    }),
-  );
+    });
+    if (hasRupee) {
+      faces.push({
+        weight,
+        style,
+        display: 'swap' as const,
+        src: [rupee] as [string],
+        unicodeRange: ['U+20B9'] as [string, ...string[]],
+      });
+    }
+    return faces;
+  });
 
   return {
     provider: fontProviders.local(),
@@ -64,6 +94,8 @@ const siteUrl = site.url || process.env.URL || process.env.CF_PAGES_URL || 'http
 export default defineConfig({
   site: siteUrl,
   trailingSlash: 'ignore',
+  // Small pages: inline the CSS so the first paint needs no extra round trip.
+  build: { inlineStylesheets: 'always' },
   integrations: [
     react(),
     sitemap({

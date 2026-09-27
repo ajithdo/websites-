@@ -41,6 +41,7 @@ const views: CategoryView[] = await Promise.all(
           widths: [120, 184, 256, 320],
           sizes: '(min-width: 64rem) 128px, 92px',
           aspect: 1,
+          blur: false,
         }),
       })),
     ),
@@ -73,16 +74,10 @@ const config: MenuConfig = {
   jsonLd={[menuJsonLd(categories, Astro.site ?? new URL('http://localhost:4321'), lang)]}
 >
   <header class="container-x menu-hero">
-    <p class="eyebrow" data-reveal>
-      {t.menu.eyebrow}
-    </p>
-    <h1 class="text-display-xl mt-4" data-reveal style="--i:1">
-      {t.menu.title}
-    </h1>
-    <p class="lede mt-5" data-reveal style="--i:2">
-      {site.features.enquiryCart ? t.menu.intro : f(t.menu.meta.description)}
-    </p>
-    <div class="menu-key" data-reveal style="--i:3">
+    <p class="eyebrow">{t.menu.eyebrow}</p>
+    <h1 class="text-display-xl mt-4">{t.menu.title}</h1>
+    <p class="lede mt-5">{site.features.enquiryCart ? t.menu.intro : f(t.menu.meta.description)}</p>
+    <div class="menu-key">
       <span class="text-sm font-semibold text-ink-muted">{t.menu.dietKey}</span>
       <DietMark diet="veg" lang={lang} showLabel />
       <DietMark diet="egg" lang={lang} showLabel />

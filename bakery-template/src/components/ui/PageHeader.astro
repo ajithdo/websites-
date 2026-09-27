@@ -19,18 +19,12 @@ const { eyebrow, title, lede, split = false, class: className } = Astro.props;
 
 <header class:list={['container-x page-header', split && 'is-split', className]}>
   <div class="page-header-title">
-    <p class="eyebrow" data-reveal>
-      {eyebrow}
-    </p>
-    <h1 class="text-display-xl page-header-h1" data-reveal style="--i:1">
+    <p class="eyebrow">{eyebrow}</p>
+    <h1 class="text-display-xl page-header-h1">
       <AccentText text={title} />
     </h1>
   </div>
-  {lede && (
-    <p class="lede page-header-lede" data-reveal style="--i:2">
-      {lede}
-    </p>
-  )}
+  {lede && <p class="lede page-header-lede">{lede}</p>}
   <slot />
 </header>
 

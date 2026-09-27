@@ -57,7 +57,7 @@ export interface ResponsiveImage {
  */
 export async function responsiveImage(
   path: string,
-  opts: { widths: number[]; sizes: string; aspect?: number; quality?: number },
+  opts: { widths: number[]; sizes: string; aspect?: number; quality?: number; blur?: boolean },
 ): Promise<ResponsiveImage> {
   const meta = img(path);
   const maxW = Math.min(Math.max(...opts.widths), meta.width);
@@ -72,13 +72,13 @@ export async function responsiveImage(
     height,
     widths: widths.length ? widths : [maxW],
     fit: 'cover' as const,
-    quality: opts.quality ?? 72,
+    quality: opts.quality ?? 62,
   };
   const [avif, webp, fallback, blur] = await Promise.all([
     getImage({ ...common, format: 'avif' }),
     getImage({ ...common, format: 'webp' }),
     getImage({ ...common, widths: [width], format: 'jpg' }),
-    lqip(path),
+    opts.blur === false ? Promise.resolve('') : lqip(path),
   ]);
   return {
     src: fallback.src,
@@ -107,8 +107,8 @@ export async function heroSources(
   const deskWidths = [960, 1280, 1600, 1920, 2400].filter((w) => w <= desk.width);
   const deskCommon = { src: desk, width: desk.width, height: desk.height, widths: deskWidths };
   const [avif, webp, fallback] = await Promise.all([
-    getImage({ ...deskCommon, format: 'avif', quality: 55 }),
-    getImage({ ...deskCommon, format: 'webp', quality: 68 }),
+    getImage({ ...deskCommon, format: 'avif', quality: 52 }),
+    getImage({ ...deskCommon, format: 'webp', quality: 66 }),
     getImage({ src: desk, width: Math.min(1600, desk.width), format: 'jpg', quality: 72 }),
   ]);
   let mobile: HeroSources['mobile'] = null;
@@ -118,11 +118,11 @@ export async function heroSources(
       src: mob,
       width: mob.width,
       height: mob.height,
-      widths: [480, 720, 960, 1200].filter((w) => w <= mob.width),
+      widths: [480, 640, 800, 960, 1200].filter((w) => w <= mob.width),
     };
     const [mAvif, mWebp] = await Promise.all([
-      getImage({ ...mobCommon, format: 'avif', quality: 55 }),
-      getImage({ ...mobCommon, format: 'webp', quality: 68 }),
+      getImage({ ...mobCommon, format: 'avif', quality: 50 }),
+      getImage({ ...mobCommon, format: 'webp', quality: 64 }),
     ]);
     mobile = { avif: mAvif.srcSet.attribute, webp: mWebp.srcSet.attribute };
   }

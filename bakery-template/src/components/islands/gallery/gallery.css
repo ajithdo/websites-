@@ -49,8 +49,9 @@
   margin-bottom: clamp(1rem, 0.75rem + 1vw, 1.75rem);
   break-inside: avoid;
 }
+/* Photos further down rise in; the first row shows at once (no wait to paint). */
 @media (prefers-reduced-motion: no-preference) {
-  .gallery-item {
+  .gallery-item:nth-child(n + 5) {
     animation: gallery-in 0.7s var(--ease) both;
   }
 }

@@ -128,7 +128,12 @@ export default function GalleryBrowser({ items, labels, config }: GalleryProps) 
               }}
             >
               <span className="gallery-photo">
-                <ResponsivePicture image={item.thumb} alt={item.alt} eager={index < 4} />
+                <ResponsivePicture
+                  image={item.thumb}
+                  alt={item.alt}
+                  eager={index < 4}
+                  priority={index === 0}
+                />
               </span>
               <span className="gallery-caption">{item.caption}</span>
             </a>

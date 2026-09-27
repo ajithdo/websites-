@@ -1,5 +1,5 @@
 ---
-import { Font, fontData } from 'astro:assets';
+import { Font } from 'astro:assets';
 import '~/styles/global.css';
 import AnnouncementBar from '~/components/layout/AnnouncementBar.astro';
 import DemoRibbon from '~/components/layout/DemoRibbon.astro';
@@ -56,10 +56,6 @@ if (site.features.telugu) {
   fontVars.add('--font-telugu-serif');
   fontVars.add('--font-telugu-sans');
 }
-
-// Preload only the active theme's display face (latin, upright): it sets the hero headline.
-const heroFont = themes[site.theme].fonts.heading;
-const heroFontUrl = fontData[heroFont]?.find((f) => f.style === 'normal')?.src[0]?.url;
 
 const siteUrl = Astro.site ?? new URL('http://localhost:4321');
 const canonical = new URL(localizePath(path, lang), siteUrl).href;
@@ -128,10 +124,6 @@ const headConfig = {
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-
-    {heroFontUrl && (
-      <link rel="preload" href={heroFontUrl} as="font" type="font/woff2" crossorigin />
-    )}
     {[...fontVars].map((v) => (
       <Font cssVariable={v} />
     ))}

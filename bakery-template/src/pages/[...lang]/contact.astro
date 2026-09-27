@@ -34,7 +34,7 @@ const [emailLocal, emailDomain] = site.contact.email.split('@');
 
   <div class="container-x">
     <ul class="contact-cards">
-      <li data-reveal>
+      <li>
         <a
           href={whatsappHref(openers.order(site.brand.name))}
           class="contact-card is-primary"
@@ -47,7 +47,7 @@ const [emailLocal, emailDomain] = site.contact.email.split('@');
           <Icon name="arrow-up-right" size={18} class="contact-card-arrow" />
         </a>
       </li>
-      <li data-reveal style="--i:1">
+      <li>
         <a href={telHref} class="contact-card">
           <Icon name="phone" size={24} />
           <span class="contact-card-label">{c.cards.call}</span>
@@ -55,7 +55,7 @@ const [emailLocal, emailDomain] = site.contact.email.split('@');
           <Icon name="arrow-up-right" size={18} class="contact-card-arrow" />
         </a>
       </li>
-      <li data-reveal style="--i:2">
+      <li>
         <a href={mailHref} class="contact-card">
           <Icon name="mail" size={24} />
           <span class="contact-card-label">{c.cards.email}</span>
@@ -67,7 +67,7 @@ const [emailLocal, emailDomain] = site.contact.email.split('@');
         </a>
       </li>
       {instagram && (
-        <li data-reveal style="--i:3">
+        <li>
           <a href={instagram.url} class="contact-card" target="_blank" rel="noopener">
             <Icon name="instagram" size={24} />
             <span class="contact-card-label">{c.cards.instagram}</span>
