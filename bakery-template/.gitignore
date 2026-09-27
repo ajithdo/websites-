@@ -29,3 +29,6 @@ Thumbs.db
 
 # Raw Lighthouse reports (summary lives in docs/qa/lighthouse.md)
 docs/qa/lighthouse/
+
+# Full screenshot matrix (npm run qa:screens); a curated set lives in docs/screenshots/
+docs/screenshots/matrix/
