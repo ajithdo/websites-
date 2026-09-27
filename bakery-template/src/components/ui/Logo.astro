@@ -52,6 +52,7 @@ const imageMode = site.brand.logo.mode === 'image';
 <style>
   .logo {
     --logo-accent: var(--bb-accent);
+    min-width: 0;
     color: inherit;
     line-height: 1;
   }
@@ -67,7 +68,15 @@ const imageMode = site.brand.logo.mode === 'image';
     font-size: calc(1.15rem * var(--bb-heading-scale));
   }
   .logo-md .logo-word {
-    font-size: calc(1.35rem * var(--bb-heading-scale));
+    font-size: calc(clamp(1.05rem, 0.7rem + 2.2vw, 1.35rem) * var(--bb-heading-scale));
+  }
+  /* Narrow phones: a long bakery name wraps onto two balanced lines. */
+  @media (max-width: 29.99rem) {
+    .logo-md .logo-word {
+      white-space: normal;
+      text-wrap: balance;
+      line-height: 1.05;
+    }
   }
   .logo-lg .logo-word {
     font-size: calc(2rem * var(--bb-heading-scale));

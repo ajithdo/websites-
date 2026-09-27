@@ -365,6 +365,21 @@
   .link-arrow:hover svg {
     transform: translateX(4px);
   }
+  /* On coloured bands, links take the band's own text colour (contrast in every theme). */
+  .band-secondary .link-arrow {
+    color: var(--bb-on-secondary);
+  }
+  .band-inverse .link-arrow {
+    color: var(--bb-on-inverse);
+  }
+  .band-inverse .btn-outline {
+    --btn-fg: var(--bb-on-inverse);
+    --btn-border: color-mix(in srgb, var(--bb-on-inverse) 45%, transparent);
+  }
+  .band-inverse .btn-outline:hover {
+    --btn-border: var(--bb-on-inverse);
+    background-color: color-mix(in srgb, var(--bb-on-inverse) 10%, transparent);
+  }
 
   /* Filter chips / segmented options */
   .chip {

@@ -25,7 +25,7 @@
 .gallery-chip-count {
   font-size: 0.75em;
   font-weight: 700;
-  opacity: 0.6;
+  opacity: 0.85;
 }
 
 /* Masonry with CSS columns: photos keep their own shapes, no JavaScript layout. */
