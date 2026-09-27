@@ -1,0 +1,10 @@
+dist/
+dist-client/
+.astro/
+node_modules/
+qa-output/
+playwright-report/
+test-results/
+package-lock.json
+src/assets/images/
+public/

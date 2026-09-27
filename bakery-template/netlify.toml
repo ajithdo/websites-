@@ -1,0 +1,8 @@
+# Netlify: set "Base directory" to bakery-template in Site settings → Build & deploy
+# (or keep this project at the repo root). Security and cache headers live in public/_headers.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"

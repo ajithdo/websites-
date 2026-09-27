@@ -1,0 +1,7 @@
+# Cloudflare Pages. With Git integration, set in the dashboard:
+#   Root directory: bakery-template · Build command: npm run build · Output: dist
+# For direct uploads: npx wrangler pages deploy
+# Node version comes from .nvmrc. Headers live in public/_headers.
+name = "bakery-template"
+pages_build_output_dir = "./dist"
+compatibility_date = "2026-09-01"
