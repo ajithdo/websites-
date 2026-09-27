@@ -61,7 +61,7 @@ test.describe('menu enquiry cart', () => {
     const sent = await page.evaluate(() => (window as unknown as { __wa: string[] }).__wa);
     expect(sent).toHaveLength(1);
     const url = new URL(sent[0]!);
-    expect(url.origin + url.pathname).toBe('https://wa.me/919000000000');
+    expect(url.origin + url.pathname).toBe('https://wa.me/919381487875');
     const text = url.searchParams.get('text')!;
     expect(text).toContain('• Belgian Chocolate Truffle (1 kg, eggless) × 1 — ₹1,050');
     expect(text).toContain('• Butter Croissant × 2 — ₹220');

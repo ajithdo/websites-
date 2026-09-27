@@ -31,7 +31,7 @@ test('contact enquiry validates, then opens WhatsApp with the message', async ({
   await form.getByRole('button', { name: 'Send via WhatsApp' }).click();
   const wa = await popup;
   const text = new URL(wa.url()).searchParams.get('text')!;
-  expect(new URL(wa.url()).pathname).toBe('/919000000000');
+  expect(new URL(wa.url()).pathname).toBe('/919381487875');
   expect(text).toContain('Hi Butter & Bloom! I have a corporate enquiry.');
   expect(text).toContain('*Name:* Priya');
   expect(text).toContain('*Phone:* 98765 43210');

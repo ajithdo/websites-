@@ -14,7 +14,7 @@ test('home carries bakery structured data and complete meta tags', async ({ page
   expect(bakery).toBeTruthy();
   expect(bakery).toMatchObject({
     name: 'Butter & Bloom',
-    telephone: '+919000000000',
+    telephone: '+919381487875',
     address: { '@type': 'PostalAddress', postalCode: '506001', addressCountry: 'IN' },
   });
   expect(bakery!.openingHoursSpecification).toHaveLength(7);

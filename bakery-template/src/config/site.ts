@@ -30,9 +30,9 @@ export const site: SiteConfig = {
   timezone: 'Asia/Kolkata',
 
   contact: {
-    phoneDisplay: '+91 90000 00000',
-    phone: '+919000000000',
-    whatsapp: '919000000000',
+    phoneDisplay: '+91 93814 87875',
+    phone: '+919381487875',
+    whatsapp: '919381487875',
     email: 'hello@butterandbloom.example',
     address: {
       street: '12 Sample Street',
@@ -391,7 +391,7 @@ export const site: SiteConfig = {
 
   studio: {
     name: 'Your Studio',
-    whatsapp: '919000000001',
+    whatsapp: '919381487875',
     footerCredit: true,
   },
 };

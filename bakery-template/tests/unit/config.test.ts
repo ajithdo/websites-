@@ -45,9 +45,9 @@ describe('site config', () => {
     expect(new Set(menuIds).size).toBe(35);
   });
 
-  it('uses obviously fake contact details in the demo', () => {
+  it('sends demo enquiries to the studio and keeps the other details fake', () => {
     if (!site.features.demoMode) return;
-    expect(site.contact.whatsapp).toBe('919000000000');
+    expect(site.contact.whatsapp).toBe(site.studio.whatsapp);
     expect(site.contact.email.endsWith('.example')).toBe(true);
     expect(site.fssai).toBe('');
   });

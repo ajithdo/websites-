@@ -130,7 +130,7 @@ test.describe('cake builder', () => {
     const sent = await page.evaluate(() => (window as unknown as { __wa: string[] }).__wa);
     expect(sent).toHaveLength(1);
     const url = new URL(sent[0]!);
-    expect(url.origin + url.pathname).toBe('https://wa.me/919000000000');
+    expect(url.origin + url.pathname).toBe('https://wa.me/919381487875');
     const text = url.searchParams.get('text')!;
     for (const line of [
       '*Occasion:* Birthday',
@@ -182,7 +182,7 @@ test.describe('cake builder', () => {
     const popup = context.waitForEvent('page');
     await page.getByRole('button', { name: 'Send on WhatsApp' }).click();
     const wa = await popup;
-    expect(wa.url()).toMatch(/^https:\/\/wa\.me\/919000000000\?text=/);
+    expect(wa.url()).toMatch(/^https:\/\/wa\.me\/919381487875\?text=/);
     expect(decodeURIComponent(wa.url())).toContain('*Occasion:* Anniversary');
     await expect(page).toHaveURL(/\/custom-cakes\/$/);
     await expect(
